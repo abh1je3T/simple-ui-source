@@ -2,6 +2,8 @@
 
 A React + TypeScript component library, developed and documented with [Storybook](https://storybook.js.org/). Each component lives in its own package under [`packages/`](packages) with its own source, styles, and stories.
 
+**Live preview:** [Simple UI | Storybook](https://simple-ui-react.vercel.app/?path=/docs/introduction--docs)
+
 ## Tech Stack
 
 - **React 18** + **TypeScript**
