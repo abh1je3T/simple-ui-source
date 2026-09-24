@@ -1,0 +1,98 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as AvatarStories from './Avatar.stories';
+
+<Meta of={AvatarStories} name="Avatar" />
+
+<Title />
+<Subtitle>A visual representation of a user or entity.</Subtitle>
+
+<Description>
+  The `Avatar` component is used to display user profiles, brand logos, or entity representations. It handles image loading gracefully, falling back to initials or generic icons, and supports integrated status indicators and badges.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Smart Fallbacks**: Automatically generates initials if an image fails to load or isn't provided.
+- **Status Indicators**: Built-in support for online, away, and busy status dots without breaking the bounding box.
+- **Custom Badges**: Pass custom React nodes (like notification counts or role icons) into the `badge` slot.
+- **Multiple Shapes**: Choose between standard `circle` or modern `square` forms.
+- **Semantic Tones**: Apply background tones (`primary`, `success`, `neutral`) when using initials or icons.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Consistent Sizing**: Use a consistent size within a specific UI context (e.g., all avatars in a list should be `md`).
+- **Provide Names**: Always provide a `name` prop, even if you are passing an `icon`/image, as it is used for `aria-label` and generating fallback initials.
+- **Status Usage**: Use the `status` prop for real-time presence indicators (online/offline).
+
+### Don't:
+- **Overcrowded Badges**: Avoid putting complex components inside the `badge` slot. Keep it to simple icons or numbers.
+- **Text in Images**: Avoid using images that contain text, as it will likely be unreadable when scaled down.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Avatar } from "@simple-ui/avatar";
+
+const UserProfile = () => {
+  return (
+    <Avatar 
+      name="Jane Doe" 
+      icon="https://example.com/avatar.jpg" 
+      size="lg" 
+      showStatus={true} 
+      status="online" 
+    />
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Performance**: The component handles its own `loaded` and `error` states, ensuring that broken image links never display the browser's default broken image icon.
+
+> [!IMPORTANT]
+> **Clickable State**: If the avatar triggers an action (like opening a profile menu), pass the `clickable` prop to add hover styling and a pointer cursor.
+
+---
+
+## Visual Styles
+
+### Shapes and Sizes
+<Canvas of={AvatarStories.Sizes} />
+<Canvas of={AvatarStories.Shapes} />
+
+### Fallback Tones
+<Canvas of={AvatarStories.Tones} />
+
+---
+
+## Examples
+
+### Status Indicators
+<Canvas of={AvatarStories.Status} />
+
+### Custom Badges
+<Canvas of={AvatarStories.WithBadge} />
+
+---
+
+## Accessibility Audit
+
+- **Alt Attributes**: Uses the `name` prop to automatically populate the `aria-label` on the wrapper element, ensuring screen readers announce the user's name regardless of whether the image loaded.
+- **Semantic Role**: Uses `role="img"` on the wrapper to group the complex inner structure (image, initials, badges) into a single focusable entity if needed.
+
+---
+
+## API Reference
+
+<ArgTypes />

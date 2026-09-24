@@ -1,0 +1,96 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ComboBoxStories from './ComboBox.stories';
+
+<Meta of={ComboBoxStories} name="Quick start" />
+
+<Title />
+<Subtitle>An advanced selection input combining a text field with a filterable dropdown.</Subtitle>
+
+<Description>
+  The `ComboBox` component is an essential tool for large datasets where standard dropdowns become unwieldy. It allows users to type to filter a long list of options, significantly speeding up the selection process. It internally orchestrates the `Input` and `DropMenu` components.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Text Filtering**: Automatically filters the provided `options` array based on user input, ignoring case for robust searching.
+- **Smart Rendering**: Leverages the `DropMenu` component's portal architecture, ensuring the filtered list never gets clipped by parent containers.
+- **Controlled & Uncontrolled**: Fully supports both React state management patterns (`value` + `onChange` vs `defaultValue`).
+- **Empty State Management**: Gracefully handles scenarios where the user's search yields no results.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Large Datasets**: Use the `ComboBox` when users need to select from a list of more than 10-15 items (like countries, timezones, or complex categories).
+- **Clear Placeholders**: Provide a placeholder that indicates the user can search (e.g., "Type to search countries...").
+
+### Don't:
+- **Small Datasets**: Do not use a `ComboBox` for very small lists (e.g., Gender or Yes/No). Use a standard `Dropdown` or `Radio` group instead to save the user a click.
+- **Async Fetching**: Currently, this component expects a static `options` array. For remote data fetching, you must handle the debounce and API calls outside and pass the resulting options in.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { ComboBox } from "@simple-ui/combo-box";
+import { useState } from "react";
+
+const options = [
+  { label: "United States", value: "us" },
+  { label: "United Kingdom", value: "uk" },
+  { label: "Canada", value: "ca" },
+  { label: "Australia", value: "au" },
+];
+
+const Example = () => {
+  const [country, setCountry] = useState("");
+  
+  return (
+    <ComboBox 
+      options={options}
+      value={country}
+      onChange={setCountry}
+      placeholder="Search for a country..."
+    />
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Data Structure**: The component strictly expects an array of objects with `{ label: string, value: string }`. If your data comes in a different shape, map it before passing it to the `ComboBox`.
+
+> [!IMPORTANT]
+> **Interaction Model**: Clicking the input immediately opens the menu showing all options. Typing begins the filtering process. When an option is selected, the input's text value is updated to match the option's `label`, but the `onChange` event fires with the option's `value`.
+
+---
+
+## Visual Styles
+
+### Default Filtering
+Type in the input below to see the options filter dynamically.
+<Canvas of={ComboBoxStories.Default} />
+
+### Disabled State
+<Canvas of={ComboBoxStories.Disabled} />
+
+---
+
+## Accessibility Audit
+
+- **Focus Management**: The internal `Input` handles focus natively. When an item is selected from the menu, focus is returned to the input.
+- **Semantic Structure**: Relies on the underlying accessibility features of the `Input` and `DropMenu` components, meaning it correctly identifies as a combined text box and popup menu to screen readers.
+- **Keyboard Navigation**: (Inherited from `DropMenu`) Users can navigate the filtered list using the Up/Down arrow keys and select with Enter.
+
+---
+
+## API Reference
+
+<ArgTypes />

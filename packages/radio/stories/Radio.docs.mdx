@@ -1,0 +1,116 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as RadioStories from './Radio.stories';
+
+<Meta of={RadioStories} name="Quick start" />
+
+<Title />
+<Subtitle>A core input component for selecting a single option from a set.</Subtitle>
+
+<Description>
+  The `Radio` component provides a native, accessible way for users to select exactly one option from a mutually exclusive group. It handles custom styling while maintaining native semantic HTML underneath.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Semantic Tones**: Includes validation tones (`success`, `error`) and branding tones (`primary`, `neutral`).
+- **Scalable Sizes**: Available in `sm`, `md`, and `lg` to fit tight layouts or provide larger touch targets.
+- **Native Accessibility**: Uses native `<input type="radio">` under the hood for perfect screen reader and keyboard support.
+- **Custom Visuals**: Replaces standard browser styling with crisp, animated CSS circles.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Use in Groups**: Radios must be used in groups of two or more where choices are mutually exclusive.
+- **Shared Name**: Ensure all radios in the same group share the exact same `name` attribute.
+- **Use with Label**: Always pair the radio with a `Label` component or an associated `<label>` element for accessibility.
+
+### Don't:
+- **Single Options**: Do not use a single radio button. If there's only one choice (like an opt-in), use a `Checkbox`.
+- **Multiple Selections**: Do not use radios if the user can select multiple options.
+- **Long Lists**: Avoid using radios for lists with more than 6-8 options. Use a `Dropdown` or `Select` instead.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Radio } from "@simple-ui/radio";
+import { Label } from "@simple-ui/label";
+import { useState } from "react";
+
+const Example = () => {
+  const [value, setValue] = useState("apple");
+  
+  return (
+    <div style={{ display: "flex", gap: "16px" }}>
+      <Label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <Radio 
+          name="fruit" 
+          checked={value === "apple"} 
+          onChange={() => setValue("apple")} 
+        />
+        Apple
+      </Label>
+      <Label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <Radio 
+          name="fruit" 
+          checked={value === "orange"} 
+          onChange={() => setValue("orange")} 
+        />
+        Orange
+      </Label>
+    </div>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Vertical Alignment**: In most forms, stacking radio options vertically improves scannability compared to horizontal layouts.
+
+> [!TIP]
+> **Hit Area**: Wrapping the radio and its text in a `<label>` increases the clickable area, making it significantly easier for users on touch devices.
+
+> [!IMPORTANT]
+> **Default Selection**: Radio groups should typically have a default option selected. If no default is suitable, consider if a different component might be better.
+
+---
+
+## Visual Styles
+
+### Tones
+<Canvas of={RadioStories.Tones} />
+
+### Sizes
+<Canvas of={RadioStories.Sizes} />
+
+---
+
+## Examples
+
+### Disabled State
+<Canvas of={RadioStories.States} />
+
+### Group Example
+<Canvas of={RadioStories.RadioGroup} />
+
+---
+
+## Accessibility Audit
+
+- **Keyboard Support**: Native support. Tab to enter the group, use Arrow keys to move selection within the group.
+- **Semantic Element**: Wraps an actual visually hidden `<input type="radio">` to preserve native semantics.
+- **Focus Rings**: Provides a clear, high-contrast focus ring when navigated via keyboard.
+
+---
+
+## API Reference
+
+<ArgTypes />

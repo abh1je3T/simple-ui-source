@@ -1,0 +1,21 @@
+{
+  "grid": {
+    "columns": 12,
+    "gutter": "16px",
+    "responsive": {
+      "sm": 8,
+      "md": 16,
+      "lg": 24
+    }
+  },
+
+  "maxWidth": "1200px",
+
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "16px",
+    "lg": "24px",
+    "xl": "32px"
+  }
+}

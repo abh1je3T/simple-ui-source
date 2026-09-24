@@ -1,0 +1,90 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as LoaderStories from './Loader.stories';
+
+<Meta of={LoaderStories} name="Quick start" />
+
+<Title />
+<Subtitle>A visual indicator representing an indeterminate wait time.</Subtitle>
+
+<Description>
+  The `Loader` component is used to inform the user that a process is happening in the background and they need to wait. It offers multiple animation styles to fit different UI contexts, from small inline buttons to full-page loading screens.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Multiple Animations**: Choose from `spinner` (circular), `dots` (bouncing), `glow` (pulsing), and `bars` (equalizer).
+- **Scalable Sizes**: Available in `sm`, `md`, and `lg`.
+- **Semantic Tones**: Brand-aligned colors (`primary`, `secondary`, `neutral`) to match the surrounding context.
+- **Accessible by Default**: Implements `role="status"` to inform screen readers of the loading state.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Immediate Feedback**: Show a loader as soon as an asynchronous action begins (like fetching data or submitting a form).
+- **Match the Context**: Use a `sm` spinner inside a button, but use a `lg` `glow` or `dots` loader for a full-page data fetch.
+- **Inline Placement**: When loading specific data (like a dropdown list), place the loader exactly where the data will appear.
+
+### Don't:
+- **Determinate Progress**: Do not use the `Loader` if you know exactly how long the process will take or if you have progress metrics (e.g., uploading a file). Use the `Progress` bar component instead.
+- **Overuse**: Don't show loaders for extremely fast operations (< 300ms) as it causes visual flickering. Only show loaders if the operation takes longer.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Loader } from "@simple-ui/loader";
+
+const Example = ({ isLoading }) => {
+  if (isLoading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', padding: '40px' }}>
+        <Loader variant="dots" size="lg" tone="primary" />
+      </div>
+    );
+  }
+  
+  return <DataContent />;
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Button Integration**: The `spinner` variant in `size="sm"` is perfectly tuned to sit inside the `Button` component when it's in a loading state.
+
+> [!IMPORTANT]
+> **Contextual Wait**: If the wait time is expected to be more than 10 seconds, a simple indeterminate loader is not enough. Provide text explaining *what* is happening to reduce user anxiety.
+
+---
+
+## Visual Styles
+
+### Animation Variants
+<Canvas of={LoaderStories.Variants} />
+
+### Sizes
+<Canvas of={LoaderStories.Sizes} />
+
+### Tones
+<Canvas of={LoaderStories.Tones} />
+
+---
+
+## Accessibility Audit
+
+- **ARIA Role**: Uses `role="status"` which is polite by default, meaning screen readers will announce the loading state without interrupting the user's current task.
+- **Aria Label**: Includes `aria-label="Loading"` so screen readers can interpret the visual animation.
+- **Reduced Motion**: (Planned) Respects `prefers-reduced-motion` media queries by slowing down or simplifying animations for sensitive users.
+
+---
+
+## API Reference
+
+<ArgTypes />

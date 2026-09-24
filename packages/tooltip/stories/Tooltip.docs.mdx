@@ -1,0 +1,101 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as TooltipStories from './Tooltip.stories';
+
+<Meta of={TooltipStories} name="Quick start" />
+
+<Title />
+<Subtitle>Contextual, transient information that appears on hover or focus.</Subtitle>
+
+<Description>
+  The `Tooltip` component provides supplementary information about an element without cluttering the interface. It is essential for explaining icon-only buttons, unfamiliar terms, or providing brief context for interactive elements.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Smart Positioning**: Powered by `@floating-ui` for automatic flipping and collision detection to stay within the viewport.
+- **Accessibility Integration**: Automatically manages `aria-describedby` and focus states for full keyboard and screen reader support.
+- **Multiple Tones**: Supports semantic tones (`success`, `error`, `warning`) and themed variants (`dark`, `light`).
+- **Interactive Control**: Configurable appearance delays, cursor following, and portal-based rendering.
+- **Responsive Layouts**: Three sizes (`sm`, `md`, `lg`) to match various design requirements.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Be Concise**: Keep content extremely brief (ideally 2-5 words).
+- **Icon-Only Buttons**: Always provide a tooltip for buttons that contain only icons.
+- **Contextual Help**: Use tooltips to explain unfamiliar abbreviations or technical terms.
+
+### Don't:
+- **Essential Information**: Never put critical information in a tooltip (like required fields or error messages) that a user must see to proceed.
+- **Interactive Content**: Avoid putting links, buttons, or inputs inside a tooltip. Use a `Popover` for rich content.
+- **Redundancy**: Don't repeat text that is already visible on the screen.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Tooltip } from "@simple-ui/tooltip";
+import { Button } from "@simple-ui/button";
+import { FiInfo } from "react-icons/fi";
+
+const Example = () => {
+  return (
+    <Tooltip content="More information about this feature" placement="top">
+      <Button variant="outline" icon={<FiInfo />} />
+    </Tooltip>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Scannability**: Tooltips should be scannable at a glance. If you need more than one sentence, you likely need a `Popover` or a dedicated help section.
+
+> [!TIP]
+> **Delay Management**: Use a small delay (e.g., 200-300ms) to prevent tooltips from flashing during casual mouse movement across the UI.
+
+> [!IMPORTANT]
+> **Keyboard Focus**: Always ensure tooltips appear on keyboard focus, not just mouse hover, to support users who don't use a pointer device.
+
+---
+
+## Visual Styles
+
+### Tones
+<Canvas of={TooltipStories.Tones} />
+
+### Sizes
+<Canvas of={TooltipStories.Sizes} />
+
+---
+
+## Configuration
+
+### Placements
+<Canvas of={TooltipStories.Placements} />
+
+### Advanced Interactions
+<Canvas of={TooltipStories.FollowCursor} />
+<Canvas of={TooltipStories.WithDelay} />
+
+---
+
+## Accessibility Audit
+
+- **Focus Support**: Tooltips are triggered by both mouse `mouseenter` and keyboard `focus` events.
+- **ARIA Linking**: Uses `aria-describedby` to programmatically associate the tooltip content with its trigger element.
+- **Dismissible**: Users can press the `Escape` key to instantly dismiss an open tooltip.
+
+---
+
+## API Reference
+
+<ArgTypes />

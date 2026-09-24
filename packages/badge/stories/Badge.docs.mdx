@@ -1,0 +1,99 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as BadgeStories from './Badge.stories';
+
+<Meta of={BadgeStories} name="Quick start" />
+
+<Title />
+<Subtitle>A compact label component for status, categories, and notifications.</Subtitle>
+
+<Description>
+  The `Badge` component is used to highlight short pieces of information or status. It provides clear visual cues to users through semantic tones and flexible variants, making it ideal for tags, badges, and metadata labels.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Semantic Tones**: Includes a full range of tones (`primary`, `success`, `error`, etc.) to convey meaning at a glance.
+- **Multiple Variants**: Choose between `solid`, `subtle`, and `outline` styles to match the desired level of emphasis.
+- **Icon Support**: Integrated icon slot for providing additional context or branding.
+- **Responsive Sizes**: Three sizes (`sm`, `md`, `lg`) to fit into various UI contexts from dense tables to large headers.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Short Labels**: Keep badge text concise (ideally 1-2 words).
+- **Semantic Consistency**: Use tones correctly (e.g., `success` for positive status, `error` for negative).
+- **Secondary Info**: Use badges for metadata or status, not for primary navigation or complex content.
+
+### Don't:
+- **Button-like Interaction**: Don't use badges for primary actions; use the `Button` component instead.
+- **Overcrowding**: Avoid placing too many badges close together, which can create visual noise.
+- **Long Text**: Don't use sentences or long phrases inside a badge.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Badge } from "@simple-ui/badge";
+import { FiStar } from "react-icons/fi";
+
+const Example = () => {
+  return (
+    <Badge 
+      tone="success" 
+      variant="subtle" 
+      icon={<FiStar />}
+    >
+      Top Rated
+    </Badge>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Emphasis Hierarchy**: Use `solid` badges for critical information that needs immediate attention and `subtle` or `outline` for secondary metadata.
+
+> [!TIP]
+> **Status Colors**: When representing status (e.g. "Active", "Pending"), use the `primary` tone for active states and `neutral` for inactive ones unless a specific semantic tone is required.
+
+---
+
+## Visual Styles
+
+### Variants
+<Canvas of={BadgeStories.Variants} />
+
+### Sizes
+<Canvas of={BadgeStories.Sizes} />
+
+### Tones
+<Canvas of={BadgeStories.Tones} />
+
+---
+
+## Examples
+
+### With Icons
+<Canvas of={BadgeStories.WithIcon} />
+
+---
+
+## Accessibility Audit
+
+- **Semantic HTML**: Uses a standard `<span>` element to avoid interfering with heading structures.
+- **Visual Contrast**: Token-based colors ensure high contrast ratios for text readability.
+- **Screen Readers**: If the badge only contains an icon, ensure an `aria-label` is provided or use descriptive text.
+
+---
+
+## API Reference
+
+<ArgTypes />

@@ -1,0 +1,108 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as AlertStories from './Alert.stories';
+
+<Meta of={AlertStories} name="Quick start" />
+
+<Title />
+<Subtitle>A prominent feedback component for communicating important status messages.</Subtitle>
+
+<Description>
+  The `Alert` component is used to deliver high-priority information or feedback to users. 
+  It provides semantic coloring and integrated icons to ensure that the nature of the message (success, error, warning, or info) is immediately recognizable.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Semantic Tones**: Full range of tones (`primary`, `success`, `error`, `warning`, `info`, `neutral`) for accurate communication.
+- **Visual Variants**: Choose between `subtle` (light background) for standard feedback and `solid` (filled) for maximum visibility.
+- **Content Hierarchy**: Supports a bold `title` and a detailed body `description` for structured messaging.
+- **Dismissible Support**: Built-in functionality for user-closable alerts with smooth entry and exit transitions.
+- **Flexible Icons**: Slot for custom icons to enhance the scannability of the alert message.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Place Contextually**: Position alerts close to the relevant content or at the top of the page for global status.
+- **Be Concise**: Keep alert messages short. If more detail is needed, use the `description` area or link to documentation.
+- **Choose Tones Wisely**: Use `error` only for critical failures and `warning` for potential issues that don't block progress.
+
+### Don't:
+- **Overuse**: Don't clutter the UI with multiple alerts at once, as it can lead to "alert fatigue" and important messages might be ignored.
+- **Interrupt Flow**: For non-critical background processes, consider using a `Toast` instead of an inline `Alert`.
+- **Misuse Colors**: Avoid using the `success` tone for neutral information or `error` for simple warnings.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Alert } from "@simple-ui/alert";
+import { FiCheckCircle } from "react-icons/fi";
+
+const Example = () => {
+  return (
+    <Alert 
+      tone="success" 
+      title="Deployment Successful" 
+      icon={<FiCheckCircle />}
+      dismissible
+    >
+      The new version of the application has been deployed to the production cluster.
+    </Alert>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Scannability**: Always include an `icon` with your alert. Users often recognize icons faster than they read text, especially in high-stress situations (like errors).
+
+> [!TIP]
+> **Actionable Feedback**: Whenever possible, include a clear instruction or a link to an action within the alert description to help users resolve the issue.
+
+> [!IMPORTANT]
+> **Lifecycle Management**: For temporary feedback (like "Settings saved"), consider making the alert `dismissible` or using an automated timeout if implemented via a manager.
+
+---
+
+## Visual Styles
+
+### Tones (Subtle)
+<Canvas of={AlertStories.SubtleTones} />
+
+### Solid Variant
+<Canvas of={AlertStories.SolidVariant} />
+
+### Sizes
+<Canvas of={AlertStories.Sizes} />
+
+---
+
+## Examples
+
+### With Interaction (Dismissible)
+<Canvas of={AlertStories.Dismissible} />
+
+### With Structured Content
+<Canvas of={AlertStories.WithIcon} />
+
+---
+
+## Accessibility Audit
+
+- **ARIA Role**: Uses `role="alert"` for high-priority messages to ensure they are immediately announced by screen readers.
+- **Dismiss Button**: Includes an `aria-label="Close alert"` on the dismiss button for clear identification.
+- **Color Contrast**: All semantic tones are optimized to meet WCAG AA contrast standards for readability.
+
+---
+
+## API Reference
+
+<ArgTypes />

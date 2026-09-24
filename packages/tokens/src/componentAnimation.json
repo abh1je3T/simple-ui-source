@@ -1,0 +1,70 @@
+{
+  "accordion": {
+    "open": {
+      "property": "height, opacity",
+      "duration": "animation.duration.md",
+      "easing": "animation.easing.easeInOut"
+    },
+    "close": {
+      "property": "height, opacity",
+      "duration": "animation.duration.md",
+      "easing": "animation.easing.easeInOut"
+    }
+  },
+  "dropdown": {
+    "open": {
+      "property": "opacity, transform",
+      "duration": "animation.duration.sm",
+      "easing": "animation.easing.easeOut",
+      "transform": "translateY(0%)"
+    },
+    "close": {
+      "property": "opacity, transform",
+      "duration": "animation.duration.sm",
+      "easing": "animation.easing.easeIn",
+      "transform": "translateY(-10%)"
+    }
+  },
+  "alert": {
+    "enter": {
+      "property": "opacity, transform",
+      "duration": "animation.duration.sm",
+      "easing": "animation.easing.easeOut",
+      "transform": "translateY(0%)"
+    },
+    "exit": {
+      "property": "opacity, transform",
+      "duration": "animation.duration.sm",
+      "easing": "animation.easing.easeIn",
+      "transform": "translateY(-10%)"
+    }
+  },
+  "modal": {
+    "open": {
+      "property": "opacity, transform, scale",
+      "duration": "animation.duration.md",
+      "easing": "animation.easing.easeOut",
+      "transform": "scale(1)"
+    },
+    "close": {
+      "property": "opacity, transform, scale",
+      "duration": "animation.duration.md",
+      "easing": "animation.easing.easeIn",
+      "transform": "scale(0.95)"
+    }
+  },
+  "tooltip": {
+    "show": {
+      "property": "opacity, transform",
+      "duration": "animation.duration.sm",
+      "easing": "animation.easing.easeOut",
+      "transform": "translateY(0px)"
+    },
+    "hide": {
+      "property": "opacity, transform",
+      "duration": "animation.duration.sm",
+      "easing": "animation.easing.easeIn",
+      "transform": "translateY(-5px)"
+    }
+  }
+}

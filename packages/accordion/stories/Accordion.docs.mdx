@@ -1,0 +1,100 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as AccordionStories from './Accordion.stories';
+
+<Meta of={AccordionStories} name="Quick start" />
+
+<Title />
+<Subtitle>A vertically stacked list of collapsible content panels.</Subtitle>
+
+<Description>
+  The `Accordion` component is an essential layout tool for managing large amounts of information in a constrained space. 
+  It allows users to scan headers and selectively expand only the content they are interested in, significantly reducing cognitive load and page length.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Single or Multiple Expansion**: Toggle between allowing only one open panel (`single={true}`) or multiple simultaneous open panels.
+- **Visual Variants**: Choose between `outline` (clean, bordered) or `filled` (background-driven) styles to match your design system.
+- **Customizable Icons**: Fully support for swapping open/close indicator icons (e.g. Chevron, Plus/Minus) to align with your iconography.
+- **Semantic Tones**: Apply brand or status colors to the entire accordion group using the `tone` prop.
+- **Smooth Animations**: Integrated CSS transitions for a premium, fluid expansion experience.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Group Related Content**: Use accordions for content that is logically grouped but secondary to the main page flow (e.g. FAQs, advanced settings).
+- **Descriptive Headers**: Ensure each panel header clearly describes the content within.
+- **Initial State**: Use `defaultOpenId` to highlight the most important or common section upon initial load.
+
+### Don't:
+- **Critical Information**: Avoid hiding mission-critical information that the user *must* see to complete a task.
+- **Deep Nesting**: Don't put an accordion inside another accordion; this creates confusing navigation and layout issues.
+- **Excessive Items**: If you have more than 10-15 panels, consider using a different pattern like a searchable list or category pages.
+
+---
+
+## Usage Pattern
+
+The `Accordion` requires an `items` array where each object defines a unique section.
+
+```tsx
+import { Accordion } from "@simple-ui/accordion";
+import { FiPlus, FiMinus } from "react-icons/fi";
+
+const faqItems = [
+  { id: "1", title: "Is it responsive?", content: "Yes, it works on all devices." },
+  { id: "2", title: "Is it accessible?", content: "Yes, it uses semantic buttons for headers." }
+];
+
+<Accordion 
+  items={faqItems} 
+  single={true}
+  closeIcon={<FiPlus />}
+  openIcon={<FiMinus />}
+/>
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Scannability**: Treat accordion headers like micro-headings. They should be scannable at a glance, typically 3-6 words long.
+
+> [!TIP]
+> **Icon Placement**: Keep icons on the right side of the header to maintain a consistent reading line for the text on the left.
+
+> [!IMPORTANT]
+> **Unique Identifiers**: Ensure each `id` in the `items` array is globally unique to prevent state collisions and ensure correct key-based rendering.
+
+---
+
+## Visual Styles
+
+### Visual Variants
+<Canvas of={AccordionStories.FilledPrimary} />
+
+### Multiple Sections
+<Canvas of={AccordionStories.MultipleOpen} />
+
+### Custom Icons
+<Canvas of={AccordionStories.ChevronIcon} />
+<Canvas of={AccordionStories.PlusMinus} />
+
+---
+
+## Accessibility Audit
+
+- **Semantic Headers**: Uses native `<button>` elements for headers, ensuring they are keyboard-focusable and reachable via screen reader shortcuts.
+- **Keyboard Navigation**: Supports standard `Tab` and `Enter`/`Space` interactions for toggling panels.
+- **ARIA States**: Implements `aria-expanded` on trigger buttons to communicate panel open/closed state to assistive technologies. The `aria-controls` relationship links each trigger to its content panel.
+
+---
+
+## API Reference
+
+<ArgTypes />

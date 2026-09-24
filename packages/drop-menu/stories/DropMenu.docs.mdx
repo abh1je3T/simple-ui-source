@@ -1,0 +1,108 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as DropMenuStories from './DropMenu.stories';
+
+<Meta of={DropMenuStories} name="Quick start" />
+
+<Title />
+<Subtitle>A high-performance, accessible menu component for building complex interaction layers.</Subtitle>
+
+<Description>
+  The `DropMenu` follows the **Compound Component Pattern**, providing a flexible way to build custom menus. It supports standard button triggers, right-click context modes, and multi-level nested navigation with full keyboard accessibility.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Keyboard Accessible**: Built-in support for WAI-ARIA Menu patterns including arrow key navigation.
+- **Context Menu Mode**: Transform any surface into a right-click triggered menu at mouse coordinates.
+- **Auto-Collision Detection**: Smart positioning that flips or shifts to stay within the viewport.
+- **Compound Pattern**: Modular architecture using `Trigger`, `Content`, and `Item` for maximum layout control.
+- **Visual Richness**: Seamless integration of icons and keyboard shortcuts for a premium application feel.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Actions vs Navigation**: Use `DropMenu` for system actions (Edit, Delete, Export).
+- **Grouping**: Use `DropMenu.Separator` and section labels to group related actions. This reduces cognitive load for the user.
+- **Feedback**: Always provide immediate feedback when a menu item is clicked (e.g., closing the menu or triggering a toast).
+
+### Don't:
+- **Primary Navigation**: Use `NavigationMenu` or simple links if the primary goal is moving between pages.
+- **Complex Forms**: Avoid putting complex form inputs directly inside the `DropMenu`; use a Modal or Popover instead.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { DropMenu } from "@simple-ui/drop-menu";
+import { Button } from "@simple-ui/button";
+
+const MyComponent = () => (
+  <DropMenu>
+    <DropMenu.Trigger>
+      <Button>Options</Button>
+    </DropMenu.Trigger>
+    <DropMenu.Content>
+      <DropMenu.Item onClick={() => console.log("Profile")}>Profile</DropMenu.Item>
+      <DropMenu.Item onClick={() => console.log("Settings")}>Settings</DropMenu.Item>
+      <DropMenu.Separator />
+      <DropMenu.Item onClick={() => console.log("Logout")}>Logout</DropMenu.Item>
+    </DropMenu.Content>
+  </DropMenu>
+);
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Compound Elements**: Always use the compound components (`DropMenu.Trigger`, `DropMenu.Content`, `DropMenu.Item`) to ensure context is passed correctly down the tree.
+
+> [!IMPORTANT]
+> **Keyboard Shortcuts**: If an item has a keyboard shortcut, visually indicate it using the `.sui-dropmenu__shortcut` class as shown in the examples, but remember you still have to implement the actual keyboard listener in your application logic.
+
+---
+
+## Visual Styles
+
+### Grouped & Categorized
+Using custom labels and separators allows you to build complex, categorized lists.
+<Canvas of={DropMenuStories.Grouped} />
+
+### Disabled Items
+Demonstrates how items can be disabled.
+<Canvas of={DropMenuStories.WithDisabledItem} />
+
+---
+
+## Examples
+
+### Long Menus & Scrolling
+When menus contain many items, they automatically handle scrolling to maintain usability within the viewport.
+<Canvas of={DropMenuStories.LongMenu} />
+
+### Context Menu (Right-Click)
+By enabling `contextMode`, you can trigger the menu at mouse coordinates. Right-click in the example in ContextMenu story to see it in action.
+
+### ComboBox (Searchable)
+Demonstrates how to build a functional ComboBox with a controlled input and filtered results using DropMenu primitives.
+<Canvas of={DropMenuStories.ComboBox} />
+
+---
+
+## Accessibility Audit
+
+- **Keyboard Support**: Full WAI-ARIA Menu pattern. `ArrowDown`/`ArrowUp` to navigate, `Enter`/`Space` to select, `Escape` to close, `Tab` to exit.
+- **Focus Management**: Focus is trapped within the menu while open and returns to the trigger when closed.
+- **ARIA Roles**: The container acts as `menu`, items as `menuitem`, and separators as `separator`.
+
+---
+
+## API Reference
+
+<ArgTypes />

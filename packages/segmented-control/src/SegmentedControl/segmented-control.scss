@@ -1,0 +1,377 @@
+.sui-segmented {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-round);
+  padding: 4px;
+
+  /* ===== ITEM ===== */
+  &__item {
+    position: relative;
+    z-index: 1;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    padding: 6px 12px;
+    font-size: var(--font-size-sm);
+    color: var(--muted-foreground);
+
+    border-radius: var(--radius-round);
+
+    transition: color var(--animation-duration-sm)
+      var(--animation-easing-ease-out);
+
+    &:hover {
+      color: var(--foreground);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--control-focus-ring);
+    }
+
+    &.is-active {
+      color: var(--foreground);
+    }
+  }
+
+  /* ===== DIVIDER ===== */
+  &__divider {
+    width: 1px;
+    align-self: stretch;
+    margin: 6px 0;
+    background: var(--border);
+    opacity: 0.6;
+  }
+
+  /* ===== INDICATOR ===== */
+  &__indicator {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 3px 0;
+
+    border-radius: var(--radius-round);
+    background: var(--card);
+    box-shadow: var(--shadows-sm);
+
+    z-index: 0;
+
+    transition:
+      transform var(--animation-duration-md) var(--animation-easing-ease-in-out),
+      width var(--animation-duration-md) var(--animation-easing-ease-in-out);
+  }
+
+  &__indicator-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+  }
+
+  /* ===== SIZES ===== */
+  &--sm &__item {
+    padding: 4px 10px;
+    font-size: var(--font-size-xs);
+  }
+
+  &--lg &__item {
+    padding: 8px 16px;
+    font-size: var(--font-size-md);
+  }
+
+  /* ===== INDICATOR TRANSITIONS ===== */
+  &__indicator {
+    transition:
+      transform var(--animation-duration-md) var(--animation-easing-ease-in-out),
+      width var(--animation-duration-md) var(--animation-easing-ease-in-out);
+  }
+
+  &__indicator.no-transition {
+    transition: none !important;
+  }
+}
+
+/* =========================================================
+   SUBTLE — all tones
+========================================================= */
+
+.sui-segmented--subtle.sui-segmented--neutral {
+  background: var(--muted);
+
+  .sui-segmented__indicator {
+    background: var(--card);
+    box-shadow: var(--shadows-sm);
+  }
+
+  .sui-segmented__item {
+    color: var(--muted-foreground);
+
+    &:hover {
+      color: var(--foreground);
+    }
+    &.is-active {
+      color: var(--foreground);
+    }
+  }
+}
+
+.sui-segmented--subtle.sui-segmented--primary {
+  background: var(--primary-subtle-background);
+
+  .sui-segmented__indicator {
+    background: var(--card);
+    box-shadow: var(--shadows-sm);
+  }
+
+  .sui-segmented__item {
+    color: var(--muted-foreground);
+
+    &:hover {
+      color: var(--primary-base);
+    }
+    &.is-active {
+      color: var(--primary-subtle-text);
+    }
+  }
+
+  .sui-segmented__divider {
+    background: var(--primary-subtle-border);
+  }
+}
+
+.sui-segmented--subtle.sui-segmented--success {
+  background: var(--success-subtle);
+
+  .sui-segmented__indicator {
+    background: var(--card);
+    box-shadow: var(--shadows-sm);
+  }
+
+  .sui-segmented__item {
+    color: var(--muted-foreground);
+
+    &:hover {
+      color: var(--success-base);
+    }
+    &.is-active {
+      color: var(--success-base);
+    }
+  }
+}
+
+.sui-segmented--subtle.sui-segmented--error {
+  background: var(--error-subtle);
+
+  .sui-segmented__indicator {
+    background: var(--card);
+    box-shadow: var(--shadows-sm);
+  }
+
+  .sui-segmented__item {
+    color: var(--muted-foreground);
+
+    &:hover {
+      color: var(--error-base);
+    }
+    &.is-active {
+      color: var(--error-base);
+    }
+  }
+}
+
+.sui-segmented--subtle.sui-segmented--warning {
+  background: var(--warning-subtle);
+
+  .sui-segmented__indicator {
+    background: var(--card);
+    box-shadow: var(--shadows-sm);
+  }
+
+  .sui-segmented__item {
+    color: var(--muted-foreground);
+
+    /* warning-base (#FFC107) is bright yellow — foreground keeps active readable */
+    &:hover {
+      color: var(--warning-base);
+    }
+    &.is-active {
+      color: var(--foreground);
+    }
+  }
+}
+
+.sui-segmented--subtle.sui-segmented--info {
+  background: var(--info-subtle);
+
+  .sui-segmented__indicator {
+    background: var(--card);
+    box-shadow: var(--shadows-sm);
+  }
+
+  .sui-segmented__item {
+    color: var(--info-base);
+
+    &:hover {
+      color: var(--foreground);
+    }
+    &.is-active {
+      color: var(--info-base);
+    }
+  }
+}
+
+/* =========================================================
+   OUTLINE — all tones, border-based, transparent bg
+   indicator is a tinted fill of the tone colour
+========================================================= */
+
+.sui-segmented--outline {
+  background: transparent;
+  padding: 3px; /* account for 1px border */
+
+  .sui-segmented__indicator {
+    box-shadow: none;
+  }
+}
+
+.sui-segmented--outline.sui-segmented--neutral {
+  border: 1px solid var(--border);
+
+  .sui-segmented__indicator {
+    background: var(--muted);
+  }
+
+  .sui-segmented__item {
+    color: var(--muted-foreground);
+
+    &:hover {
+      color: var(--foreground);
+    }
+    &.is-active {
+      color: var(--foreground);
+    }
+  }
+}
+
+.sui-segmented--outline.sui-segmented--primary {
+  border: 1px solid var(--primary-subtle-border);
+
+  .sui-segmented__indicator {
+    background: var(--primary-subtle-background);
+  }
+
+  .sui-segmented__item {
+    color: var(--muted-foreground);
+
+    &:hover {
+      color: var(--primary-base);
+    }
+    &.is-active {
+      color: var(--primary-subtle-text);
+    }
+  }
+
+  .sui-segmented__divider {
+    background: var(--primary-subtle-border);
+  }
+}
+
+.sui-segmented--outline.sui-segmented--success {
+  border: 1px solid var(--success-base);
+
+  .sui-segmented__indicator {
+    background: var(--success-subtle);
+  }
+
+  .sui-segmented__item {
+    color: var(--muted-foreground);
+
+    &:hover {
+      color: var(--success-base);
+    }
+    &.is-active {
+      color: var(--success-base);
+    }
+  }
+
+  .sui-segmented__divider {
+    background: var(--success-base);
+    opacity: 0.3;
+  }
+}
+
+.sui-segmented--outline.sui-segmented--error {
+  border: 1px solid var(--error-base);
+
+  .sui-segmented__indicator {
+    background: var(--error-subtle);
+  }
+
+  .sui-segmented__item {
+    color: var(--muted-foreground);
+
+    &:hover {
+      color: var(--error-base);
+    }
+    &.is-active {
+      color: var(--error-base);
+    }
+  }
+
+  .sui-segmented__divider {
+    background: var(--error-base);
+    opacity: 0.3;
+  }
+}
+
+.sui-segmented--outline.sui-segmented--warning {
+  border: 1px solid var(--warning-base);
+
+  .sui-segmented__indicator {
+    background: var(--warning-subtle);
+  }
+
+  .sui-segmented__item {
+    color: var(--muted-foreground);
+
+    /* warning-base is bright yellow — foreground for active contrast */
+    &:hover {
+      color: var(--warning-base);
+    }
+    &.is-active {
+      color: var(--foreground);
+    }
+  }
+
+  .sui-segmented__divider {
+    background: var(--warning-base);
+    opacity: 0.3;
+  }
+}
+
+.sui-segmented--outline.sui-segmented--info {
+  border: 1px solid var(--info-base);
+
+  .sui-segmented__indicator {
+    background: var(--info-subtle);
+  }
+
+  .sui-segmented__item {
+    color: var(--info-base);
+
+    &:hover {
+      color: var(--foreground);
+    }
+    &.is-active {
+      color: var(--info-base);
+    }
+  }
+
+  .sui-segmented__divider {
+    background: var(--info-base);
+    opacity: 0.3;
+  }
+}

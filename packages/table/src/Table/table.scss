@@ -1,0 +1,478 @@
+/* =========================
+   BASE TABLE
+========================= */
+.sui-table {
+  --table-bg: var(--background);
+  --table-head-bg: var(--muted);
+  --table-head-text: var(--foreground);
+  --table-cell-text: var(--foreground);
+  --table-border-color: var(--grey200);
+  --accent-color: var(--primary-base);
+
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-md);
+  overflow: auto;
+  font-size: var(--font-size-sm);
+  background-color: var(--table-bg);
+  display: grid;
+  grid-auto-rows: min-content;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid var(--table-border-color);
+
+  &.is-resizing {
+    transition: none !important;
+    cursor: col-resize;
+    user-select: none;
+
+    .sui-table__cell {
+      transition: none !important;
+    }
+  }
+
+  /* =========================
+     SOLID APPEARANCE
+  ========================= */
+
+  &.sui-table--neutral {
+    &.sui-table--solid {
+      --table-head-bg: var(--grey800);
+      --table-head-text: var(--white);
+      --accent-color: var(--grey800);
+    }
+  }
+
+  &.sui-table--primary {
+    --accent-color: var(--primary-base);
+    &.sui-table--solid {
+      --table-head-bg: var(--primary-background-base);
+      --table-head-text: var(--primary-text-base);
+      --table-border-color: var(--primary-border-base);
+    }
+  }
+
+  &.sui-table--success {
+    --accent-color: var(--success-base);
+    &.sui-table--solid {
+      --table-head-bg: var(--success-base);
+      --table-head-text: var(--white);
+      --table-border-color: var(--success-base);
+    }
+  }
+
+  &.sui-table--error {
+    --accent-color: var(--error-base);
+    &.sui-table--solid {
+      --table-head-bg: var(--error-base);
+      --table-head-text: var(--white);
+      --table-border-color: var(--error-base);
+    }
+  }
+
+  &.sui-table--warning {
+    --accent-color: var(--warning-base);
+    &.sui-table--solid {
+      --table-head-bg: var(--warning-base);
+      --table-head-text: var(--black);
+      --table-border-color: var(--warning-base);
+    }
+  }
+
+  &.sui-table--info {
+    --accent-color: var(--info-base);
+    &.sui-table--solid {
+      --table-head-bg: var(--info-base);
+      --table-head-text: var(--white);
+      --table-border-color: var(--info-base);
+    }
+  }
+
+  &.sui-table--subtle {
+    backdrop-filter: blur(12px);
+
+    &.sui-table--neutral {
+      --table-bg: color-mix(in srgb, var(--grey600) 8%, transparent);
+      --table-head-bg: color-mix(in srgb, var(--grey600) 16%, transparent);
+      --table-head-text: var(--grey800);
+      --table-cell-text: var(--grey800);
+      --table-border-color: color-mix(in srgb, var(--grey600) 25%, transparent);
+      --accent-color: var(--grey600);
+
+      background-color: var(--table-bg);
+      border-color: var(--table-border-color);
+    }
+
+    &.sui-table--primary {
+      --table-bg: var(--primary-subtle-background);
+      --table-head-bg: color-mix(in srgb, var(--primary-base) 15%, transparent);
+      --table-head-text: var(--primary-base);
+      --table-cell-text: var(--primary-base);
+      --table-border-color: var(--primary-subtle-border);
+      --accent-color: var(--primary-base);
+
+      background-color: var(--table-bg);
+      border-color: var(--table-border-color);
+    }
+
+    &.sui-table--success {
+      --table-bg: var(--success-subtle);
+      --table-head-bg: color-mix(in srgb, var(--success-base) 15%, transparent);
+      --table-head-text: var(--success-base);
+      --table-cell-text: var(--success-base);
+      --table-border-color: color-mix(
+        in srgb,
+        var(--success-base) 28%,
+        transparent
+      );
+      --accent-color: var(--success-base);
+
+      background-color: var(--table-bg);
+      border-color: var(--table-border-color);
+    }
+
+    &.sui-table--error {
+      --table-bg: var(--error-subtle);
+      --table-head-bg: color-mix(in srgb, var(--error-base) 15%, transparent);
+      --table-head-text: var(--error-base);
+      --table-cell-text: var(--error-base);
+      --table-border-color: color-mix(
+        in srgb,
+        var(--error-base) 28%,
+        transparent
+      );
+      --accent-color: var(--error-base);
+
+      background-color: var(--table-bg);
+      border-color: var(--table-border-color);
+    }
+
+    &.sui-table--warning {
+      --table-bg: var(--warning-subtle);
+      --table-head-bg: color-mix(in srgb, var(--warning-base) 20%, transparent);
+      --table-head-text: var(--primary-base);
+      --table-cell-text: var(--primary-base);
+      --table-border-color: color-mix(
+        in srgb,
+        var(--warning-base) 35%,
+        transparent
+      );
+      --accent-color: var(--black);
+
+      background-color: var(--table-bg);
+      border-color: var(--table-border-color);
+    }
+
+    &.sui-table--info {
+      --table-bg: var(--info-subtle);
+      --table-head-bg: color-mix(in srgb, var(--info-base) 15%, transparent);
+      --table-head-text: var(--info-base);
+      --table-cell-text: var(--info-base);
+      --table-border-color: color-mix(
+        in srgb,
+        var(--info-base) 28%,
+        transparent
+      );
+      --accent-color: var(--info-base);
+
+      background-color: var(--table-bg);
+      border-color: var(--table-border-color);
+    }
+  }
+}
+
+.sui-table__sort-indicator {
+  margin-left: 8px;
+  color: var(--accent-color, var(--primary-base));
+  display: inline-flex;
+  font-weight: bold;
+}
+
+/* =========================
+   CELLS
+========================= */
+.sui-table__cell {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--table-border-color);
+  color: var(--table-cell-text);
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  .sui-table--compact & {
+    padding: var(--layout-spacing-xs) var(--layout-spacing-sm);
+    min-height: 36px;
+  }
+  .sui-table--comfortable & {
+    padding: var(--layout-spacing-sm) var(--layout-spacing-md);
+    min-height: 48px;
+  }
+  .sui-table--spacious & {
+    padding: var(--layout-spacing-md) var(--layout-spacing-lg);
+    min-height: 64px;
+  }
+}
+
+.sui-table__head .sui-table__cell {
+  background-color: var(--table-head-bg);
+  color: var(--table-head-text);
+  font-weight: var(--font-weight-semibold);
+  border-bottom: 2px solid var(--table-border-color);
+
+  &.is-drag-target-left::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: var(--primary-base);
+    z-index: 50;
+  }
+
+  &.is-drag-target-right::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: var(--primary-base);
+    z-index: 50;
+  }
+}
+
+/* =========================
+   STICKY & PINNING
+========================= */
+.sui-table__head {
+  display: contents;
+}
+
+.sui-table__body {
+  display: contents;
+}
+
+.sui-table__head.is-sticky-header .sui-table__cell {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+  background-color: var(--table-head-bg);
+}
+
+.sui-table__cell.is-sticky-column {
+  position: sticky;
+  z-index: 5;
+  background-color: var(
+    --table-bg
+  ); /* Ensure solid background for stickiness */
+  border-right: 1px solid var(--table-border-color);
+
+  background-clip: padding-box;
+
+  &.sui-table__cell--head {
+    z-index: 11;
+    background-color: var(--table-head-bg);
+  }
+}
+
+/* =========================
+   INTERACTIVITY
+========================= */
+
+.sui-table__drag-handle-cell {
+  width: 48px;
+  min-width: 48px;
+  padding: 0 !important;
+  justify-content: center;
+  border-right: 0 !important;
+
+  &.is-sticky-first-column {
+    position: sticky;
+    left: 0;
+    z-index: 12;
+    background-color: var(--background);
+    border-right: 1px solid var(--table-border-color);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: var(--table-bg);
+      z-index: -1;
+    }
+
+    &.sui-table__cell--head {
+      &::before {
+        background-color: var(--table-head-bg);
+      }
+    }
+  }
+}
+
+.sui-table__drag-handle,
+.sui-table__pin-control {
+  color: inherit;
+  font-size: 18px;
+  display: flex;
+  opacity: 0.7;
+}
+
+.sui-table__drag-handle {
+  cursor: grab;
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.sui-table__pin-control {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s;
+  opacity: 0;
+  transform: scale(0.8);
+
+  &:hover {
+    color: var(--accent-color, var(--primary-base));
+    transform: scale(1.1);
+    opacity: 1;
+  }
+
+  &.is-pinned-active {
+    opacity: 1;
+    color: inherit;
+    transform: scale(1);
+  }
+}
+
+.sui-table__head-cell:hover .sui-table__pin-control {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.sui-table__row {
+  display: contents;
+}
+
+.sui-table__row.is-draggable {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: inherit;
+
+  &.is-dragging {
+    opacity: 0.5;
+    background-color: var(--primary-light);
+  }
+  .is-sticky-first-column {
+    background-color: var(--table-head-bg);
+
+    &:has(~ .is-pinned) {
+      z-index: 20;
+    }
+  }
+}
+
+/* =========================
+   COLUMN DRAG PLACEHOLDER
+========================= */
+
+/* Header placeholder: dashed ghost slot */
+.sui-table__head-cell.is-placeholder {
+  background: transparent !important;
+  border-bottom-color: transparent !important;
+  position: relative;
+  overflow: visible;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 4px 2px;
+    border: 2px dashed var(--primary-base);
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--primary-base) 8%, transparent);
+    animation: placeholder-pulse 1s ease-in-out infinite;
+    z-index: 0;
+  }
+}
+
+/* Body cell placeholder: subtle ghost slot */
+.sui-table__cell.is-placeholder {
+  background: color-mix(in srgb, var(--primary-base) 5%, transparent) !important;
+  border-right: none !important;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 2px 2px;
+    border-radius: 3px;
+    background: repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--primary-base) 15%, transparent) 0px,
+      color-mix(in srgb, var(--primary-base) 15%, transparent) 4px,
+      transparent 4px,
+      transparent 10px
+    );
+    opacity: 0.6;
+  }
+}
+
+@keyframes placeholder-pulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+
+.sui-table__resize-handle {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  width: 8px;
+  height: 100%;
+  cursor: col-resize;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+
+  &::after {
+    content: "";
+    width: 2px;
+    height: 100%;
+    background: transparent;
+    transition: background 0.2s;
+  }
+
+  &:hover::after {
+    background: var(--accent-color, var(--primary-base));
+  }
+
+  .sui-table__head-cell:not(:last-child) &::after {
+    background: var(--grey200);
+    width: 2px;
+    height: 100%;
+    margin-top: 20%;
+  }
+
+  &:active::after {
+    background: var(--accent-color, var(--primary-base));
+    width: 3px;
+  }
+}
+
+/* =========================
+   ALIGNMENT & UTILS
+========================= */
+.sui-table__cell--align-center {
+  justify-content: center;
+  text-align: center;
+}
+
+.sui-table__cell--align-right {
+  justify-content: flex-end;
+  text-align: right;
+}

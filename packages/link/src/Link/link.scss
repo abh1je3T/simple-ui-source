@@ -1,0 +1,71 @@
+.sui-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-md);
+  color: var(--primary-link-base);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--animation-duration-xs)
+    var(--animation-easing-ease-in-out);
+
+  &:hover {
+    color: var(--primary-link-hover);
+  }
+
+  /* --------------------
+     Variants
+  -------------------- */
+  &--default {
+    color: var(--primary-link-base);
+  }
+
+  &--muted {
+    color: var(--muted-foreground);
+
+    &:hover {
+      color: var(--foreground);
+    }
+  }
+
+  &--primary {
+    color: var(--primary-link-base);
+  }
+
+  &--danger {
+    color: var(--error-base);
+
+    &:hover {
+      color: var(--warning-base);
+    }
+  }
+
+  /* --------------------
+     Underline behavior
+  -------------------- */
+  &--underline-always {
+    text-decoration: underline;
+  }
+
+  &--underline-hover {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &--underline-none {
+    text-decoration: none;
+  }
+
+  /* --------------------
+     Disabled state
+  -------------------- */
+  &--disabled {
+    color: var(--muted-foreground);
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}

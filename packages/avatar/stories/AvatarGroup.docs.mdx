@@ -1,0 +1,89 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as AvatarGroupStories from './AvatarGroup.stories';
+
+<Meta of={AvatarGroupStories} name="AvatarGroup" />
+
+<Title />
+<Subtitle>A layout component for clustering multiple avatars together.</Subtitle>
+
+<Description>
+  The `AvatarGroup` component stacks multiple `Avatar` elements together to represent a collection of users (like a team, channel members, or participants in a thread). It handles overlap spacing and automatically generates a "+N" overflow indicator when the list exceeds a specified limit.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Overflow Management**: Pass as many `<Avatar>` components as you want; use the `max` prop to automatically truncate the list and show a clean `+N` badge.
+- **Stack Direction**: Control the visual overlap direction (`left` or `right`) to match different platform conventions (e.g., Slack vs. Teams).
+- **Synchronized Sizing**: The `size` prop passed to the group automatically synchronizes the overflow indicator to match the provided avatars (ensure your `<Avatar>` children also use the same size).
+- **Adjustable Spacing**: Choose between `normal` and `tight` overlap spacing based on available screen real estate.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Consistent Sizes**: Ensure all child `<Avatar>` components use the exact same `size` prop that you pass to the `AvatarGroup`.
+- **Use for Collections**: Ideal for showing "Liked by...", "Participants", or "Team Members".
+- **Limit Max Items**: Keep the `max` prop reasonable (usually between 3 and 5) to prevent the group from consuming too much horizontal space.
+
+### Don't:
+- **Mix Shapes**: Avoid mixing `circle` and `square` avatars within the same group, as it breaks the aesthetic overlap rhythm.
+- **Include Statuses**: Avoid using `showStatus={true}` on avatars within a group, as the overlapping nature makes the status dots look cluttered.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Avatar, AvatarGroup } from "@simple-ui/avatar";
+
+const TeamMembers = () => {
+  return (
+    <AvatarGroup max={3} size="md">
+      <Avatar name="Alice" tone="primary" />
+      <Avatar name="Bob" tone="success" />
+      <Avatar name="Charlie" tone="warning" />
+      <Avatar name="Diana" tone="error" />
+      <Avatar name="Eve" tone="neutral" />
+    </AvatarGroup>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Stacking Order**: The `stacked` prop (`left` vs `right`) changes which avatar sits "on top". `left` stacking (first avatar on top) is common in modern chat apps, while `right` stacking is common in traditional enterprise software.
+
+> [!IMPORTANT]
+> **Clicking Overflow**: The `+N` overflow indicator is currently not interactive by default. If you need it to open a modal with the full list of users, wrap the `AvatarGroup` in a clickable container or a custom implementation.
+
+---
+
+## Visual Styles
+
+### Overflow Management
+<Canvas of={AvatarGroupStories.Default} />
+
+### Stacking Direction
+<Canvas of={AvatarGroupStories.RightStack} />
+
+### Spacing Options
+<Canvas of={AvatarGroupStories.TightSpacing} />
+
+---
+
+## Accessibility Audit
+
+- **Visual Grouping**: While visually grouped, each child `Avatar` maintains its own `aria-label`, meaning screen readers will read the names sequentially.
+- **Hidden Overflow**: The "+N" indicator is visually clear, but for strict accessibility, ensure there is an alternative way for screen reader users to access the full list of names (e.g., a visually hidden text block saying "And 5 others").
+
+---
+
+## API Reference
+
+<ArgTypes />

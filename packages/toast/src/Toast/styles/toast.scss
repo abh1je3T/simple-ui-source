@@ -1,0 +1,196 @@
+.sui-toast-container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: var(--toast-gap, var(--layout-spacing-sm));
+  z-index: var(--zindex-toast);
+  padding: var(--layout-spacing-md);
+
+  &--top-right {
+    top: 0;
+    right: 0;
+  }
+  &--top-left {
+    top: 0;
+    left: 0;
+  }
+  &--bottom-right {
+    bottom: 0;
+    right: 0;
+    flex-direction: column-reverse;
+  }
+  &--bottom-left {
+    bottom: 0;
+    left: 0;
+    flex-direction: column-reverse;
+  }
+  &--top-center {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+  }
+  &--bottom-center {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+}
+
+.sui-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--layout-spacing-sm);
+
+  padding: var(--layout-spacing-sm) var(--layout-spacing-md);
+  border-radius: var(--radius-md);
+
+  box-shadow: var(--shadows-md);
+
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
+  
+  animation: sui-toast-enter 200ms ease forwards;
+
+  // Default variables
+  --toast-close-color: var(--muted-foreground);
+  --toast-close-hover-bg: rgba(0, 0, 0, 0.05);
+}
+
+@keyframes sui-toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sui-toast--exit {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+.sui-toast--loading {
+  .sui-toast__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* CONTENT */
+.sui-toast__content {
+  flex: 1;
+  padding-top: 2px; // Align with icon/button
+}
+
+.sui-toast__title {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+}
+
+.sui-toast__description {
+  color: inherit;
+  opacity: 0.8;
+  font-size: var(--font-size-xs);
+  margin-top: 2px;
+}
+
+.sui-toast__close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--toast-close-color);
+  transition: background-color 150ms ease;
+
+  &:hover {
+    background-color: var(--toast-close-hover-bg);
+  }
+}
+
+/* VARIANTS & TONES */
+
+// Subtle
+.sui-toast--subtle {
+  &.sui-toast--neutral {
+    background: var(--grey100);
+    color: var(--foreground);
+    --toast-close-color: var(--foreground);
+  }
+  &.sui-toast--primary {
+    background: var(--primary-subtle);
+    color: var(--primary-base);
+    --toast-close-color: var(--primary-base);
+  }
+  &.sui-toast--success {
+    background: var(--success-subtle);
+    color: var(--success-base);
+    --toast-close-color: var(--success-base);
+  }
+  &.sui-toast--error {
+    background: var(--error-subtle);
+    color: var(--error-base);
+    --toast-close-color: var(--error-base);
+  }
+  &.sui-toast--warning {
+    background: var(--warning-subtle);
+    color: var(--warning-base);
+    --toast-close-color: var(--warning-base);
+  }
+  &.sui-toast--info {
+    background: var(--info-subtle);
+    color: var(--info-base);
+    --toast-close-color: var(--info-base);
+  }
+
+  // Hover effect for subtle variants
+  --toast-close-hover-bg: rgba(0, 0, 0, 0.05);
+}
+
+// Solid
+.sui-toast--solid {
+  color: var(--white);
+  --toast-close-color: var(--white);
+  --toast-close-hover-bg: rgba(255, 255, 255, 0.2);
+
+  &.sui-toast--neutral { background: var(--grey800); }
+  &.sui-toast--primary { background: var(--primary-base); }
+  &.sui-toast--success { background: var(--success-base); }
+  &.sui-toast--error { background: var(--error-base); }
+  &.sui-toast--warning { 
+    background: var(--warning-base); 
+    color: var(--black);
+    --toast-close-color: var(--black);
+    --toast-close-hover-bg: rgba(0, 0, 0, 0.1);
+  }
+  &.sui-toast--info { background: var(--info-base); }
+}
+
+/* SIZE */
+.sui-toast--sm {
+  padding: 8px 12px;
+  .sui-toast__title { font-size: var(--font-size-xs); }
+}
+
+.sui-toast--md {
+  padding: 12px 16px;
+}
+
+.sui-toast--lg {
+  padding: 16px 20px;
+  .sui-toast__title { font-size: var(--font-size-md); }
+}

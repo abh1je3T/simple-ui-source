@@ -1,0 +1,108 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ButtonStories from './Button.stories';
+
+<Meta of={ButtonStories} name="Quick start" />
+
+<Title />
+<Subtitle>A foundational interactive component used to trigger actions and navigation.</Subtitle>
+
+<Description>
+  The `Button` component is the primary tool for user interaction. It is designed to be highly flexible, supporting multiple visual variants, sizes, and icon integrations while maintaining strict accessibility standards.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Multiple Variants**: Semantic styles for primary, secondary, tertiary, and status-based actions.
+- **Scalable Sizes**: Three distinct sizes (`sm`, `md`, `lg`) to accommodate different layout densities.
+- **Icon Integration**: Supports leading, trailing, or icon-only modes for enhanced visual communication.
+- **Loading & Disabled States**: Built-in states to handle asynchronous actions and restricted interactions.
+- **Design Token Integration**: Fully powered by the design system's tokens for consistent theming.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Prioritize Actions**: Use a single `primary` button per view to highlight the main action.
+- **Clear Labels**: Use concise, verb-driven labels (e.g., "Save", "Submit", "Delete").
+- **Consistent Hierarchy**: Use `secondary` or `tertiary` variants for supporting or optional actions.
+
+### Don't:
+- **Multiple Primaries**: Avoid using more than one primary button in the same group or section.
+- **Navigation Misuse**: Don't use buttons for simple text navigation; use the `Link` component instead.
+- **Vague Labels**: Avoid labels like "Click Here" or "Go"; be specific about what the action does.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Button } from "@simple-ui/button";
+import { FiSave } from "react-icons/fi";
+
+const Example = () => {
+  return (
+    <Button 
+      variant="primary" 
+      size="md" 
+      icon={<FiSave />}
+      onClick={() => console.log('Saving...')}
+    >
+      Save Changes
+    </Button>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Visual Weight**: Use visual weight to guide users. High-emphasis (solid) variants should be used for primary actions, while low-emphasis (ghost/link) variants are for secondary tasks.
+
+> [!TIP]
+> **Icon-Only Buttons**: When using a button with only an icon, always provide an `aria-label` to ensure screen reader users understand the button's purpose.
+
+> [!IMPORTANT]
+> **Touch Targets**: On mobile devices, ensure buttons have a minimum touch target area of 44x44px. The `lg` size is often preferred for mobile-first designs.
+
+---
+
+## Visual Styles
+
+### Variants
+<Canvas of={ButtonStories.Variants} />
+
+### Sizes
+<Canvas of={ButtonStories.Sizes} />
+
+### Disabled State
+<Canvas of={ButtonStories.Disabled} />
+
+---
+
+## Examples
+
+### Icon Integration
+<Canvas of={ButtonStories.IconOnly} />
+
+### Playground
+<Canvas of={ButtonStories.Playground} />
+
+---
+
+## Accessibility Audit
+
+- **Keyboard Support**: Fully navigable via `Tab` and activatable via `Enter` or `Space`.
+- **Semantic Element**: Uses the native `<button>` element, inheriting all browser-level accessibility features.
+- **Disabled State**: Prevents both click and keyboard interaction when the `disabled` prop is present.
+- **Focus Indicators**: Includes high-visibility focus rings for keyboard users.
+
+---
+
+## API Reference
+
+<ArgTypes />

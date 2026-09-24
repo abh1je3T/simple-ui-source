@@ -1,0 +1,105 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as SwitchStories from './Switch.stories';
+
+<Meta of={SwitchStories} name="Quick start" />
+
+<Title />
+<Subtitle>A toggle component for immediate state changes.</Subtitle>
+
+<Description>
+  The `Switch` component provides a highly visual way to toggle between two states, typically on and off. It is designed to look like a physical switch and is best used for settings that take effect immediately when toggled.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Semantic Tones**: Includes status tones (`success`, `error`) and branding tones (`primary`, `neutral`, `warning`).
+- **Scalable Sizes**: Available in `sm`, `md`, and `lg` to fit tight layouts or provide larger touch targets.
+- **Icon Support**: Supports custom icons within the thumb for both `on` (`iconOn`) and `off` (`iconOff`) states to provide extra visual context.
+- **Integrated Label**: Built-in `label` prop for quick and accessible text pairing.
+- **Form Participation**: Supports the `required` boolean prop for native HTML form validation integration.
+- **Native Accessibility**: Uses a visually hidden `<input type="checkbox">` to ensure perfect screen reader and keyboard support.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Immediate Action**: Use switches for settings that are applied instantly (e.g., turning on Wi-Fi, activating Dark Mode).
+- **Clear Labels**: Ensure the label clearly states what the "On" state does.
+- **Boolean States**: Use when the choice is strictly boolean (On/Off, True/False).
+
+### Don't:
+- **Form Submission**: Do not use switches for form inputs that require a "Submit" button to take effect. Use a `Checkbox` instead.
+- **Multiple Options**: Do not use switches if there are more than two mutually exclusive options. Use `Radio` buttons or a `Dropdown`.
+- **Ambiguous States**: Don't use a switch if the "On" or "Off" state isn't immediately obvious.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Switch } from "@simple-ui/switch";
+import { useState } from "react";
+
+const Example = () => {
+  const [notifications, setNotifications] = useState(false);
+  
+  return (
+    <Switch 
+      checked={notifications} 
+      onChange={setNotifications} 
+      label="Enable Push Notifications"
+      tone="primary"
+    />
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Hit Area**: The built-in `label` prop automatically wraps the text and the switch, making the entire area clickable for better UX.
+
+> [!TIP]
+> **Icon Usage**: Using icons (`iconOn` and `iconOff`) can be extremely helpful for states like "Dark Mode" vs "Light Mode" (Moon/Sun icons).
+
+> [!IMPORTANT]
+> **Tone Selection**: The `primary` tone is usually best for general settings. Use `success` or `error` only when toggling the switch activates a highly consequential or dangerous state.
+
+---
+
+## Visual Styles
+
+### Tones
+<Canvas of={SwitchStories.Tones} />
+
+### Sizes
+<Canvas of={SwitchStories.Sizes} />
+
+---
+
+## Examples
+
+### With Custom Icons
+<Canvas of={SwitchStories.WithIcons} />
+
+### Disabled State
+<Canvas of={SwitchStories.Disabled} />
+
+---
+
+## Accessibility Audit
+
+- **Keyboard Support**: Native support. Tab to focus, Space to toggle.
+- **Semantic Element**: Wraps an actual visually hidden `<input type="checkbox">` to preserve native semantics and form participation. The `required` prop maps directly to the native input attribute.
+- **Focus Rings**: Provides a clear, high-contrast focus ring on the track when navigated via keyboard.
+
+---
+
+## API Reference
+
+<ArgTypes />

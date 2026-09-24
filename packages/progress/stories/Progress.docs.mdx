@@ -1,0 +1,112 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ProgressStories from './Progress.stories';
+
+<Meta of={ProgressStories} name="Quick start" />
+
+<Title />
+<Subtitle>A visual indicator for displaying completion status of a task or process.</Subtitle>
+
+<Description>
+  The `Progress` component provides feedback on the completion of a task. It supports both determinate (known duration) and indeterminate (unknown duration) states, buffer visualization for streaming data, and diverse aesthetic patterns like discrete steps or dotted tracks.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Dual Modes**: Support for both `determinate` (specific percentage) and `indeterminate` (infinite loading) modes.
+- **Visual Patterns**: Choose between standard `continuous` bars, `dotted` appearances, or discrete `steps`.
+- **Streaming Buffer**: Visualize secondary progress (like video buffering or background pre-fetching) using the `buffer` prop.
+- **Semantic Tones**: Apply semantic colors (`success`, `warning`, `error`, `primary`) to convey the state of the task alongside progress.
+- **Built-in Labels**: Optional percentage label rendering inside the bar.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Long Tasks**: Use the `Progress` bar for tasks that are expected to take longer than 1 second (e.g., file uploads, complex calculations).
+- **Determinate When Possible**: Always try to use the `determinate` mode with accurate progress updates to reduce user anxiety.
+- **Contextual Tones**: Change the `tone` to `success` when complete, or `error` if the process fails mid-way.
+
+### Don't:
+- **Instant Actions**: Do not use a progress bar for nearly instantaneous actions; use a `Loader` (spinner) instead.
+- **Misleading Buffers**: Don't use the `buffer` prop randomly; it strictly represents data loaded ahead of the current execution point.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Progress } from "@simple-ui/progress";
+import { useEffect, useState } from "react";
+
+const Example = () => {
+  const [progress, setProgress] = useState(0);
+  
+  useEffect(() => {
+    const timer = setInterval(() => setProgress((p) => (p < 100 ? p + 10 : 100)), 500);
+    return () => clearInterval(timer);
+  }, []);
+  
+  return (
+    <Progress 
+      value={progress} 
+      showValue={true} 
+      tone={progress === 100 ? "success" : "primary"} 
+    />
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Smooth Animations**: The component uses CSS transitions to smoothly animate between values. Do not aggressively throttle your state updates; feeding it frequent, small updates looks better than infrequent, large jumps.
+
+> [!IMPORTANT]
+> **Accessibility**: Even if you hide the visual percentage label (`showValue={false}`), the component still sets `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` so screen readers can announce the progress.
+
+---
+
+## Visual Styles
+
+### Tones
+<Canvas of={ProgressStories.Tones} />
+
+### Sizes
+<Canvas of={ProgressStories.Sizes} />
+
+### Appearances & Patterns
+You can change the track appearance (`solid` vs `dotted`) or the fill pattern (`continuous` vs `steps`).
+<Canvas of={ProgressStories.Appearances} />
+<Canvas of={ProgressStories.Patterns} />
+<Canvas of={ProgressStories.Steps} />
+
+---
+
+## Examples
+
+### Indeterminate & Buffer Modes
+<Canvas of={ProgressStories.Modes} />
+<Canvas of={ProgressStories.StreamingBuffer} />
+
+### Dashboard Showcase
+A complex layout combining multiple progress bars with different configurations.
+<Canvas of={ProgressStories.DashboardShowcase} />
+
+---
+
+## Accessibility Audit
+
+- **ARIA Roles**: The root element uses `role="progressbar"`.
+- **Live Regions**: For determinate bars, standard `aria-value*` attributes are updated dynamically.
+- **Indeterminate State**: When `mode="indeterminate"`, the `aria-valuenow` is explicitly removed to indicate an unknown duration to assistive technologies.
+
+---
+
+## API Reference
+
+<ArgTypes />

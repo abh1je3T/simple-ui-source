@@ -1,0 +1,194 @@
+.sui-alert {
+  --description-color: var(--muted-foreground);
+
+  display: flex;
+  align-items: flex-start;
+  gap: var(--layout-spacing-sm);
+
+  padding: var(--layout-spacing-sm) var(--layout-spacing-md);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-md);
+
+  transition:
+    opacity var(--component-alert-enter-duration)
+      var(--component-alert-enter-easing),
+    transform var(--component-alert-enter-duration)
+      var(--component-alert-enter-easing);
+}
+
+/* ---------------------------
+   TRANSITIONS (CORE)
+--------------------------- */
+
+.sui-alert--enter {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.sui-alert--enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sui-alert--exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sui-alert--exit-active {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+/* ---------------------------
+   ELEMENTS
+--------------------------- */
+
+.sui-alert__icon {
+  font-size: var(--icon-size-md);
+  display: flex;
+  align-items: center;
+}
+
+.sui-alert__content {
+  flex: 1;
+}
+
+.sui-alert__title {
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--layout-spacing-xs);
+}
+
+.sui-alert__description {
+  color: var(--description-color);
+}
+
+.sui-alert__close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  font-size: var(--icon-size-md);
+  color: inherit;
+
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background-color 150ms ease;
+
+  &:hover {
+    background-color: var(--alert-close-hover-bg, rgba(0, 0, 0, 0.05));
+  }
+}
+
+/* ---------------------------
+   SIZE MODIFIERS
+--------------------------- */
+
+.sui-alert--sm {
+  padding: var(--layout-spacing-xs) var(--layout-spacing-sm);
+  font-size: var(--font-size-xs);
+}
+
+.sui-alert--md {
+  padding: var(--layout-spacing-sm) var(--layout-spacing-md);
+  font-size: var(--font-size-sm);
+}
+
+.sui-alert--lg {
+  padding: var(--layout-spacing-md) var(--layout-spacing-lg);
+  font-size: var(--font-size-md);
+}
+
+/* ---------------------------
+   VARIANT: SUBTLE
+--------------------------- */
+
+.sui-alert--subtle {
+  &.sui-alert--success {
+    background: var(--success-subtle);
+    color: var(--success-base);
+    --description-color: var(--success-base);
+  }
+
+  &.sui-alert--error {
+    background: var(--error-subtle);
+    color: var(--error-base);
+    --description-color: var(--error-base);
+  }
+
+  &.sui-alert--warning {
+    background: var(--warning-subtle);
+    color: var(--warning-base);
+    --description-color: var(--warning-base);
+  }
+
+  &.sui-alert--info {
+    background: var(--info-subtle);
+    color: var(--info-base);
+    --description-color: var(--info-base);
+  }
+
+  &.sui-alert--primary {
+    background: var(--primary-subtle-background);
+    color: var(--primary-base);
+    --description-color: var(--primary-base);
+  }
+
+  &.sui-alert--neutral {
+    background: var(--grey100);
+    color: var(--foreground);
+    --description-color: var(--foreground);
+  }
+}
+
+/* ---------------------------
+   VARIANT: SOLID
+--------------------------- */
+
+.sui-alert--solid {
+  --alert-close-hover-bg: rgba(255, 255, 255, 0.2);
+
+  &.sui-alert--success {
+    background: var(--success-base);
+    color: var(--white);
+    --description-color: var(--white);
+  }
+
+  &.sui-alert--error {
+    background: var(--error-base);
+    color: var(--white);
+    --description-color: var(--white);
+  }
+
+  &.sui-alert--info {
+    background: var(--info-base);
+    color: var(--white);
+    --description-color: var(--white);
+  }
+
+  &.sui-alert--primary {
+    background: var(--primary-base);
+    color: var(--primary-text-base);
+    --description-color: var(--primary-text-base);
+  }
+
+  &.sui-alert--neutral {
+    background: var(--grey800);
+    color: var(--white);
+    --description-color: var(--white);
+  }
+
+  &.sui-alert--warning {
+    background: var(--warning-base);
+    color: var(--black);
+    --description-color: var(--black);
+    --alert-close-hover-bg: rgba(0, 0, 0, 0.1);
+  }
+}

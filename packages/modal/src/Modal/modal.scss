@@ -1,0 +1,136 @@
+.sui-modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: var(--zindex-modal);
+}
+
+/* =========================
+   BACKDROP
+========================= */
+.sui-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45); // (keep as-is for now; no token yet)
+}
+
+/* =========================
+   CENTER WRAPPER
+========================= */
+.sui-modal-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: var(--layout-spacing-lg);
+}
+
+/* =========================
+   BASE MODAL
+========================= */
+.sui-modal {
+  background: var(--card);
+  color: var(--card-foreground);
+
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadows-lg);
+
+  width: 100%;
+  max-width: 600px;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  transition:
+    transform var(--animation-duration-md) var(--animation-easing-ease-in-out),
+    opacity var(--animation-duration-md) var(--animation-easing-ease-in-out);
+}
+
+/* =========================
+   HEADER
+========================= */
+.sui-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: var(--layout-spacing-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.sui-modal__title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-md);
+}
+
+.sui-modal__close {
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+
+  font-size: var(--font-size-lg);
+  color: var(--muted-foreground);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: var(--layout-spacing-xs);
+  border-radius: var(--radius-sm);
+
+  transition: background var(--animation-duration-xs)
+    var(--animation-easing-ease-in-out);
+
+  &:hover {
+    background: var(--muted);
+  }
+}
+
+/* =========================
+   CONTENT
+========================= */
+.sui-modal__content {
+  padding: var(--layout-spacing-md);
+
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-md);
+}
+
+/* =========================
+   SIZES
+========================= */
+.sui-modal--sm {
+  width: min(92vw, 360px);
+}
+
+.sui-modal--md {
+  width: min(92vw, 520px);
+}
+
+.sui-modal--lg {
+  width: min(92vw, 720px);
+}
+
+.sui-modal--xl {
+  width: min(92vw, 960px);
+}
+
+/* =========================
+   TONES
+========================= */
+.sui-modal--primary {
+  border-top: 4px solid var(--primary-base);
+}
+
+.sui-modal--secondary {
+  border-top: 4px solid var(--secondary-base);
+}
+
+.sui-modal--tertiary {
+  border-top: 4px solid var(--tertiary-base);
+}

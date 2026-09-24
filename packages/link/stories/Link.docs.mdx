@@ -1,0 +1,104 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as LinkStories from './Link.stories';
+
+<Meta of={LinkStories} name="Quick start" />
+
+<Title />
+<Subtitle>A typographic component for navigation and external references.</Subtitle>
+
+<Description>
+  The `Link` component is used to navigate users to different pages or external resources. It provides standardized styling for active, hover, and disabled states while ensuring accessible markup for screen readers.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Semantic Variants**: Supports `default`, `primary`, `muted`, and `danger` styles to match different contexts.
+- **Polymorphic Routing**: Seamlessly integrates with framework routers (Next.js, React Router, Remix) via the `as` prop without breaking styles.
+- **Underline Control**: Explicitly control underline behavior (`hover`, `always`, `none`) for better inline text integration.
+- **External Security**: Automatically applies `target="_blank"` and `rel="noopener noreferrer"` when the `external` prop is used.
+- **Disabled State**: Safely disables links using `aria-disabled` and pointer events, preventing accidental navigation.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Use for Navigation**: Use links when an action takes the user to a new URL, a different section of the page, or opens a new tab.
+- **Clear Text**: Ensure the link text clearly describes the destination (e.g., "Read the Documentation" instead of "Click Here").
+- **Inline Text**: Use the `hover` underline style for links embedded within paragraphs to reduce visual clutter while remaining identifiable.
+
+### Don't:
+- **Form Submission**: Do not use links for actions that mutate data or submit forms; use a `Button` instead.
+- **Underline Removal**: Do not remove the underline (`underline="none"`) unless the link is explicitly styled as a button or card, as it damages accessibility.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Link } from "@simple-ui/link";
+
+const Example = () => {
+  return (
+    <p>
+      Please review our <Link href="/terms" variant="primary">Terms of Service</Link> before continuing. 
+      You can also read more <Link href="https://example.com" external>on our blog</Link>.
+    </p>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **External Links**: When using `external={true}`, it's often helpful to include an external link icon (via children) to visually indicate to the user that they will leave the current site.
+
+> [!IMPORTANT]
+> **Framework Integration**: When using Next.js or React Router, pass their link component to the `as` prop (e.g. `<Link as={NextLink} href="/about">`) to maintain client-side routing capabilities while keeping the Simple UI visual styles.
+
+---
+
+## Visual Styles
+
+### Variants
+<Canvas of={LinkStories.Primary} />
+<Canvas of={LinkStories.Muted} />
+
+### Underline Behaviors
+<Canvas of={LinkStories.UnderlineHover} />
+
+---
+
+## Examples
+
+### External Link
+<Canvas of={LinkStories.External} />
+
+### Framework Routing (Polymorphic)
+You can render the link as a custom router component from Next.js, React Router, etc.
+<Canvas of={LinkStories.WithRouter} />
+
+### Mixed Navigation
+A single unified API for both native anchors and client-side routing.
+<Canvas of={LinkStories.MixedNavigation} />
+
+### Disabled State
+<Canvas of={LinkStories.Disabled} />
+
+---
+
+## Accessibility Audit
+
+- **Semantic HTML**: Renders a standard `<a>` tag.
+- **Security Attributes**: The `external` prop automatically adds `rel="noopener noreferrer"`, protecting against reverse tabnabbing attacks.
+- **Disabled Semantics**: Uses `aria-disabled="true"` rather than removing the `href` attribute, ensuring screen readers still announce it as a disabled link.
+
+---
+
+## API Reference
+
+<ArgTypes />

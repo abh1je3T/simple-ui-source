@@ -1,0 +1,35 @@
+.sui-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &__label {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  &__required {
+    color: red;
+    margin-left: 4px;
+  }
+
+  &__control {
+    display: flex;
+    align-items: center;
+  }
+
+  &__message {
+    font-size: 12px;
+    color: #666;
+
+    &--error {
+      color: red;
+    }
+  }
+
+  &--error {
+    .sui-form-field__control {
+      border-color: red;
+    }
+  }
+}

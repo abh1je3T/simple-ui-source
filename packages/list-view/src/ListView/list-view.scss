@@ -1,0 +1,140 @@
+.sui-list-view {
+  position: relative;
+
+  overflow: auto;
+
+  width: 100%;
+  height: 100%;
+
+  -webkit-overflow-scrolling: touch;
+
+  padding: var(--layout-spacing-sm);
+
+  scroll-behavior: smooth;
+
+  overscroll-behavior: contain;
+}
+
+/* =========================
+   VIRTUAL INNER CONTAINER
+========================= */
+
+.sui-list-view__inner {
+  position: relative;
+  width: 100%;
+}
+
+/* =========================
+   ROW
+========================= */
+
+.sui-list-view__row {
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+/* Optional spacing between rows */
+.sui-list-view__row + .sui-list-view__row {
+  margin-top: var(--layout-spacing-sm);
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.sui-list-view__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 200px;
+
+  padding: var(--layout-spacing-xl);
+
+  color: var(--muted-foreground);
+
+  text-align: center;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.sui-list-view__loading,
+.sui-list-view__refresh {
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--layout-spacing-sm);
+
+  padding: var(--layout-spacing-md);
+}
+
+/* =========================
+   SCROLLBAR (optional)
+========================= */
+
+.sui-list-view::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.sui-list-view::-webkit-scrollbar-thumb {
+  background: var(--grey300);
+  border-radius: var(--radius-round);
+}
+
+.sui-list-view::-webkit-scrollbar-thumb:hover {
+  background: var(--grey400);
+}
+
+.sui-list-view::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sui-list-view__refresh-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  z-index: 10;
+}
+
+.sui-list-view__pull-handle {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 40px;
+  height: 4px;
+
+  background: var(--grey300);
+  border-radius: var(--radius-round);
+  z-index: 15;
+
+  transition: opacity 200ms ease;
+  cursor: grab;
+  &.is-pulling {
+    cursor: grabbing;
+  }
+
+  &:hover {
+    background: var(--grey400);
+  }
+}
+
+.sui-list-view__content {
+  will-change: transform;
+}

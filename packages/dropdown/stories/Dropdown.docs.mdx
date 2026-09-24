@@ -1,0 +1,108 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as DropdownStories from './Dropdown.stories';
+
+<Meta of={DropdownStories} name="Quick start" />
+
+<Title />
+<Subtitle>A premium custom selection component with advanced filtering and multi-select support.</Subtitle>
+
+<Description>
+  The `Dropdown` component provides a robust and accessible way for users to select one or more options from a list. It features advanced focus management, portal-based rendering to avoid clipping, and specialized modes for multi-selection and hierarchical data.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Multi-select Mode**: Built-in support for multiple selections with an integrated checkbox interface.
+- **Portal Rendering**: Uses React Portals to render the menu at the `document.body` level, ensuring it is never clipped by parent containers.
+- **Hierarchical Groups**: Supports grouping options into categories with distinct headers for better data organization.
+- **Advanced State Feedback**: Integrated UI for `loading` spinners and reactive `error` validation messages.
+- **Full Keyboard Support**: Industry-standard navigation via arrow keys, Enter, Space, and Escape.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Use for Selection**: Use the dropdown for selecting from a list of predefined values.
+- **Grouping**: Group long lists (more than 8-10 items) into categories to help users find options faster.
+- **Clear Placeholders**: Use a descriptive placeholder (e.g., "Choose a city...") when no value is selected.
+
+### Don't:
+- **Too Few Options**: Avoid using a dropdown for only 2 options; consider using a `Radio` or `Switch` instead for better visibility.
+- **Complex Content**: Don't cram complex interactive components inside dropdown options.
+- **Overloading Labels**: Avoid using extremely long labels for options; keep them concise.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Dropdown } from "@simple-ui/dropdown";
+import { useState } from "react";
+
+const options = [
+  { label: "Option 1", value: "1" },
+  { label: "Option 2", value: "2" },
+  { label: "Option 3", value: "3" },
+];
+
+const Example = () => {
+  const [value, setValue] = useState("");
+  
+  return (
+    <Dropdown 
+      options={options} 
+      value={value} 
+      onChange={setValue} 
+      placeholder="Select an option"
+    />
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Mobile Optimization**: For mobile views, the `multiple` mode provides a larger hit area for checkboxes, making selection much easier on touch devices.
+
+> [!TIP]
+> **Placement Strategy**: The component automatically calculates the best placement (top or bottom) based on viewport space, but you should ensure the trigger has enough surrounding space for a comfortable interaction.
+
+> [!IMPORTANT]
+> **Value Consistency**: Ensure that the `value` passed to the component matches one of the `value` properties in the `options` array for proper initial state rendering.
+
+---
+
+## Visual Styles
+
+### Selection Modes
+<Canvas of={DropdownStories.Default} />
+<Canvas of={DropdownStories.MultiSelect} />
+
+### Hierarchical Groups
+<Canvas of={DropdownStories.Grouped} />
+
+### Component States
+<Canvas of={DropdownStories.Loading} />
+<Canvas of={DropdownStories.ErrorState} />
+
+---
+
+## Accessibility Audit
+
+- **Focus Management**: Uses `aria-activedescendant` to manage focus within the listbox without moving the browser's active element.
+- **Keyboard Navigation**:
+  - `ArrowUp` / `ArrowDown`: Navigate options.
+  - `Enter` / `Space`: Toggle menu or select focused option.
+  - `Escape`: Close menu without selecting.
+- **ARIA Roles**: Implements `role="listbox"` and `role="option"` with appropriate `aria-selected` and `aria-multiselectable` states.
+
+---
+
+## API Reference
+
+<ArgTypes />

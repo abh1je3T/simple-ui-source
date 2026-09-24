@@ -1,0 +1,112 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ToastStories from './Toast.stories';
+
+<Meta of={ToastStories} name="Quick start" />
+
+<Title />
+<Subtitle>A non-intrusive notification system for providing feedback to the user.</Subtitle>
+
+<Description>
+  The `Toast` component is an imperative notification system. It displays transient messages that do not require user interaction to dismiss, making them perfect for confirming background actions (e.g., "Settings Saved" or "Item Deleted").
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Imperative API**: Trigger toasts from anywhere in your application using a simple JavaScript function (`toast()`), entirely decoupled from your component render cycle.
+- **Auto-Dismiss**: Automatically hides after a specified duration, with a built-in "pause on hover" feature so users don't lose the message while reading.
+- **Promise Handling**: Built-in support for resolving promises, automatically transitioning from a `loading` state to a `success` or `error` state based on the promise outcome.
+- **Multiple Positions**: Render toasts in various corners of the screen (e.g., `bottom-right`, `top-center`) via the `ToastProvider`.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Keep it Brief**: Toasts appear and disappear quickly. Use short, scannable text (usually 3-7 words).
+- **Confirmation Feedback**: Use toasts to confirm the success of an action that happens off-screen or without immediate visual change (like copying to the clipboard or saving a background setting).
+- **Provide Actions**: If an action is reversible, consider providing an "Undo" button within the toast (using the custom `action` slot).
+
+### Don't:
+- **Critical Errors**: Never use a toast for critical errors (e.g., "Payment Failed" or "Connection Lost"). Critical information requires an `Alert` or a Modal that forces user acknowledgement.
+- **Overwhelm the User**: Avoid triggering multiple toasts in rapid succession. The manager will stack them, but this creates significant visual noise.
+
+---
+
+## Usage Pattern
+
+The Toast system requires two parts: the `ToastProvider` (placed high in your app tree) and the `useToast` hook (or direct `toast` function).
+
+```tsx
+import { ToastProvider, useToast } from "@simple-ui/toast";
+
+// 1. Wrap your app
+export const App = () => (
+  <ToastProvider position="bottom-right">
+    <MyComponent />
+  </ToastProvider>
+);
+
+// 2. Trigger from anywhere
+const MyComponent = () => {
+  const { toast } = useToast();
+
+  const handleSave = () => {
+    toast({
+      title: "Settings Saved",
+      description: "Your preferences have been updated.",
+      tone: "success",
+      duration: 5000,
+    });
+  };
+
+  return <button onClick={handleSave}>Save</button>;
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Promise Handling**: Instead of managing loading/success/error states manually, use `toast.promise(myPromise, { loading: 'Saving...', success: 'Saved!', error: 'Failed' })` for a perfectly synchronized UX.
+
+> [!IMPORTANT]
+> **Accessibility Settings**: The `Toast` system natively implements `aria-live="polite"` and `role="status"`. This means screen readers will wait for the user to finish their current sentence before announcing the toast, preventing jarring interruptions.
+
+---
+
+## Visual Styles
+
+### Semantic Tones
+Toasts support all semantic tones (`success`, `error`, `warning`, `info`, `primary`, `neutral`).
+<Canvas of={ToastStories.BasicSuccess} />
+
+### Visual Variants
+Choose between `subtle` (light background) and `solid` (filled background) styles.
+<Canvas of={ToastStories.SubtleVsSolid} />
+
+---
+
+## Examples
+
+### Promise Handling
+<Canvas of={ToastStories.PromiseToast} />
+
+### Rich Content (Title & Positions)
+<Canvas of={ToastStories.Positions} />
+
+---
+
+## Accessibility Audit
+
+- **Live Regions**: By using `role="status"` and `aria-live="polite"`, the notifications are seamlessly integrated into the screen reader queue.
+- **Focus Management**: The toast itself does not steal focus when it appears, preserving the user's current workflow context.
+- **Hover Pausing**: The timer is paused whenever the user's mouse hovers over the toast, giving users with cognitive or reading difficulties ample time to process the information.
+
+---
+
+## API Reference
+
+<ArgTypes />

@@ -1,0 +1,79 @@
+{
+  "fontSize": {
+    "xs": "0.75em",
+    "sm": "0.875em",
+    "md": "1em",
+    "lg": "1.25em",
+    "xl": "1.5em",
+
+    "responsive": {
+      "sm": {
+        "xs": "0.75em",
+        "md": "0.875em",
+        "lg": "1em"
+      },
+      "md": {
+        "xs": "0.875em",
+        "md": "1em",
+        "lg": "1.125em"
+      },
+      "lg": {
+        "xs": "1em",
+        "md": "1.25em",
+        "lg": "1.5em"
+      }
+    }
+  },
+
+  "iconSize": {
+    "xs": "0.875em",
+    "sm": "1em",
+    "md": "1.25em",
+    "lg": "1.5em",
+    "xl": "1.75em",
+
+    "button": {
+      "sm": "1em",
+      "md": "1.25em",
+      "lg": "1.5em"
+    },
+
+    "ui": {
+      "xs": "0.875em",
+      "sm": "1em",
+      "md": "1.25em",
+      "lg": "1.5em",
+      "xl": "1.75em"
+    }
+  },
+
+  "fontWeight": {
+    "regular": 400,
+    "medium": 500,
+    "semibold": 600,
+    "bold": 700
+  },
+
+  "letterSpacing": {
+    "tight": "-0.03em",
+    "normal": "0em",
+    "wide": "0.03em"
+  },
+
+  "lineHeight": {
+    "xs": "1em",
+    "sm": "1.25em",
+    "md": "1.5em",
+    "lg": "1.75em",
+    "xl": "2em",
+
+    "heading": {
+      "h1": "3em",
+      "h2": "2.5em",
+      "h3": "2em",
+      "h4": "1.75em",
+      "h5": "1.5em",
+      "h6": "1.25em"
+    }
+  }
+}

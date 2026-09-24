@@ -1,0 +1,80 @@
+.sui-skeleton {
+  position: relative;
+  overflow: hidden;
+
+  background: var(--skeleton-base, #e5e7eb);
+
+  &::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    transform: translateX(-100%);
+
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.5),
+      transparent
+    );
+
+    animation: sui-skeleton-shimmer 1.4s infinite;
+  }
+}
+
+@keyframes sui-skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ---------------- CARD ---------------- */
+
+.sui-card-skeleton {
+  pointer-events: none;
+
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full, 999px);
+    flex-shrink: 0;
+  }
+
+  &__title {
+    width: 180px;
+    height: 18px;
+    border-radius: var(--radius-sm);
+  }
+
+  &__subtitle {
+    width: 120px;
+    height: 14px;
+    margin-top: 8px;
+    border-radius: var(--radius-sm);
+  }
+
+  &__media {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  &__line {
+    width: 100%;
+    height: 14px;
+
+    border-radius: var(--radius-sm);
+
+    margin-bottom: 10px;
+
+    &--short {
+      width: 72%;
+    }
+  }
+
+  &__button {
+    width: 88px;
+    height: 36px;
+    border-radius: var(--radius-md);
+  }
+}

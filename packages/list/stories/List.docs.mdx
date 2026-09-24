@@ -1,0 +1,97 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ListStories from './List.stories';
+
+<Meta of={ListStories} name="Quick start" />
+
+<Title />
+<Subtitle>A typographic component for displaying grouped collections of items.</Subtitle>
+
+<Description>
+  The `List` component is used to display continuous, vertical indexes of text or images. It handles native HTML list semantics while providing enhanced styling options like divided rows, custom marker colors, and consistent spacing.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Semantic Tags**: Switch between ordered (`<ol>`) and unordered (`<ul>`) lists seamlessly using the `as` prop.
+- **Marker Control**: Support for native marker styles (`disc`, `circle`, `square`, `decimal`) and the ability to completely hide them (`none`).
+- **Marker Theming**: Apply semantic tones to list markers (e.g., `success`, `primary`) without affecting the text content.
+- **Visual Variants**: Use the `divided` variant to automatically inject border separators between list items.
+- **Consistent Spacing**: Easily adjust the vertical gap between items using the `gap` prop.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Consistent Items**: Ensure all items within a list follow a similar structure and purpose.
+- **Nested Lists**: Use nested lists when displaying hierarchical data (like a table of contents or folder structure).
+- **Hide Markers for Custom UI**: Use `styleType="none"` when building custom list interfaces (like a list of `Card` components) where the semantic list tag is desired for accessibility, but bullet points are not.
+
+### Don't:
+- **Overuse Dividers**: Avoid the `divided` variant for simple text lists; save it for complex items like settings rows or data logs.
+- **Single Item Lists**: Do not use a list if there is only one item. Use a standard paragraph instead.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { List } from "@simple-ui/list";
+
+const Example = () => {
+  return (
+    <List as="ul" styleType="disc" gap="sm" markerColor="primary">
+      <List.Item>Analyze user requirements</List.Item>
+      <List.Item>Develop the component library</List.Item>
+      <List.Item>Write exhaustive documentation</List.Item>
+    </List>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Compound Components**: Always use the provided `<List.Item>` instead of native `<li>` tags to ensure proper styling hooks and consistent spacing within the Simple UI ecosystem.
+
+> [!TIP]
+> **Data Grids vs Lists**: If your list items contain multiple columns of distinct data (like Name, Date, Status), consider using a `Table` or `DataGrid` component instead for better alignment and scannability.
+
+---
+
+## Visual Styles
+
+### Semantic Lists (Ordered vs Unordered)
+<Canvas of={ListStories.Default} />
+<Canvas of={ListStories.Ordered} />
+
+### Marker Colors
+<Canvas of={ListStories.MarkerColors} />
+
+### Spacing (Gaps)
+<Canvas of={ListStories.Spacing} />
+
+---
+
+## Examples
+
+### Divided Variant
+The `divided` variant is perfect for settings panels, notification feeds, or complex data rows.
+<Canvas of={ListStories.Divided} />
+
+---
+
+## Accessibility Audit
+
+- **Semantic HTML**: Renders native `<ul>`, `<ol>`, and `<li>` elements, ensuring screen readers announce the number of items and the list boundaries correctly.
+- **Visual Markers**: When `styleType="none"` is used, the list semantics are preserved, but the visual bullets are removed, ensuring the layout remains accessible even when visually customized.
+
+---
+
+## API Reference
+
+<ArgTypes />

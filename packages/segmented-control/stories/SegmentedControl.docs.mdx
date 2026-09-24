@@ -1,0 +1,100 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as SegmentedControlStories from './SegmentedControl.stories';
+
+<Meta of={SegmentedControlStories} name="Quick start" />
+
+<Title />
+<Subtitle>A horizontal control for selecting a single option from a small group.</Subtitle>
+
+<Description>
+  The `SegmentedControl` provides a compact, mutually exclusive selection mechanism. It acts as a horizontal radio group with a sliding indicator, often used to switch between views, filter data, or select modes within a constrained space.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Sliding Indicator**: Smooth, GPU-accelerated animated indicator that glides between selected options.
+- **Smart Dividers**: Internal dividers dynamically hide themselves when adjacent to the active item to maintain a clean aesthetic.
+- **Native Keyboard Support**: Full support for `ArrowRight`, `ArrowLeft`, `Home`, and `End` keys, instantly updating the selection as per WAI-ARIA tablist standards.
+- **Visual Variants**: Choose between the default `subtle` style or an `outline` version for higher contrast against complex backgrounds.
+- **Semantic Tones**: Apply branding or status colors (`primary`, `success`, `neutral`) to the active indicator.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Small Datasets**: Use for groups of 2 to 5 options.
+- **Equal Importance**: Ensure all options have relatively similar label lengths and conceptual weight.
+- **View Switching**: Excellent for toggling between "Map View" / "List View" or "Daily" / "Weekly" / "Monthly".
+
+### Don't:
+- **Long Lists**: Do not use if there are more than 5 options; use a `Dropdown` instead.
+- **Form Submission**: Avoid using this for primary form data if the options require detailed explanation (use standard `Radio` buttons with helper text instead).
+- **Multiple Lines**: Segmented controls should never wrap to a second line. If space is tight, consider a smaller size or a dropdown.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { SegmentedControl } from "@simple-ui/segmented-control";
+import { useState } from "react";
+
+const options = [
+  { label: "Daily", value: "daily" },
+  { label: "Weekly", value: "weekly" },
+  { label: "Monthly", value: "monthly" },
+];
+
+const Example = () => {
+  const [view, setView] = useState("weekly");
+  
+  return (
+    <SegmentedControl 
+      options={options}
+      value={view}
+      onChange={setView}
+      tone="primary"
+    />
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Controlled vs Uncontrolled**: For UI state (like view toggles), it's often easiest to use this as a controlled component (`value` + `onChange`). If used in a form where you only need the final submit value, `defaultValue` is sufficient.
+
+> [!IMPORTANT]
+> **Keyboard Navigation**: Unlike standard tab keys, navigating with arrow keys *immediately* activates the new option. This follows the recommended pattern for tablists where the visual change is immediate.
+
+---
+
+## Visual Styles
+
+### Variants
+<Canvas of={SegmentedControlStories.Variants} />
+
+### Tones
+<Canvas of={SegmentedControlStories.Tones} />
+
+### Sizes
+<Canvas of={SegmentedControlStories.Sizes} />
+
+---
+
+## Accessibility Audit
+
+- **ARIA Roles**: Implements `role="tablist"` on the container and `role="tab"` on the buttons, treating the selection like a set of tabs.
+- **Focus Management**: Uses a roaming `tabIndex` pattern. Only the selected tab is in the focus sequence (`tabIndex={0}`), while others are `-1`. Arrow keys move focus and selection simultaneously.
+- **Animation Skipping**: If the user navigates rapidly via keyboard (e.g., Home/End keys), the animation is momentarily disabled to prevent dizzying visual sweeps across the entire component.
+
+---
+
+## API Reference
+
+<ArgTypes />

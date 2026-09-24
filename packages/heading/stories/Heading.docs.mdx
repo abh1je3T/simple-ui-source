@@ -1,0 +1,99 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as HeadingStories from './Heading.stories';
+
+<Meta of={HeadingStories} name="Quick start" />
+
+<Title />
+<Subtitle>A typographic component for displaying titles and establishing page hierarchy.</Subtitle>
+
+<Description>
+  The `Heading` component is used to create visual and semantic hierarchy within a page. It allows developers to decouple the semantic HTML tag (for SEO and accessibility) from the visual size, ensuring perfect semantic structure without compromising design.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Semantic vs Visual Decoupling**: Set the semantic HTML tag (`as` prop) independently of its visual scale (`size` prop).
+- **Responsive Scales**: Includes standard sizes (`h1`-`h6`) plus an oversized `display` option.
+- **Weight Control**: Adjustable font weights (`regular`, `medium`, `semibold`, `bold`) to fine-tune emphasis.
+- **Smart Defaults**: Automatically falls back to a visual size that matches the chosen semantic tag if no size is provided.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Semantic Hierarchy**: Ensure you use `as="h1"` through `as="h6"` in a strictly descending order on the page for optimal SEO and screen reader navigation.
+- **One H1 per Page**: Generally, restrict the use of `as="h1"` to the primary title of the page.
+- **Visual Adjustments**: If an `h3` is semantically correct but looks too small, use `as="h3" size="h2"` instead of breaking the hierarchy.
+
+### Don't:
+- **Styling Hooks**: Avoid using the `Heading` component just to make text bold or large. If the text is not acting as a title for the content below it, use a standard paragraph or span with utility classes.
+- **Skipping Levels**: Don't skip semantic heading levels (e.g., jumping from `h2` straight to `h4`).
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Heading } from "@simple-ui/heading";
+
+const ArticleHeader = () => {
+  return (
+    <header>
+      <Heading as="h1" size="display" weight="bold">
+        The Future of Web Development
+      </Heading>
+      {/* Even though this is an h2 semantically, we want it to look like an h4 visually */}
+      <Heading as="h2" size="h4" weight="regular">
+        Exploring new frameworks and architectures.
+      </Heading>
+    </header>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **SEO Optimization**: Search engines heavily weigh the content inside `h1` and `h2` tags. Always ensure your headings accurately describe the content they precede.
+
+> [!TIP]
+> **Readability**: For very large headings (like `size="display"`), use a bolder weight (`bold` or `semibold`) to maintain strong visual impact.
+
+> [!IMPORTANT]
+> **Default Fallback**: If you define `as="h3"` but omit the `size` prop, the component will automatically apply the visual styling of an `h3`.
+
+---
+
+## Visual Styles
+
+### Visual Sizes
+<Canvas of={HeadingStories.Levels} />
+
+### Font Weights
+<Canvas of={HeadingStories.Weights} />
+
+---
+
+## Examples
+
+### Semantic Decoupling
+This example demonstrates an element that is semantically an `h2` but is styled to look like an `h4`.
+<Canvas of={HeadingStories.UIExample} />
+
+---
+
+## Accessibility Audit
+
+- **Semantic Tags**: Renders native `<h1>` through `<h6>` tags based on the `as` prop.
+- **Screen Readers**: Correct usage of heading levels allows screen reader users to quickly navigate between sections using heading shortcuts (e.g., the 'H' key).
+
+---
+
+## API Reference
+
+<ArgTypes />

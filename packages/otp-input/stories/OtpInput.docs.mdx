@@ -1,0 +1,109 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as OtpInputStories from './OtpInput.stories';
+
+<Meta of={OtpInputStories} name="Quick start" />
+
+<Title />
+<Subtitle>A highly specialized input component designed exclusively for One-Time Passwords (OTP) and verification codes.</Subtitle>
+
+<Description>
+  The `OTPInput` component handles the complex UX requirements of multi-character verification codes. It manages individual digit focus, supports pasting full codes directly into the first box, and allows for custom visual grouping (e.g., `XXX-XXX`).
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Pasting Support**: Users can paste a 6-digit code into the first box, and the component will automatically distribute the characters across the inputs.
+- **Smart Focus Management**: Automatically advances focus to the next input when a digit is entered, and moves focus back when `Backspace` is pressed.
+- **Custom Grouping**: Use the `group` prop to split inputs into chunks (e.g., `[3, 3]`) and insert custom separators (`-`, `/`, or React Icons) between them.
+- **Mobile Optimized**: Integrates with mobile device capabilities (like iOS SMS autofill) by ensuring the correct `autocomplete` and `inputMode` attributes are set.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Use for Verification**: Use exclusively for multi-factor authentication, email verification codes, or PIN entry.
+- **Auto Focus**: Consider using `autoFocus={true}` on the verification screen to immediately capture user input without requiring a click.
+- **Provide Paste Instructions**: While the component supports pasting natively, ensure users know they can paste the code.
+
+### Don't:
+- **Standard Forms**: Do not use this component for standard numeric entry (like zip codes or phone numbers). Use a standard `Input` instead.
+- **Mixed Characters**: While it supports text (`inputMode="text"`), it is heavily optimized for numeric codes. Avoid using it for complex alphanumeric passwords.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { OTPInput } from "@simple-ui/otp-input";
+import { useState } from "react";
+
+const VerificationForm = () => {
+  const [code, setCode] = useState("");
+  
+  return (
+    <OTPInput 
+      length={6} 
+      value={code} 
+      onChange={setCode} 
+      group={[3, 3]} 
+      separator="-" 
+      tone="primary" 
+      autoFocus 
+    />
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Grouping UX**: For codes longer than 4 digits, breaking them into groups (e.g., 6 digits into two groups of 3) significantly reduces cognitive load and reading errors.
+
+> [!IMPORTANT]
+> **Controlled State**: The `value` prop is the *combined* string of all inputs. If a user enters "123", the value is "123", even if the `length` is 6.
+
+---
+
+## Visual Styles
+
+### Variants
+Choose between the classic `boxed` style or a minimalistic `underline` look.
+<Canvas of={OtpInputStories.Default} />
+<Canvas of={OtpInputStories.Underline} />
+
+### Sizes
+<Canvas of={OtpInputStories.Sizes} />
+
+### Tones
+<Canvas of={OtpInputStories.Tones} />
+
+---
+
+## Examples
+
+### Complex Grouping & Separators
+You can pass custom React elements into the `separator` slot to achieve unique designs.
+<Canvas of={OtpInputStories.Grouped} />
+<Canvas of={OtpInputStories.IconSeparatorShowcase} />
+
+### Disabled State
+<Canvas of={OtpInputStories.Disabled} />
+
+---
+
+## Accessibility Audit
+
+- **Input Attributes**: Uses `autoComplete="one-time-code"` which tells mobile OS to suggest SMS codes directly above the keyboard.
+- **Screen Readers**: Each individual input has a hidden `aria-label` identifying its position (e.g., "Digit 1", "Digit 2") to ensure screen reader users understand the sequence.
+- **Focus Rings**: Standard focus rings are applied to individual boxes to clearly indicate the current active input.
+
+---
+
+## API Reference
+
+<ArgTypes />

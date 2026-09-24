@@ -1,0 +1,196 @@
+{
+  "primary": {
+    "base": "#FFD700",
+    "hover": "#FFC400",
+    "pressed": "#FFB300",
+    "active": "#FFD700",
+    "disabled": "#666600",
+
+    "text": {
+      "base": "#000000",
+      "hover": "#000000",
+      "disabled": "#333300"
+    },
+
+    "background": {
+      "base": "#FFD700",
+      "hover": "#FFC400",
+      "pressed": "#FFB300",
+      "disabled": "#666600"
+    },
+
+    "border": {
+      "base": "#FFD700",
+      "hover": "#FFC400",
+      "disabled": "#666600"
+    },
+
+    "subtle": {
+      "background": "#1A1A00",
+      "text": "#FFD700",
+      "border": "#666600"
+    },
+
+    "link": {
+      "base": "#00E5FF",
+      "hover": "#66F0FF",
+      "visited": "#FF66FF"
+    }
+  },
+
+  "secondary": {
+    "base": "#00E5FF",
+    "hover": "#66F0FF",
+    "pressed": "#00B8CC",
+    "active": "#00E5FF",
+    "disabled": "#004C4C",
+
+    "text": {
+      "base": "#000000",
+      "hover": "#000000",
+      "disabled": "#003333"
+    },
+
+    "background": {
+      "base": "#00E5FF",
+      "hover": "#66F0FF",
+      "pressed": "#00B8CC",
+      "disabled": "#004C4C"
+    },
+
+    "border": {
+      "base": "#00E5FF",
+      "hover": "#66F0FF",
+      "disabled": "#004C4C"
+    },
+
+    "subtle": {
+      "background": "#001A1A",
+      "text": "#00E5FF",
+      "border": "#004C4C"
+    },
+
+    "link": {
+      "base": "#00E5FF",
+      "hover": "#66F0FF",
+      "visited": "#00B8CC"
+    }
+  },
+
+  "tertiary": {
+    "base": "#1A1A1A",
+    "hover": "#222222",
+    "pressed": "#333333",
+    "active": "#444444",
+    "disabled": "#111111",
+
+    "text": {
+      "base": "#FFFFFF",
+      "hover": "#FFFFFF",
+      "disabled": "#888888"
+    },
+
+    "background": {
+      "base": "#1A1A1A",
+      "hover": "#222222",
+      "pressed": "#333333",
+      "disabled": "#111111"
+    },
+
+    "border": {
+      "base": "#444444",
+      "hover": "#555555",
+      "disabled": "#222222"
+    },
+
+    "subtle": {
+      "background": "#111111",
+      "text": "#CCCCCC",
+      "border": "#333333"
+    },
+
+    "link": {
+      "base": "#CCCCCC",
+      "hover": "#EEEEEE",
+      "visited": "#FFFFFF"
+    }
+  },
+
+  "success": {
+    "base": "#00FF00",
+    "subtle": "#003300",
+    "text": "#000000"
+  },
+
+  "warning": {
+    "base": "#FFD700",
+    "subtle": "#332900",
+    "text": "#000000"
+  },
+
+  "error": {
+    "base": "#FF4D4D",
+    "subtle": "#330000",
+    "text": "#FFFFFF"
+  },
+
+  "info": {
+    "base": "#00E5FF",
+    "subtle": "#003333",
+    "text": "#000000"
+  },
+
+  "control": {
+    "text": "#FFFFFF",
+    "placeholder": "#AAAAAA",
+    "background": "#000000",
+    "border": "#FFFFFF",
+    "disabledText": "#666666",
+    "disabledBackground": "#000000",
+    "disabledBorder": "#666666",
+    "focusRing": "#FFD700"
+  },
+
+  "black": "#000000",
+  "white": "#FFFFFF",
+
+  "grey100": "#111111",
+  "grey200": "#222222",
+  "grey300": "#333333",
+  "grey400": "#555555",
+  "grey500": "#777777",
+  "grey600": "#999999",
+  "grey800": "#CCCCCC",
+  "grey900": "#EEEEEE",
+
+  "background": "#000000",
+  "foreground": "#FFFFFF",
+
+  "card": "#0A0A0A",
+  "cardForeground": "#FFFFFF",
+
+  "popover": "#0A0A0A",
+  "popoverForeground": "#FFFFFF",
+
+  "muted": "#111111",
+  "mutedForeground": "#CCCCCC",
+
+  "border": "#FFFFFF",
+  "input": "#FFFFFF",
+  "ring": "#FFD700",
+
+  "sidebar": "#000000",
+  "sidebarForeground": "#FFFFFF",
+  "sidebarPrimary": "#FFD700",
+  "sidebarPrimaryForeground": "#000000",
+  "sidebarAccent": "#00E5FF",
+  "sidebarAccentForeground": "#000000",
+  "sidebarBorder": "#FFFFFF",
+  "sidebarRing": "#FFD700",
+
+  "chart1": "#FFD700",
+  "chart2": "#00E5FF",
+  "chart3": "#FF4D4D",
+  "chart4": "#00FF00",
+  "chart5": "#FF66FF"
+}

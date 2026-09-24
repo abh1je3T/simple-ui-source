@@ -1,0 +1,51 @@
+.sui-label {
+  display: inline-flex;
+  align-items: center;
+  color: var(--foreground);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+/* -----------------------
+   Sizes
+------------------------ */
+
+.sui-label--sm {
+  font-size: var(--font-size-xs);
+}
+
+.sui-label--md {
+  font-size: var(--font-size-sm);
+}
+
+.sui-label--lg {
+  font-size: var(--font-size-md);
+}
+
+/* -----------------------
+   Weights
+------------------------ */
+
+.sui-label--regular {
+  font-weight: var(--font-weight-regular);
+}
+
+.sui-label--medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.sui-label--semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.sui-label--bold {
+  font-weight: var(--font-weight-bold);
+}
+
+/* -----------------------
+   Required marker
+------------------------ */
+
+.sui-label__required {
+  color: var(--error-base);
+  margin-left: 4px;
+}

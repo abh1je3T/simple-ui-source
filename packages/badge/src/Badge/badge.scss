@@ -1,0 +1,119 @@
+.sui-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--layout-spacing-xs);
+
+  border-radius: 999px;
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+  width: max-content;
+
+  /* ================= SIZE ================= */
+
+  &--sm {
+    font-size: var(--font-size-xs);
+    padding: 2px 6px;
+  }
+
+  &--md {
+    font-size: var(--font-size-sm);
+    padding: 4px 10px;
+  }
+
+  &--lg {
+    font-size: var(--font-size-md);
+    padding: 6px 12px;
+  }
+
+  /* ================= ICON ================= */
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__text {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* =========================================================
+   SOLID VARIANTS
+========================================================= */
+
+.sui-badge--solid.sui-badge--primary {
+  background: var(--primary-base);
+  color: var(--primary-text-base);
+}
+
+.sui-badge--solid.sui-badge--success {
+  background: var(--success-base);
+  color: var(--white);
+}
+
+.sui-badge--solid.sui-badge--error {
+  background: var(--error-base);
+  color: var(--white);
+}
+
+.sui-badge--solid.sui-badge--warning {
+  background: var(--warning-base);
+  color: var(--black);
+}
+
+.sui-badge--solid.sui-badge--info {
+  background: var(--info-base);
+  color: var(--white);
+}
+
+.sui-badge--solid.sui-badge--neutral {
+  background: var(--grey200);
+  color: var(--foreground);
+}
+
+/* =========================================================
+   SUBTLE VARIANTS (FIXED PROPERLY)
+========================================================= */
+
+.sui-badge--subtle.sui-badge--primary {
+  background: var(--primary-subtle-background);
+  color: var(--primary-subtle-text);
+  border: 1px solid var(--primary-subtle-border);
+}
+
+.sui-badge--subtle.sui-badge--success {
+  background: var(--success-subtle);
+  color: var(--success-base);
+}
+
+.sui-badge--subtle.sui-badge--error {
+  background: var(--error-subtle);
+  color: var(--error-base);
+}
+
+.sui-badge--subtle.sui-badge--warning {
+  background: var(--warning-subtle);
+  color: var(--warning-base);
+}
+
+.sui-badge--subtle.sui-badge--info {
+  background: var(--info-subtle);
+  color: var(--info-base);
+}
+
+.sui-badge--subtle.sui-badge--neutral {
+  background: var(--muted);
+  color: var(--muted-foreground);
+}
+
+/* =========================================================
+   OUTLINE VARIANT
+========================================================= */
+
+.sui-badge--outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+}

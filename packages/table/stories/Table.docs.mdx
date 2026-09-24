@@ -1,0 +1,280 @@
+import {
+  Meta,
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  Canvas,
+  ArgTypes,
+} from "@storybook/addon-docs/blocks";
+
+import * as TableStories from "./Table.stories";
+
+<Meta of={TableStories} name="Quick start" />
+
+<Title />
+
+<Subtitle>
+  A flexible enterprise-grade data table component with sorting, resizing,
+  pinning, drag-and-drop, sticky layouts, and rich composability.
+</Subtitle>
+
+<Description>
+  The `Table` component provides a scalable foundation for rendering structured
+  datasets across dashboards, admin panels, analytics systems, and internal
+  tools.
+
+  Built using composable primitives like `Table.Head`, `Table.Row`,
+  `Table.Cell`, and `Table.HeadCell`, it enables complete control over table
+  structure while supporting advanced enterprise interactions such as:
+
+  - Interactive sorting
+  - Column resizing
+  - Sticky headers
+  - Row & column drag-and-drop
+  - Interactive pinning
+  - Custom cell rendering
+  - Semantic appearance variants
+
+  The component is fully theme-aware and integrates seamlessly with the
+  Simple UI token system.
+</Description>
+
+<Primary />
+
+---
+
+# Key Features
+
+- **Composable API**: Build complex layouts using semantic table primitives.
+- **Interactive Behaviors**: Supports sorting, resizing, drag-and-drop, and pinning.
+- **Enterprise Ready**: Optimized for dashboards, admin tools, and data-heavy applications.
+- **Custom Rendering**: Easily render avatars, badges, progress bars, and actions.
+- **Theme Support**: Integrated with design tokens and semantic tones.
+- **Accessibility Focused**: Uses semantic table structure and keyboard-friendly interactions.
+
+---
+
+# Usage Guidelines
+
+Use the `Table` component when users need to compare, scan, sort, or manage
+structured data efficiently.
+
+## Do
+
+- Use sorting for meaningful datasets.
+- Keep pinned columns minimal for readability.
+- Use semantic tones consistently.
+- Use sticky headers for long-scroll datasets.
+- Keep row actions predictable and discoverable.
+
+## Don’t
+
+- Avoid enabling every advanced feature unless necessary.
+- Avoid excessive sticky columns on smaller screens.
+- Don’t overload rows with too many actions.
+- Avoid mixing unrelated content types within the same column.
+
+---
+
+# Basic Usage
+
+```tsx
+import { Table } from "@simple-ui/table";
+
+export const Example = () => {
+  return (
+    <Table
+      columns={[
+        { key: "name", width: "1fr" },
+        { key: "email", width: "1fr" },
+        { key: "role", width: "160px" },
+      ]}
+    >
+      <Table.Head>
+        <Table.Row>
+          <Table.HeadCell>Name</Table.HeadCell>
+          <Table.HeadCell>Email</Table.HeadCell>
+          <Table.HeadCell>Role</Table.HeadCell>
+        </Table.Row>
+      </Table.Head>
+
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>Alice Freeman</Table.Cell>
+          <Table.Cell>alice@example.com</Table.Cell>
+          <Table.Cell>Admin</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  );
+};
+```
+
+---
+
+# Best Practices
+
+> [!TIP]
+> Start simple and progressively enable advanced interactions like resizing,
+> drag-and-drop, or pinning only when the workflow truly benefits from them.
+
+> [!IMPORTANT]
+> Sticky layouts require properly constrained parent containers with overflow
+> handling for the best experience.
+
+> [!WARNING]
+> Combining resizing, dragging, sorting, and pinning simultaneously may create
+> interaction overload in smaller datasets.
+
+---
+
+# Default Table
+
+Basic composable table structure.
+
+<Canvas of={TableStories.Default} />
+
+---
+
+# Appearance Variants
+
+## Solid Appearance
+
+The `solid` appearance provides stronger visual separation and works well for
+dense enterprise interfaces.
+
+<Canvas of={TableStories.AppearanceSolid} />
+
+---
+
+## Subtle Appearance
+
+The `subtle` appearance reduces visual noise and fits modern minimal layouts.
+
+<Canvas of={TableStories.AppearanceSubtle} />
+
+---
+
+# Interactive Features
+
+## Interactive Sorting
+
+Sortable headers allow users to reorganize datasets dynamically.
+
+<Canvas of={TableStories.InteractiveSorting} />
+
+---
+
+## Column Resizing
+
+Resizable columns help users customize layout density and visibility.
+
+<Canvas of={TableStories.ColumnResizing} />
+
+---
+
+## Sticky Header
+
+Sticky headers improve readability during long-scroll navigation.
+
+<Canvas of={TableStories.StickyHeader} />
+
+---
+
+## Drag and Drop
+
+Supports both row reordering and column reordering interactions.
+
+<Canvas of={TableStories.DragAndDrop} />
+
+---
+
+## Adjacent Pinning
+
+Pinned columns remain visible while horizontally scrolling large datasets.
+
+<Canvas of={TableStories.AdjacentPinning} />
+
+---
+
+# Real World Examples
+
+## User Management
+
+Demonstrates:
+- Avatars
+- Status badges
+- Selection controls
+- Rich cell layouts
+
+<Canvas of={TableStories.UserManagement} />
+
+---
+
+## Project Dashboard
+
+Demonstrates:
+- Progress indicators
+- Semantic statuses
+- Custom cell rendering
+- Dashboard-style layouts
+
+<Canvas of={TableStories.ProjectDashboard} />
+
+---
+
+## Enterprise Data Grid
+
+Comprehensive showcase combining:
+
+- Sorting
+- Column resizing
+- Sticky headers
+- Drag-and-drop
+- Interactive pinning
+- Dynamic layouts
+
+<Canvas of={TableStories.AllFeaturesEnabled} />
+
+---
+
+# Accessibility
+
+## Keyboard Support
+
+The table supports keyboard-accessible interactions for:
+
+- `Tab`
+- `Enter`
+- `Space`
+
+Interactive controls inside cells remain fully accessible.
+
+---
+
+## Semantic Structure
+
+Uses semantic table elements:
+
+- `table`
+- `thead`
+- `tbody`
+- `tr`
+- `th`
+- `td`
+
+---
+
+## Visual Accessibility
+
+- Supports semantic tones
+- Works with light/dark themes
+- Built on accessible design tokens
+- Compatible with high contrast systems
+
+---
+
+# API Reference
+
+<ArgTypes />

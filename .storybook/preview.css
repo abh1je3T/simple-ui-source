@@ -1,0 +1,44 @@
+/* Import the font */
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap");
+
+/* Apply globally */
+body,
+html {
+  font-family: "Ubuntu Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400; /* default weight */
+  font-style: normal;
+  * {
+    font-family: "Ubuntu Sans", sans-serif;
+    font-optical-sizing: auto;
+  }
+  #storybook-root,
+  .sb-show-main,
+  .sbdocs.sbdocs-preview.sb-unstyled {
+    color: var(--foreground);
+    background: var(--background) !important;
+  }
+
+  #storybook-root {
+    height: 100svh;
+  }
+}
+
+html {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+html[data-theme="high-contrast"] {
+  color-scheme: dark;
+}
+
+.ubuntu-sans-bold {
+  font-weight: 700;
+}
+.ubuntu-sans-light {
+  font-weight: 300;
+}

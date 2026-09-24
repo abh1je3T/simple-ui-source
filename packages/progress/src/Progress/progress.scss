@@ -1,0 +1,213 @@
+.sui-progress {
+  --progress-height: 4px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+
+  /* =========================
+     TRACK
+  ========================= */
+  &__track {
+    height: var(--progress-height);
+    width: 100%;
+    background: var(--muted);
+    border-radius: var(--radius-round);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* =========================
+     BAR WRAPPER
+  ========================= */
+  &__bar {
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+
+  /* =========================
+     FILLED BAR
+  ========================= */
+  &__bar-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: var(--radius-round);
+    transition: width 0.3s ease;
+  }
+
+  &__bar-buffer {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    border-radius: var(--radius-round);
+    background: color-mix(in srgb, var(--primary-base) 25%, transparent);
+    transition: width 0.35s ease;
+    z-index: 1;
+  }
+
+  /* =========================
+     DOT BACKGROUND
+  ========================= */
+  &__bar-dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+      circle,
+      currentColor 1px,
+      transparent 2px
+    );
+    background-size: 6px 6px;
+    opacity: 0.35;
+    pointer-events: none;
+    background-position-y: center;
+  }
+
+  /* =========================
+     DOTTED MODE
+  ========================= */
+  &--dotted {
+    .sui-progress__track {
+      background: transparent;
+    }
+
+    .sui-progress__bar-fill {
+      position: relative;
+      z-index: 2;
+    }
+
+    .sui-progress__bar-dots {
+      z-index: 1;
+    }
+  }
+
+  /* =========================
+     INDETERMINATE
+  ========================= */
+  &--indeterminate {
+    .sui-progress__bar-fill {
+      position: absolute;
+      width: 40%;
+      animation: sui-progress-indeterminate 1.2s infinite linear;
+    }
+  }
+
+  @keyframes sui-progress-indeterminate {
+    0% {
+      left: -40%;
+    }
+
+    100% {
+      left: 100%;
+    }
+  }
+
+  /* =========================
+     SIZES
+  ========================= */
+  &--sm {
+    --progress-height: 4px;
+  }
+
+  &--md {
+    --progress-height: 8px;
+  }
+
+  &--lg {
+    --progress-height: 12px;
+
+    .sui-progress__bar-dots {
+      background-image: radial-gradient(
+        circle,
+        currentColor 2px,
+        transparent 3px
+      );
+      background-size: 12px 12px;
+    }
+  }
+
+  /* =========================
+     TONES
+  ========================= */
+  &--primary {
+    color: var(--primary-base);
+
+    .sui-progress__bar-fill {
+      background: currentColor;
+    }
+  }
+
+  &--success {
+    color: var(--success-base);
+
+    .sui-progress__bar-fill {
+      background: currentColor;
+    }
+  }
+
+  &--warning {
+    color: var(--warning-base);
+
+    .sui-progress__bar-fill {
+      background: currentColor;
+    }
+  }
+
+  &--error {
+    color: var(--error-base);
+
+    .sui-progress__bar-fill {
+      background: currentColor;
+    }
+  }
+
+  &--neutral {
+    color: var(--grey400);
+
+    .sui-progress__bar-fill {
+      background: currentColor;
+    }
+  }
+
+  /* =========================
+     STEPS
+  ========================= */
+  &__steps {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__step {
+    flex: 1;
+    height: 8px;
+    background: var(--muted);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* inner animated fill (now tone-aware) */
+  &__step::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+
+  &__step.is-filled::after {
+    transform: scaleX(1);
+  }
+
+  /* =========================
+     LABEL
+  ========================= */
+  &__label {
+    font-size: var(--font-size-xs);
+    color: var(--foreground);
+    text-align: right;
+  }
+}

@@ -1,0 +1,176 @@
+@mixin flex(
+  $direction: row,
+  $justify: flex-start,
+  $align: stretch,
+  $gap: null,
+  $wrap: null
+) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+
+  @if $gap != null {
+    gap: $gap;
+  }
+
+  @if $wrap != null {
+    flex-wrap: $wrap;
+  }
+}
+// Row + Justify + Align combinations
+@mixin row-start-start {
+  @include flex(row, flex-start, flex-start);
+}
+@mixin row-start-center {
+  @include flex(row, flex-start, center);
+}
+@mixin row-start-end {
+  @include flex(row, flex-start, flex-end);
+}
+@mixin row-start-stretch {
+  @include flex(row, flex-start, stretch);
+}
+
+@mixin row-center-start {
+  @include flex(row, center, flex-start);
+}
+@mixin row-center-center {
+  @include flex(row, center, center);
+}
+@mixin row-center-end {
+  @include flex(row, center, flex-end);
+}
+@mixin row-center-stretch {
+  @include flex(row, center, stretch);
+}
+
+@mixin row-end-start {
+  @include flex(row, flex-end, flex-start);
+}
+@mixin row-end-center {
+  @include flex(row, flex-end, center);
+}
+@mixin row-end-end {
+  @include flex(row, flex-end, flex-end);
+}
+@mixin row-end-stretch {
+  @include flex(row, flex-end, stretch);
+}
+
+@mixin row-between-start {
+  @include flex(row, space-between, flex-start);
+}
+@mixin row-between-center {
+  @include flex(row, space-between, center);
+}
+@mixin row-between-end {
+  @include flex(row, space-between, flex-end);
+}
+@mixin row-between-stretch {
+  @include flex(row, space-between, stretch);
+}
+
+@mixin row-around-start {
+  @include flex(row, space-around, flex-start);
+}
+@mixin row-around-center {
+  @include flex(row, space-around, center);
+}
+@mixin row-around-end {
+  @include flex(row, space-around, flex-end);
+}
+@mixin row-around-stretch {
+  @include flex(row, space-around, stretch);
+}
+
+@mixin row-evenly-start {
+  @include flex(row, space-evenly, flex-start);
+}
+@mixin row-evenly-center {
+  @include flex(row, space-evenly, center);
+}
+@mixin row-evenly-end {
+  @include flex(row, space-evenly, flex-end);
+}
+@mixin row-evenly-stretch {
+  @include flex(row, space-evenly, stretch);
+}
+// Column + Justify + Align combinations
+@mixin column-start-start {
+  @include flex(column, flex-start, flex-start);
+}
+@mixin column-start-center {
+  @include flex(column, flex-start, center);
+}
+@mixin column-start-end {
+  @include flex(column, flex-start, flex-end);
+}
+@mixin column-start-stretch {
+  @include flex(column, flex-start, stretch);
+}
+
+@mixin column-center-start {
+  @include flex(column, center, flex-start);
+}
+@mixin column-center-center {
+  @include flex(column, center, center);
+}
+@mixin column-center-end {
+  @include flex(column, center, flex-end);
+}
+@mixin column-center-stretch {
+  @include flex(column, center, stretch);
+}
+
+@mixin column-end-start {
+  @include flex(column, flex-end, flex-start);
+}
+@mixin column-end-center {
+  @include flex(column, flex-end, center);
+}
+@mixin column-end-end {
+  @include flex(column, flex-end, flex-end);
+}
+@mixin column-end-stretch {
+  @include flex(column, flex-end, stretch);
+}
+
+@mixin column-between-start {
+  @include flex(column, space-between, flex-start);
+}
+@mixin column-between-center {
+  @include flex(column, space-between, center);
+}
+@mixin column-between-end {
+  @include flex(column, space-between, flex-end);
+}
+@mixin column-between-stretch {
+  @include flex(column, space-between, stretch);
+}
+
+@mixin column-around-start {
+  @include flex(column, space-around, flex-start);
+}
+@mixin column-around-center {
+  @include flex(column, space-around, center);
+}
+@mixin column-around-end {
+  @include flex(column, space-around, flex-end);
+}
+@mixin column-around-stretch {
+  @include flex(column, space-around, stretch);
+}
+
+@mixin column-evenly-start {
+  @include flex(column, space-evenly, flex-start);
+}
+@mixin column-evenly-center {
+  @include flex(column, space-evenly, center);
+}
+@mixin column-evenly-end {
+  @include flex(column, space-evenly, flex-end);
+}
+@mixin column-evenly-stretch {
+  @include flex(column, space-evenly, stretch);
+}

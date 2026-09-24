@@ -1,0 +1,22 @@
+{
+  "duration": {
+    "xs": "100ms",
+    "sm": "200ms",
+    "md": "300ms",
+    "lg": "400ms",
+    "xl": "500ms"
+  },
+
+  "easing": {
+    "easeIn": "cubic-bezier(0.4, 0, 1, 1)",
+    "easeOut": "cubic-bezier(0, 0, 0.2, 1)",
+    "easeInOut": "cubic-bezier(0.4, 0, 0.2, 1)",
+    "linear": "linear"
+  },
+
+  "delay": {
+    "xs": "50ms",
+    "sm": "100ms",
+    "md": "150ms"
+  }
+}

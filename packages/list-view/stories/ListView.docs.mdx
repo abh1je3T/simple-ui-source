@@ -1,0 +1,117 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ListViewStories from './ListView.stories';
+
+<Meta of={ListViewStories} name="Quick start" />
+
+<Title />
+<Subtitle>A high-performance virtualized list with infinite scroll and pull-to-refresh.</Subtitle>
+
+<Description>
+  The `ListView` component is designed for rendering large datasets efficiently using windowing/virtualization. It provides built-in support for standard mobile-first interactions like infinite loading and pull-to-refresh, while remaining unopinionated about how each row is styled.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Virtualization**: Powered by `@tanstack/react-virtual`, it only renders items currently visible in the viewport, ensuring 60fps performance even with thousands of rows.
+- **Infinite Scroll**: Automatically triggers data fetching when the user approaches the end of the list.
+- **Pull to Refresh**: Built-in gesture support for refreshing data from the top.
+- **Loading States**: Configurable loading placeholders and progress indicators.
+- **Empty State**: Customizable rendering for empty datasets.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Large Datasets**: Use `ListView` instead of a standard `map()` when dealing with more than 50-100 items.
+- **Fixed Container Height**: Ensure the parent container (or the `ListView` itself) has a defined height, as virtualization relies on scroll events from a bounded container.
+- **Estimated Item Size**: Provide an accurate `estimatedItemSize` to help the virtualizer calculate scrollbar height correctly.
+
+### Don't:
+- **Simple Lists**: Don't use `ListView` for small, static lists (use `@simple-ui/list` instead). The overhead of virtualization is only beneficial for dynamic or large data.
+- **Variable Heights (Unpredictable)**: Avoid extremely unpredictable item heights if possible, as it can cause scroll jumping.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { ListView } from "@simple-ui/list-view";
+import { List } from "@simple-ui/list";
+
+const MyList = () => {
+  const data = [...];
+
+  return (
+    <div style={{ height: 500 }}>
+      <ListView
+        data={data}
+        estimatedItemSize={72}
+        renderItem={(item) => (
+          <List.Item icon={<MyIcon />}>
+            {item.name}
+          </List.Item>
+        )}
+      />
+    </div>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Composition**: Combine `ListView` with `List.Item`, `Avatar`, and `Badge` to create rich, platform-native list experiences.
+
+> [!IMPORTANT]
+> **Key Extractor**: Always provide a `keyExtractor` function to ensure React can efficiently track and re-render virtualized rows during scrolling.
+
+---
+
+## Examples
+
+### Contacts List
+A typical contact list pattern featuring avatars and status badges.
+<Canvas of={ListViewStories.ContactsList} />
+
+### Settings Menu
+A system settings pattern with icons and trailing toggle switches.
+<Canvas of={ListViewStories.SettingsMenu} />
+
+### Notification Feed
+A denser layout with unread indicators and multi-line content.
+<Canvas of={ListViewStories.NotificationFeed} />
+
+### Chat Message Feed
+A real-time communication pattern with message bubbles, directional alignment, and history loading (via pull-to-refresh).
+<Canvas of={ListViewStories.ChatMessageFeed} />
+
+---
+
+## Infinite Loading & Refreshing
+
+### Infinite Scroll
+Simulates fetching more data as the user reaches the bottom.
+<Canvas of={ListViewStories.InfiniteScrollDemo} />
+
+### Pull to Refresh
+Demonstrates the refresh gesture and state.
+<Canvas of={ListViewStories.PullToRefreshDemo} />
+
+---
+
+## Accessibility Audit
+
+- **Roles**: Uses `role="list"` for the container and `role="listitem"` for individual rows.
+- **Keyboard**: Supports standard scrollbar interaction and focus management for interactive children within rows.
+- **ARIA**: Loading states are communicated through appropriate ARIA attributes if custom loaders are used.
+
+---
+
+## API Reference
+
+<ArgTypes />

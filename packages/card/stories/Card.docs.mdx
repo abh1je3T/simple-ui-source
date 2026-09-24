@@ -1,0 +1,117 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as CardStories from './Card.stories';
+
+<Meta of={CardStories} name="Quick start" />
+
+<Title />
+<Subtitle>A flexible container for grouping related content and actions.</Subtitle>
+
+<Description>
+  The `Card` component is a versatile layout tool used to represent a single object or a collection of related data. 
+  It provides structured slots for headers, media, body content, and actions, ensuring a consistent look and feel across your application.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Slot-based Architecture**: Dedicated areas for `leading`, `heading`, `subtitle`, `media`, `body`, and `action`.
+- **Loading States**: Includes a dedicated `CardSkeleton` component to smoothly transition between loading and loaded states, preventing layout shift.
+- **Multiple Variants**: Choose between `elevated` (shadow), `filled` (background), or `outline` (border) styles.
+- **Semantic Tones**: Apply brand or status colors using the `tone` prop.
+- **Visual Heading Flexibility**: Use the `titleSize` prop to control the visual weight (h1-h6) of your heading regardless of its semantic level.
+- **Responsive Media**: Integrated support for media content with consistent spacing and aspect ratios.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Group Related Items**: Use cards to cluster information that belongs together (e.g., a user profile or a product listing).
+- **Consistent Variants**: Use the same card variant for items of the same type within a grid or list.
+- **Concise Content**: Keep body text brief. Use the `action` slot for "Read More" if more detail is available elsewhere.
+
+### Don't:
+- **Nested Cards**: Avoid nesting cards within cards as it creates excessive visual noise and complex depth levels.
+- **Overcrowded Headers**: Don't cram too much information into the header; use the `body` slot for secondary details.
+- **Inconsistent Actions**: Ensure buttons in the `action` slot follow the same visual style across a set of cards.
+
+---
+
+## Usage Pattern
+
+The `Card` uses props to define its content. You don't need to wrap internal sections manually; the component handles the layout for you based on what props are provided.
+
+```tsx
+import { Card } from "@simple-ui/card";
+import { Avatar } from "@simple-ui/avatar";
+import { Image } from "@simple-ui/image";
+import { Button } from "@simple-ui/button";
+
+<Card
+  leading={<Avatar name="User" />}
+  heading="Project Title"
+  subtitle="Last updated 2h ago"
+  media={<Image src="cover.jpg" />}
+  body="This is the main description of the card."
+  action={<Button>View Details</Button>}
+/>
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Visual Hierarchy**: Use `elevated` cards for primary page elements and `outline` or `filled` for secondary items to create clear visual depth.
+
+> [!TIP]
+> **Heading Selection**: When passing a string to the `heading` prop, the component defaults to a semantic `h3` tag. Adjust the `titleSize` to match your SEO hierarchy.
+
+> [!IMPORTANT]
+> **Image Spacing**: The `media` slot automatically handles spacing. For the best visual results, use images with a consistent aspect ratio (e.g., 16:9 or 4:3) across all cards in a grid.
+
+---
+
+## Visual Styles
+
+### Variants
+<Canvas of={CardStories.Variants} />
+
+### Tones
+<Canvas of={CardStories.Tones} />
+
+---
+
+## Examples
+
+### Dashboard Metric
+<Canvas of={CardStories.DashboardExample} />
+
+### Profile Card
+<Canvas of={CardStories.WithLeading} />
+
+### Loading States (Skeleton)
+Use the `CardSkeleton` component as a placeholder while content is fetching. It mirrors the exact layout slots to prevent layout shifts.
+<Canvas of={CardStories.Skeleton} />
+
+#### Minimal Skeleton
+You can toggle visibility of specific skeleton blocks (e.g. `showMedia={false}`) to match your target card layout.
+<Canvas of={CardStories.SkeletonMinimal} />
+
+#### Simulated Loading Transition
+<Canvas of={CardStories.LoadingTransition} />
+
+---
+
+## Accessibility Audit
+
+- **Semantic HTML**: Uses the `<article>` tag for self-contained content, improving SEO and screen reader navigation.
+- **Heading Levels**: Automatically handles heading semantics while allowing visual size customization.
+- **Keyboard Navigation**: Interactive elements inside slots (like `action`) remain fully accessible in the tab order.
+
+---
+
+## API Reference
+
+<ArgTypes />

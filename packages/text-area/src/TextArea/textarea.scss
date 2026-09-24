@@ -1,0 +1,171 @@
+.sui-textarea {
+  display: flex;
+  flex-direction: column;
+
+  /* =========================
+     CONTROL
+  ========================= */
+
+  &__control {
+    width: 100%;
+    border: 1px solid var(--control-border, var(--border));
+    border-radius: var(--radius-md);
+    background: var(--control-background, var(--card));
+    padding: var(--layout-spacing-sm);
+    font-size: var(--font-size-sm);
+    color: var(--control-text, var(--foreground));
+    line-height: 1.5; /* explicit so getLineHeight() reads a stable value */
+    outline: none;
+    resize: none; /* always none — auto-resize handles it */
+    overflow: hidden; /* JS overrides to "auto" when maxRows is hit */
+    transition:
+      border-color var(--animation-duration-sm)
+        var(--animation-easing-ease-in-out),
+      box-shadow var(--animation-duration-sm)
+        var(--animation-easing-ease-in-out);
+  }
+
+  &__control:focus {
+    border-color: var(--control-focus-border, var(--primary-base));
+    box-shadow: 0 0 0 2px
+      var(--control-focus-ring, var(--primary-subtle-border));
+  }
+
+  /* =========================
+     SIZE SYSTEM
+     min-height removed — minRows prop + JS control height now.
+     Font-size and padding still vary.
+  ========================= */
+
+  &--sm &__control {
+    font-size: var(--font-size-xs);
+    padding: 6px var(--layout-spacing-sm);
+  }
+
+  &--md &__control {
+    font-size: var(--font-size-sm);
+    padding: var(--layout-spacing-sm);
+  }
+
+  &--lg &__control {
+    font-size: var(--font-size-md);
+    padding: 10px var(--layout-spacing-sm);
+  }
+
+  /* =========================
+     TONES
+  ========================= */
+
+  &--neutral {
+    --control-focus-border: var(--grey500);
+    --control-focus-ring: var(--grey200);
+  }
+
+  &--primary {
+    --control-focus-border: var(--primary-base);
+    --control-focus-ring: var(--primary-subtle-border);
+  }
+
+  &--success {
+    --control-focus-border: var(--success-base);
+    --control-focus-ring: var(--success-subtle);
+  }
+
+  &--warning {
+    --control-focus-border: var(--warning-base);
+    --control-focus-ring: var(--warning-subtle);
+  }
+
+  &--error {
+    --control-focus-border: var(--error-base);
+    --control-focus-ring: var(--error-subtle);
+  }
+
+  /* =========================
+     OVER-LIMIT STATE
+     Separate from --error tone so both can coexist
+     (e.g. tone="warning" but over the char limit).
+  ========================= */
+
+  &--over-limit &__control {
+    border-color: var(--error-base);
+  }
+
+  &--over-limit &__control:focus {
+    box-shadow: 0 0 0 2px var(--error-subtle);
+  }
+
+  /* =========================
+     DISABLED / READONLY
+  ========================= */
+
+  &--disabled {
+    opacity: 0.6;
+    pointer-events: none;
+
+    .sui-textarea__control {
+      cursor: not-allowed;
+      background: var(--primary-background-disabled);
+    }
+  }
+
+  &--readonly &__control {
+    background: var(--tertiary-subtle-background);
+    cursor: default;
+  }
+
+  /* =========================
+     CHARACTER COUNTER
+
+     Default color = muted placeholder.
+     When not disabled/readonly, the tone class drives color
+     so the counter matches the active focus ring tone.
+     is-overflow always wins (error red).
+     is-muted (disabled/readonly) always stays grey.
+  ========================= */
+
+  &__counter {
+    font-size: var(--font-size-xs);
+    margin-top: 4px;
+    color: var(--muted-foreground);
+    text-align: right;
+    transition: color var(--animation-duration-sm)
+      var(--animation-easing-ease-in-out);
+  }
+
+  /* tone-aware counter — only when NOT muted */
+  &--neutral:not(.sui-textarea--disabled):not(.sui-textarea--readonly)
+    &__counter {
+    color: var(--grey500);
+  }
+
+  &--primary:not(.sui-textarea--disabled):not(.sui-textarea--readonly)
+    &__counter {
+    color: var(--primary-base);
+  }
+
+  &--success:not(.sui-textarea--disabled):not(.sui-textarea--readonly)
+    &__counter {
+    color: var(--success-base);
+  }
+
+  &--warning:not(.sui-textarea--disabled):not(.sui-textarea--readonly)
+    &__counter {
+    color: var(--warning-base);
+  }
+
+  &--error:not(.sui-textarea--disabled):not(.sui-textarea--readonly)
+    &__counter {
+    color: var(--error-base);
+  }
+
+  /* overflow always wins — highest specificity */
+  &__counter.is-overflow {
+    color: var(--error-base) !important;
+  }
+
+  /* muted (disabled / readonly) always stays grey */
+  &__counter.is-muted {
+    color: var(--muted-foreground) !important;
+  }
+}

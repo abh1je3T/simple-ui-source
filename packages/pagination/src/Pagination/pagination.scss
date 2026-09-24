@@ -1,0 +1,161 @@
+.sui-pagination {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  // ── Shared button base ─────────────────────────────────────────
+  &__item,
+  &__nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm, 6px);
+    cursor: pointer;
+    font: inherit;
+    line-height: 1;
+    transition:
+      background 150ms ease,
+      color 150ms ease,
+      border-color 150ms ease,
+      box-shadow 150ms ease;
+
+    // Keyboard focus — always visible, never suppressed
+    &:focus-visible {
+      outline: 2px solid var(--control-focus-ring, currentColor);
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  // ── Sizes ──────────────────────────────────────────────────────
+  &--sm &__item,
+  &--sm &__nav {
+    min-width: 28px;
+    height: 28px;
+    padding: 0 8px;
+    font-size: var(--font-size-xs, 0.75rem);
+  }
+
+  &--md &__item,
+  &--md &__nav {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    font-size: var(--font-size-sm, 0.875rem);
+  }
+
+  &--lg &__item,
+  &--lg &__nav {
+    min-width: 44px;
+    height: 44px;
+    padding: 0 14px;
+    font-size: var(--font-size-md, 1rem);
+  }
+
+  // ── Variant: solid ─────────────────────────────────────────────
+  &--solid &__item,
+  &--solid &__nav {
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--foreground);
+
+    &:hover:not(:disabled) {
+      background: var(--muted);
+      border-color: var(--grey300);
+    }
+  }
+
+  // ── Variant: subtle ────────────────────────────────────────────
+  &--subtle &__item,
+  &--subtle &__nav {
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--foreground);
+
+    &:hover:not(:disabled) {
+      background: var(--muted);
+    }
+  }
+
+  // ── Active state — tone-aware ──────────────────────────────────
+  // --_bg / --_fg / --_border are resolved per tone then applied once below.
+  //
+  // "primary" deliberately avoids --primary-background-base because in dark
+  // mode it resolves to #26282F (dark card) and --primary-text-base resolves
+  // to #1C1F23 (near-black) — invisible text on a dark background.
+  //
+  // --foreground / --background are always guaranteed high-contrast inverses
+  // across light (#1C1F23 on #F7F8FA), dark (#F7F8FA on #1C1F23), and
+  // high-contrast (#FFD700 on #000000) themes — so we use those instead.
+
+  &--primary &__item.is-active {
+    --_bg: var(--foreground);
+    --_fg: var(--background);
+    --_border: var(--foreground);
+  }
+
+  // neutral — mid-grey background, page-background text
+  &--neutral &__item.is-active {
+    --_bg: var(--grey600);
+    --_fg: var(--background);
+    --_border: var(--grey600);
+  }
+
+  // success, warning, error use semantic tokens which stay consistent across themes
+  &--success &__item.is-active {
+    --_bg: var(--success-base);
+    --_fg: #fff;
+    --_border: var(--success-base);
+  }
+
+  &--warning &__item.is-active {
+    --_bg: var(--warning-base);
+    --_fg: var(--black); // dark text on yellow in every theme
+    --_border: var(--warning-base);
+  }
+
+  &--error &__item.is-active {
+    --_bg: var(--error-base);
+    --_fg: #fff;
+    --_border: var(--error-base);
+  }
+
+  // Apply the resolved vars to the active item
+  &__item.is-active {
+    background: var(--_bg, var(--foreground));
+    color: var(--_fg, var(--background));
+    border-color: var(--_border, var(--foreground));
+    font-weight: var(--font-weight-medium, 500);
+    pointer-events: none; // active page is not clickable
+
+    // subtle variant: tinted background, colored text, no fill
+    .sui-pagination--subtle & {
+      background: color-mix(
+        in srgb,
+        var(--_bg, var(--foreground)) 12%,
+        transparent
+      );
+      @supports not (background: color-mix(in srgb, red 10%, transparent)) {
+        background: var(--primary-subtle-background);
+      }
+      color: var(--_bg, var(--foreground));
+      border-color: transparent;
+    }
+  }
+
+  // ── Ellipsis ───────────────────────────────────────────────────
+  &__ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    color: var(--muted-foreground);
+    font-size: var(--font-size-sm, 0.875rem);
+    user-select: none;
+  }
+}

@@ -1,0 +1,48 @@
+.sui-avatar-group {
+  display: flex;
+  align-items: center;
+
+  &--left {
+    flex-direction: row;
+  }
+
+  &--right {
+    flex-direction: row-reverse;
+  }
+
+  /* spacing control */
+  &--tight .sui-avatar-group-item {
+    margin-left: -0.75rem;
+  }
+
+  &--normal .sui-avatar-group-item {
+    margin-left: -0.5rem;
+  }
+
+  /* reset for first item */
+  &--left .sui-avatar-group-item:first-child,
+  &--right .sui-avatar-group-item:last-child {
+    margin-left: 0;
+  }
+}
+
+.sui-avatar-group-item {
+  position: relative;
+  transition: transform 0.2s ease;
+
+  .sui-avatar {
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  /* hover lift (Slack style) */
+  &:hover {
+    transform: translateY(-2px);
+    z-index: 10;
+
+    .sui-avatar .sui-avatar__core {
+      box-shadow: 0 4px 10px #0000001a;
+    }
+  }
+}

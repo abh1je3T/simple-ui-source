@@ -1,0 +1,93 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as LineStories from './Line.stories';
+
+<Meta of={LineStories} name="Quick start" />
+
+<Title />
+<Subtitle>A visual separator used to divide content into distinct thematic sections.</Subtitle>
+
+<Description>
+  The `Line` component (often acting as a divider) creates visual separation between blocks of content. It supports both horizontal and vertical orientations, varied border styles, and optional embedded text for structured sections (like "or" in authentication flows).
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Orientations**: Supports both `horizontal` and `vertical` layout divisions.
+- **Visual Variants**: Choose between `solid` and `dashed` styles.
+- **Embedded Text**: Easily embed text (like "OR") directly into the line without complex flexbox setups.
+- **Text Alignment**: Control the alignment of embedded text (`left`, `center`, `right`).
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Thematic Breaks**: Use the line to divide distinct sections within a page or card, such as separating a header from the body, or separating a list of actions.
+- **Authentication Flows**: Use the `text` prop to create classic "Sign in with Email" OR "Sign in with Google" dividers.
+- **Subtle Styling**: Keep the line subtle. It should structure the content without drawing too much attention to itself.
+
+### Don't:
+- **Overuse**: Do not use lines excessively between every single element. Often, whitespace is a better tool for separation.
+- **Vertical Constraints**: When using `orientation="vertical"`, ensure the parent container has a defined height, otherwise the line won't be visible.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Line } from "@simple-ui/line";
+
+const AuthForm = () => {
+  return (
+    <div>
+      <LoginForm />
+      <Line text="or continue with" align="center" variant="dashed" />
+      <SocialLoginButtons />
+    </div>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Whitespace is King**: While `Line` is great for explicit breaks, consider using CSS `gap` or `margin` first. Only use a line when content is completely different thematically.
+
+> [!IMPORTANT]
+> **Vertical Lines**: The `vertical` line requires its parent container to have `display: flex` or a fixed height. It expands to fill the available height.
+
+---
+
+## Visual Styles
+
+### Orientation
+<Canvas of={LineStories.Default} />
+<Canvas of={LineStories.Vertical} />
+
+### Variants
+<Canvas of={LineStories.Dashed} />
+
+---
+
+## Examples
+
+### With Embedded Text
+<Canvas of={LineStories.WithText} />
+<Canvas of={LineStories.WithTextLeft} />
+
+---
+
+## Accessibility Audit
+
+- **Semantic Role**: Uses `role="separator"` so screen readers correctly interpret it as a thematic break (equivalent to the native `<hr>` element).
+- **Embedded Content**: If text is provided via the `text` prop, it remains readable to screen readers within the separator context.
+
+---
+
+## API Reference
+
+<ArgTypes />

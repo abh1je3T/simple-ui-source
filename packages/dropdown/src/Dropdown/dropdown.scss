@@ -1,0 +1,201 @@
+@use "./component/drop-options.scss";
+
+.sui-dropdown {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  font-family: inherit;
+
+  /* =========================
+     TRIGGER
+  ========================= */
+  &__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    text-align: left;
+
+    background: var(--control-background);
+    border: 1px solid var(--control-border);
+    border-radius: var(--radius-md);
+
+    transition:
+      border-color var(--animation-duration-sm)
+        var(--animation-easing-ease-in-out),
+      box-shadow var(--animation-duration-sm)
+        var(--animation-easing-ease-in-out);
+
+    padding: 8px 12px;
+
+    &:focus {
+      outline: none;
+      border-color: var(--control-focus-border, var(--primary-base));
+      box-shadow: 0 0 0 2px var(--control-focus-ring);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background: var(--control-disabled-background);
+      border-color: var(--control-disabled-border);
+      color: var(--control-disabled-text);
+    }
+  }
+
+  &__value {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: var(--font-size-sm);
+    color: var(--control-text);
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    color: var(--grey500);
+    transition: transform var(--animation-duration-sm)
+      var(--animation-easing-ease-in-out);
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &--open &__icon:not(.sui-loader) {
+    transform: rotate(180deg);
+  }
+
+  &__error-message {
+    color: var(--error-base);
+    font-size: var(--font-size-xs);
+    margin-top: 4px;
+    animation: sui-dropdown-fade-in var(--animation-duration-xs)
+      var(--animation-easing-ease-out);
+  }
+
+  /* =========================
+     MENU PORTAL
+  ========================= */
+  &__menu-wrapper {
+    background: var(--card);
+    border: 1px solid var(--control-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadows-lg);
+    overflow: hidden;
+    margin-top: 4px;
+    animation: sui-dropdown-fade-in var(--animation-duration-xs)
+      var(--animation-easing-ease-out);
+  }
+
+  &__menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 240px;
+    overflow-y: auto;
+  }
+
+  /* =========================
+     SIZES
+  ========================= */
+  &--sm {
+    & .sui-dropdown__trigger {
+      padding: 6px 10px;
+    }
+    & .sui-dropdown__value {
+      font-size: var(--font-size-xs);
+    }
+    & .sui-dropdown__icon svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &--lg {
+    & .sui-dropdown__trigger {
+      padding: 10px 14px;
+    }
+    & .sui-dropdown__value {
+      font-size: var(--font-size-md);
+    }
+    & .sui-dropdown__icon svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  /* =========================
+     TONES
+  ========================= */
+  &--neutral {
+    --control-focus-border: var(--grey500);
+    --control-focus-ring: var(--grey200);
+  }
+
+  &--primary {
+    --control-focus-border: var(--primary-base);
+    --control-focus-ring: var(--primary-subtle-border);
+  }
+
+  &--success {
+    --control-focus-border: var(--success-base);
+    --control-focus-ring: var(--success-subtle);
+  }
+
+  &--warning {
+    --control-focus-border: var(--warning-base);
+    --control-focus-ring: var(--warning-subtle);
+  }
+
+  &--error {
+    --control-focus-border: var(--error-base);
+    --control-focus-ring: var(--error-subtle);
+
+    & .sui-dropdown__trigger {
+      border-color: var(--error-base);
+    }
+  }
+
+  /* =========================
+     STATES
+  ========================= */
+  &--loading {
+    & .sui-dropdown__trigger {
+      cursor: wait;
+    }
+  }
+
+  &--disabled {
+    & .sui-dropdown__trigger {
+      background: var(--control-disabled-background);
+      border-color: var(--control-disabled-border);
+      color: var(--control-disabled-text);
+      cursor: not-allowed;
+    }
+    & .sui-dropdown__value {
+      color: var(--control-disabled-text);
+    }
+    & .sui-dropdown__icon {
+      color: var(--control-disabled-text);
+      opacity: 0.5;
+    }
+  }
+}
+
+@keyframes sui-dropdown-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

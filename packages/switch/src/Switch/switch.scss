@@ -1,0 +1,166 @@
+.sui-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--layout-spacing-sm);
+  cursor: pointer;
+  user-select: none;
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+/* =========================
+   INPUT (ACCESSIBLE)
+========================= */
+.sui-switch__input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+
+  &:focus-visible + .sui-switch__track {
+    outline: 2px solid var(--switch-ring, var(--ring));
+    outline-offset: 2px;
+  }
+}
+
+/* =========================
+   TRACK
+========================= */
+.sui-switch__track {
+  --switch-width: 44px;
+  --switch-height: 24px;
+  --switch-padding: 3px;
+
+  width: var(--switch-width);
+  height: var(--switch-height);
+
+  background: var(--switch-off-bg, var(--grey300));
+
+  border-radius: var(--radius-round);
+
+  position: relative;
+
+  transition: background-color var(--animation-duration-sm)
+    var(--animation-easing-ease-in-out);
+}
+
+/* =========================
+   THUMB
+========================= */
+.sui-switch__thumb {
+  --thumb-size: calc(var(--switch-height) - (var(--switch-padding) * 2));
+
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+
+  background: var(--card);
+
+  border-radius: var(--radius-round);
+
+  position: absolute;
+  top: 50%;
+  left: var(--switch-padding);
+
+  transform: translate(0, -50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform var(--animation-duration-sm)
+    var(--animation-easing-ease-in-out);
+}
+
+/* =========================
+   ICONS
+========================= */
+.sui-switch__icon {
+  font-size: var(--icon-size-xs);
+  display: none;
+
+  &--on {
+    display: none;
+  }
+
+  &--off {
+    display: none;
+  }
+}
+
+/* =========================
+   CHECKED STATE
+========================= */
+.sui-switch__input:checked + .sui-switch__track {
+  background: var(--switch-on-bg, var(--primary-base));
+}
+
+.sui-switch__input:checked + .sui-switch__track .sui-switch__thumb {
+  transform: translate(calc(var(--switch-width) - var(--switch-height)), -50%);
+}
+
+.sui-switch__input:checked + .sui-switch__track .sui-switch__icon--on {
+  display: flex;
+}
+
+.sui-switch__input:not(:checked) + .sui-switch__track .sui-switch__icon--off {
+  display: flex;
+}
+
+/* =========================
+   LABEL
+========================= */
+.sui-switch__label {
+  font-size: var(--font-size-sm);
+  color: var(--foreground);
+}
+
+/* =========================
+   SIZES
+========================= */
+.sui-switch--sm .sui-switch__track {
+  --switch-width: 34px;
+  --switch-height: 18px;
+  --switch-padding: 2px;
+}
+
+.sui-switch--lg .sui-switch__track {
+  --switch-width: 54px;
+  --switch-height: 28px;
+  --switch-padding: 3px;
+}
+
+/* =========================
+   TONES
+========================= */
+.sui-switch--neutral {
+  --switch-off-bg: var(--grey300);
+  --switch-on-bg: var(--grey600);
+  --switch-ring: var(--grey400);
+}
+
+.sui-switch--primary {
+  --switch-off-bg: var(--grey300);
+  --switch-on-bg: var(--primary-base);
+  --switch-ring: var(--primary-base);
+}
+
+.sui-switch--success {
+  --switch-off-bg: var(--grey300);
+  --switch-on-bg: var(--success-base);
+  --switch-ring: var(--success-base);
+}
+
+.sui-switch--warning {
+  --switch-off-bg: var(--grey300);
+  --switch-on-bg: var(--warning-base);
+  --switch-ring: var(--warning-base);
+}
+
+.sui-switch--error {
+  --switch-off-bg: var(--grey300);
+  --switch-on-bg: var(--error-base);
+  --switch-ring: var(--error-base);
+}

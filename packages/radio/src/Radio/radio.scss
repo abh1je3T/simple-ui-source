@@ -1,0 +1,217 @@
+.sui-radio {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+
+  /* =========================
+     HIDDEN NATIVE INPUT
+  ========================= */
+
+  input {
+    position: absolute;
+    opacity: 0;
+    margin: 0;
+    width: var(--radio-size, 16px);
+    height: var(--radio-size, 16px);
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  /* =========================
+     CIRCLE
+  ========================= */
+
+  &__circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    border: 1px solid var(--control-border);
+    border-radius: var(--radius-round);
+    background: var(--control-background);
+
+    transition:
+      background-color var(--animation-duration-sm)
+        var(--animation-easing-ease-in-out),
+      border-color var(--animation-duration-sm)
+        var(--animation-easing-ease-in-out),
+      box-shadow var(--animation-duration-sm)
+        var(--animation-easing-ease-in-out);
+
+    position: relative;
+  }
+
+  /* =========================
+     SIZE SYSTEM
+  ========================= */
+
+  &--sm {
+    --radio-size: 14px;
+    & .sui-radio__circle {
+      width: 14px;
+      height: 14px;
+    }
+    & input {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &--md {
+    --radio-size: 16px;
+    & .sui-radio__circle {
+      width: 16px;
+      height: 16px;
+    }
+    & input {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &--lg {
+    --radio-size: 20px;
+    & .sui-radio__circle {
+      width: 20px;
+      height: 20px;
+    }
+    & input {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  /* =========================
+     FOCUS RING
+  ========================= */
+
+  input:focus-visible + &__circle {
+    box-shadow:
+      0 0 0 2px var(--card),
+      0 0 0 4px var(--control-focus-ring);
+  }
+
+  /* =========================
+     TONES — CHECKED
+  ========================= */
+
+  &--neutral input:checked + &__circle {
+    border-color: var(--grey500);
+  }
+
+  &--primary input:checked + &__circle {
+    border-color: var(--primary-base);
+  }
+
+  &--success input:checked + &__circle {
+    border-color: var(--success-base);
+  }
+
+  &--warning input:checked + &__circle {
+    border-color: var(--warning-base);
+  }
+
+  &--error input:checked + &__circle {
+    border-color: var(--error-base);
+  }
+
+  /* =========================
+     TONES — FOCUS RING COLOUR
+  ========================= */
+
+  &--neutral input:focus-visible + &__circle {
+    box-shadow:
+      0 0 0 2px var(--card),
+      0 0 0 4px var(--grey300);
+  }
+
+  &--primary input:focus-visible + &__circle {
+    box-shadow:
+      0 0 0 2px var(--card),
+      0 0 0 4px var(--primary-subtle-border);
+  }
+
+  &--success input:focus-visible + &__circle {
+    box-shadow:
+      0 0 0 2px var(--card),
+      0 0 0 4px var(--success-subtle);
+  }
+
+  &--warning input:focus-visible + &__circle {
+    box-shadow:
+      0 0 0 2px var(--card),
+      0 0 0 4px var(--warning-subtle);
+  }
+
+  &--error input:focus-visible + &__circle {
+    box-shadow:
+      0 0 0 2px var(--card),
+      0 0 0 4px var(--error-subtle);
+  }
+
+  /* =========================
+     INNER DOT
+  ========================= */
+
+  &__circle::after {
+    content: "";
+    position: absolute;
+    display: none;
+    border-radius: var(--radius-round);
+    background: currentColor;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
+  }
+
+  input:checked + &__circle::after {
+    display: block;
+  }
+
+  /* =========================
+     TONE VARIABLES — DOT COLOR
+  ========================= */
+
+  &--neutral {
+    color: var(--grey500);
+  }
+  &--primary {
+    color: var(--primary-base);
+  }
+  &--success {
+    color: var(--success-base);
+  }
+  &--warning {
+    color: var(--warning-base);
+  }
+  &--error {
+    color: var(--error-base);
+  }
+
+  /* =========================
+     DISABLED
+  ========================= */
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    input {
+      cursor: not-allowed;
+    }
+
+    .sui-radio__circle {
+      background: var(--control-disabled-background);
+      border-color: var(--control-disabled-border);
+    }
+
+    input:checked + .sui-radio__circle {
+      color: var(--control-disabled-text);
+      border-color: var(--control-disabled-border);
+    }
+  }
+}

@@ -1,0 +1,99 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ImageStories from './Image.stories';
+
+<Meta of={ImageStories} name="Quick start" />
+
+<Title />
+<Subtitle>A responsive image component with built-in loading states and aspect ratio management.</Subtitle>
+
+<Description>
+  The `Image` component handles the complexities of displaying images on the web. It manages loading skeletons, error fallbacks, lazy loading, and enforces consistent aspect ratios (`ratio` prop) and object fitting (`fit` prop) so your layout never breaks when an image loads.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Aspect Ratio Control**: Lock images to standard aspect ratios (`sq` 1:1, `wd` 16:9, `uwd` 21:9, `pt` 3:4) to prevent layout shifts.
+- **Loading Skeletons**: Automatically displays a pulsing skeleton while the image is downloading.
+- **Error Fallback**: If an image fails to load, gracefully falls back to a custom UI instead of a broken image icon.
+- **Lazy Loading by Default**: Native `loading="lazy"` is applied automatically to improve initial page load performance.
+- **Object Fit**: Easily switch between `cover` (fill area) and `contain` (show whole image).
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Use Ratios**: Always define a `ratio` if the image sits within a grid or card to prevent Cumulative Layout Shift (CLS).
+- **Provide Alt Text**: Always provide meaningful `alt` text for screen readers.
+- **Custom Fallbacks**: Provide a `fallback` component or text if the image is critical to the context.
+
+### Don't:
+- **Meaningless Alt Text**: Don't use `alt="image"` or `alt="picture"`. Describe the content of the image.
+- **Decorative Images**: If an image is purely decorative and adds no meaning, set `alt=""` so screen readers ignore it.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Image } from "@simple-ui/image";
+
+const Example = () => {
+  return (
+    <div style={{ width: "300px" }}>
+      <Image 
+        src="https://example.com/photo.jpg" 
+        alt="A beautiful sunset over the mountains"
+        ratio="wd" // 16:9 widescreen
+        fit="cover"
+        radius="md"
+      />
+    </div>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Performance**: The component uses native lazy loading. For images "above the fold" (visible immediately on load), pass `loading="eager"` to bypass lazy loading.
+
+> [!IMPORTANT]
+> **Layout Constraints**: The `Image` component expands to fill the width of its parent container. Always place it inside a container with a defined width or within a grid system.
+
+---
+
+## Visual Styles
+
+### Aspect Ratios
+<Canvas of={ImageStories.Ratios} />
+
+### Visual Styling
+<Canvas of={ImageStories.Styling} />
+
+---
+
+## States
+
+### Loading State (Skeleton)
+<Canvas of={ImageStories.LoadingWithSkeleton} />
+
+### Error State (Fallback)
+<Canvas of={ImageStories.ErrorState} />
+
+---
+
+## Accessibility Audit
+
+- **Alt Text**: Requires an `alt` prop. If the image is decorative, an empty string `alt=""` ensures screen readers skip it appropriately.
+- **Layout Shift**: By strictly enforcing aspect ratios, the component reserves space before the image loads, preventing content from jumping around and disorienting users (especially important for users with cognitive or motor disabilities).
+
+---
+
+## API Reference
+
+<ArgTypes />

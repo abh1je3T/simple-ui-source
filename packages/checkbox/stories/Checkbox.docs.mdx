@@ -1,0 +1,104 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as CheckboxStories from './Checkbox.stories';
+
+<Meta of={CheckboxStories} name="Quick start" />
+
+<Title />
+<Subtitle>An interactive control for selecting one or more options from a list.</Subtitle>
+
+<Description>
+  The `Checkbox` component allows users to select single or multiple items from a list, or to toggle a specific boolean setting. It fully supports `checked`, `unchecked`, and `indeterminate` states with custom, highly polished visual feedback.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Indeterminate State**: Built-in support for mixed states, essential for complex nested selection lists like file trees.
+- **Semantic Tones**: Includes validation tones (`success`, `error`) and branding tones (`primary`, `neutral`).
+- **Scalable Sizes**: Available in `sm`, `md`, and `lg` to fit tight layouts or provide larger touch targets.
+- **Native Accessibility**: Uses native `<input type="checkbox">` under the hood for perfect screen reader and keyboard support.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Independent Choices**: Use checkboxes when the user can select any number of choices (zero, one, or several).
+- **Use with Label**: Always pair the checkbox with a `Label` component or an associated `<label>` element.
+- **Indeterminate Parent**: Use the `indeterminate` state on a parent checkbox when only some of its children are selected.
+
+### Don't:
+- **Mutually Exclusive**: Do not use checkboxes for mutually exclusive options; use `Radio` buttons instead.
+- **Instant Actions**: Avoid using checkboxes to trigger immediate state changes (like turning on a feature immediately). Use a `Switch` for immediate toggles.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Checkbox } from "@simple-ui/checkbox";
+import { Label } from "@simple-ui/label";
+import { useState } from "react";
+
+const Example = () => {
+  const [checked, setChecked] = useState(false);
+  
+  return (
+    <Label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+      <Checkbox 
+        checked={checked} 
+        onChange={setChecked} 
+      />
+      Accept Terms and Conditions
+    </Label>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Hit Area**: Wrapping the checkbox and its text in a `<label>` increases the clickable area, making it significantly easier for users on touch devices.
+
+> [!TIP]
+> **Layout**: Vertical stacking is generally easier to scan than horizontal placement when presenting a list of multiple checkboxes.
+
+> [!IMPORTANT]
+> **Indeterminate vs Checked**: The `indeterminate` prop is visually overriding. If `indeterminate=true`, it will display a minus icon regardless of the `checked` state, but the underlying input value is unaffected.
+
+---
+
+## Visual Styles
+
+### Tones
+<Canvas of={CheckboxStories.Tones} />
+
+### Sizes
+<Canvas of={CheckboxStories.Sizes} />
+
+---
+
+## Examples
+
+### Indeterminate State
+<Canvas of={CheckboxStories.Indeterminate} />
+
+### Disabled State
+<Canvas of={CheckboxStories.Disabled} />
+
+---
+
+## Accessibility Audit
+
+- **Keyboard Support**: Native support. Tab to focus, Space to toggle.
+- **Semantic Element**: Wraps an actual visually hidden `<input type="checkbox">` to preserve native semantics.
+- **Focus Rings**: Provides a clear, high-contrast focus ring when navigated via keyboard.
+
+---
+
+## API Reference
+
+<ArgTypes />

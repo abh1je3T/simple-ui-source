@@ -1,0 +1,112 @@
+.sui-list {
+  margin: 0;
+  padding-left: var(--layout-spacing-lg);
+  color: var(--foreground);
+
+  // -----------------------
+  // List styles
+  // -----------------------
+  &--disc {
+    list-style: disc;
+  }
+  &--circle {
+    list-style: circle;
+  }
+  &--square {
+    list-style: square;
+  }
+  &--decimal {
+    list-style: decimal;
+  }
+  &--none {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  // -----------------------
+  // Marker color system
+  // -----------------------
+  &--marker-default li::marker {
+    color: var(--foreground);
+  }
+  &--marker-primary li::marker {
+    color: var(--primary-base);
+  }
+  &--marker-secondary li::marker {
+    color: var(--secondary-base);
+  }
+  &--marker-muted li::marker {
+    color: var(--muted-foreground);
+  }
+  &--marker-success li::marker {
+    color: var(--success-base);
+  }
+  &--marker-error li::marker {
+    color: var(--error-base);
+  }
+
+  // -----------------------
+  // Gap system
+  // -----------------------
+  &--gap-sm > .sui-list-item {
+    margin-bottom: var(--layout-spacing-xs);
+  }
+  &--gap-md > .sui-list-item {
+    margin-bottom: var(--layout-spacing-sm);
+  }
+  &--gap-lg > .sui-list-item {
+    margin-bottom: var(--layout-spacing-md);
+  }
+
+  &--gap-sm,
+  &--gap-md,
+  &--gap-lg {
+    > .sui-list-item:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // -----------------------
+  // Divided variant
+  // -----------------------
+  &--divided > .sui-list-item {
+    padding: var(--layout-spacing-sm) 0;
+    border-bottom: 1px solid var(--border);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  // -----------------------
+  // Nested lists
+  // -----------------------
+  .sui-list {
+    margin-top: var(--layout-spacing-xs);
+    padding-left: var(--layout-spacing-lg);
+  }
+}
+
+// -----------------------
+// List Item
+// -----------------------
+.sui-list-item {
+  display: list-item;
+
+  &__inner {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--layout-spacing-xs);
+    width: stretch;
+  }
+
+  &__icon {
+    display: inline-flex;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  &__content {
+    flex: 1;
+  }
+}

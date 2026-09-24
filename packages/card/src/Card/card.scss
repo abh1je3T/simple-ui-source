@@ -1,0 +1,145 @@
+.sui-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  color: var(--card-foreground);
+
+  overflow: hidden;
+
+  /* ensures consistent inner spacing behavior */
+  box-sizing: border-box;
+
+  /* ---------------- VARIANTS ---------------- */
+
+  &--elevated {
+    box-shadow: var(--shadows-md);
+  }
+
+  &--filled {
+    background: var(--muted);
+  }
+
+  &--outline {
+    border: 1px solid var(--border);
+  }
+
+  /* ---------------- TONES ---------------- */
+
+  &--primary {
+    &.sui-card--filled {
+      background: var(--primary-subtle-background);
+    }
+
+    &.sui-card--outline {
+      border-color: var(--primary-border-base);
+    }
+  }
+
+  &--success {
+    &.sui-card--filled {
+      background: var(--success-subtle);
+    }
+
+    &.sui-card--outline {
+      border-color: var(--success-base);
+    }
+  }
+
+  &--warning {
+    &.sui-card--filled {
+      background: var(--warning-subtle);
+    }
+
+    &.sui-card--outline {
+      border-color: var(--warning-base);
+    }
+  }
+
+  &--error {
+    &.sui-card--filled {
+      background: var(--error-subtle);
+    }
+
+    &.sui-card--outline {
+      border-color: var(--error-base);
+    }
+  }
+
+  /* ---------------- HEADER ---------------- */
+
+  &__header {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+
+    padding: 16px 16px 0;
+  }
+
+  &__leading {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color: var(--foreground);
+  }
+
+  /* ---------------- MEDIA ---------------- */
+
+  &__media {
+    width: 100%;
+    margin: 0; /* ensure full bleed without extra spacing */
+
+    img,
+    video {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  /* ---------------- BODY ---------------- */
+
+  &__body {
+    padding: 0 16px;
+
+    font-size: var(--font-size-sm);
+    color: var(--grey800);
+
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* ---------------- ACTION ---------------- */
+
+  &__action {
+    margin-top: 16px;
+    padding: 0 16px 16px;
+
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* ---------------- EDGE CASE FIX ---------------- */
+  /* ensures bottom padding exists even if action is missing */
+  &__body:last-child {
+    padding-bottom: 16px;
+  }
+}

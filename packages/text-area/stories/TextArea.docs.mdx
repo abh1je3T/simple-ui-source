@@ -1,0 +1,104 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as TextAreaStories from './TextArea.stories';
+
+<Meta of={TextAreaStories} name="Quick start" />
+
+<Title />
+<Subtitle>A multi-line text input component that auto-grows to fit its content.</Subtitle>
+
+<Description>
+  The `TextArea` component allows users to input multiple lines of text. Unlike standard HTML textareas, it automatically resizes its height to fit the content, providing a superior UX by eliminating awkward internal scrollbars. It also includes built-in character counting.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Auto-Resize**: Automatically grows in height as the user types, respecting `minRows` and `maxRows` boundaries.
+- **Character Count**: Built-in support for character counting, including soft limits (allows typing past the max length while showing an error state).
+- **Semantic Tones**: Includes validation tones (`success`, `error`) and branding tones (`primary`, `neutral`).
+- **Controlled API**: Simplified `onChange` handler that directly returns the string value instead of the full event object.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Use for Long Text**: Use `TextArea` when you expect the user to input more than a few words (e.g., descriptions, comments, bios).
+- **Set Row Limits**: Set reasonable `minRows` (to show initial intent) and `maxRows` (to prevent the component from growing infinitely and breaking the layout).
+- **Pair with Labels**: Always use within a `FormField` or pair with a `Label` for accessibility.
+
+### Don't:
+- **Single-line Data**: Do not use `TextArea` for short data like emails or names; use `Input` instead.
+- **Hard Max Lengths**: Avoid strict, native `maxLength` limitations that block typing. Instead, use the component's soft character counting feature, which allows the user to finish their thought and then edit down to size.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Textarea } from "@simple-ui/text-area";
+import { useState } from "react";
+
+const Example = () => {
+  const [bio, setBio] = useState("");
+  
+  return (
+    <Textarea 
+      placeholder="Tell us about yourself..."
+      value={bio}
+      onChange={setBio}
+      minRows={3}
+      maxRows={6}
+      showCharCount
+      maxLength={200}
+    />
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Soft Limits vs Hard Limits**: The `TextArea` deliberately removes the native HTML `maxLength` attribute to prevent jarring cutoffs. If the user exceeds the `maxLength` prop, the component enters an `error` state, allowing the user to easily edit their text rather than losing keystrokes.
+
+> [!TIP]
+> **Custom Renderers**: You can pass a function to `renderCharCount` if you want to display the count differently (e.g., "50 characters remaining" instead of "150/200").
+
+---
+
+## Visual Styles
+
+### Tones
+<Canvas of={TextAreaStories.Tones} />
+
+### Sizes
+<Canvas of={TextAreaStories.Sizes} />
+
+---
+
+## Features
+
+### Auto-Resize (Min/Max Rows)
+Type multiple lines in this example to see it grow until it hits the `maxRows` limit, at which point it will begin scrolling natively.
+<Canvas of={TextAreaStories.AutoResize} />
+
+### Character Limits
+Exceeding the limit will trigger an error state visually, without blocking the user from typing.
+<Canvas of={TextAreaStories.CharacterCounter} />
+
+---
+
+## Accessibility Audit
+
+- **Focus Styling**: Provides a clear focus ring that respects the active `tone`.
+- **Keyboard Navigation**: Behaves exactly like a native textarea, supporting Enter for new lines.
+- **Dynamic Resizing**: Resizing is handled via layout effects and `requestAnimationFrame` to ensure smooth rendering without layout thrashing.
+
+---
+
+## API Reference
+
+<ArgTypes />

@@ -1,0 +1,259 @@
+.sui-checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+
+  /* =========================
+     HIDDEN NATIVE INPUT
+  ========================= */
+
+  input {
+    position: absolute;
+    opacity: 0;
+    margin: 0;
+    width: var(--checkbox-size, 16px);
+    height: var(--checkbox-size, 16px);
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  /* =========================
+     BOX
+  ========================= */
+
+  &__box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    border: 1px solid var(--control-border);
+    border-radius: var(--radius-sm);
+    background: var(--control-background);
+
+    transition:
+      background-color var(--animation-duration-sm)
+        var(--animation-easing-ease-in-out),
+      border-color var(--animation-duration-sm)
+        var(--animation-easing-ease-in-out),
+      box-shadow var(--animation-duration-sm)
+        var(--animation-easing-ease-in-out);
+
+    position: relative;
+  }
+
+  /* =========================
+     SIZE SYSTEM
+     --checkbox-size keeps input overlay and box in sync.
+  ========================= */
+
+  &--sm {
+    --checkbox-size: 14px;
+    & .sui-checkbox__box {
+      width: 14px;
+      height: 14px;
+    }
+    & input {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &--md {
+    --checkbox-size: 16px;
+    & .sui-checkbox__box {
+      width: 16px;
+      height: 16px;
+    }
+    & input {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &--lg {
+    --checkbox-size: 20px;
+    & .sui-checkbox__box {
+      width: 20px;
+      height: 20px;
+    }
+    & input {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  /* =========================
+     FOCUS RING
+     :focus-visible means keyboard only — no ring on mouse click.
+  ========================= */
+
+  input:focus-visible + &__box {
+    box-shadow:
+      0 0 0 2px var(--card),
+      0 0 0 4px var(--control-focus-ring);
+  }
+
+  /* =========================
+     TONES — CHECKED
+  ========================= */
+
+  &--neutral input:checked + &__box {
+    background: var(--grey500);
+    border-color: var(--grey500);
+  }
+
+  &--primary input:checked + &__box {
+    background: var(--primary-base);
+    border-color: var(--primary-base);
+  }
+
+  &--success input:checked + &__box {
+    background: var(--success-base);
+    border-color: var(--success-base);
+  }
+
+  &--warning input:checked + &__box {
+    background: var(--warning-base);
+    border-color: var(--warning-base);
+  }
+
+  &--error input:checked + &__box {
+    background: var(--error-base);
+    border-color: var(--error-base);
+  }
+
+  /* =========================
+     TONES — FOCUS RING COLOUR
+  ========================= */
+
+  &--neutral input:focus-visible + &__box {
+    box-shadow:
+      0 0 0 2px var(--card),
+      0 0 0 4px var(--grey300);
+  }
+
+  &--primary input:focus-visible + &__box {
+    box-shadow:
+      0 0 0 2px var(--card),
+      0 0 0 4px var(--primary-subtle-border);
+  }
+
+  &--success input:focus-visible + &__box {
+    box-shadow:
+      0 0 0 2px var(--card),
+      0 0 0 4px var(--success-subtle);
+  }
+
+  &--warning input:focus-visible + &__box {
+    box-shadow:
+      0 0 0 2px var(--card),
+      0 0 0 4px var(--warning-subtle);
+  }
+
+  &--error input:focus-visible + &__box {
+    box-shadow:
+      0 0 0 2px var(--card),
+      0 0 0 4px var(--error-subtle);
+  }
+
+  /* =========================
+     PSEUDO BASE
+     Always hidden. Specific states below switch it on.
+  ========================= */
+
+  &__box::after {
+    content: "";
+    position: absolute;
+    display: none;
+    box-sizing: content-box;
+  }
+
+  /* =========================
+     CHECK ICON — tick
+     :not(.sui-checkbox--indeterminate) is the key guard.
+     Without it, removing indeterminate while checked=true
+     leaves the dash geometry behind and rotates it into
+     a diagonal line instead of a proper tick.
+  ========================= */
+
+  &:not(#{&}--indeterminate) input:checked + &__box::after {
+    display: block;
+    left: 50%;
+    top: 40%;
+    width: 30%;
+    height: 55%;
+    border: solid var(--card);
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  /* =========================
+     INDETERMINATE — dash
+     The :not() guard above means this and the tick
+     rule are mutually exclusive — they can never both
+     apply to the same element at the same time.
+  ========================= */
+
+  &--indeterminate &__box {
+    background: var(--checkbox-tone-bg, var(--primary-base));
+    border-color: var(--checkbox-tone-bg, var(--primary-base));
+  }
+
+  &--indeterminate &__box::after {
+    display: block;
+    width: 55%;
+    height: 2px;
+    background: var(--card);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+  }
+
+  /* =========================
+     TONE VARIABLES
+     Drives indeterminate background and can be extended
+     to any future tone-aware state.
+  ========================= */
+
+  &--neutral {
+    --checkbox-tone-bg: var(--grey500);
+  }
+  &--primary {
+    --checkbox-tone-bg: var(--primary-base);
+  }
+  &--success {
+    --checkbox-tone-bg: var(--success-base);
+  }
+  &--warning {
+    --checkbox-tone-bg: var(--warning-base);
+  }
+  &--error {
+    --checkbox-tone-bg: var(--error-base);
+  }
+
+  /* =========================
+     DISABLED
+  ========================= */
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+
+    input {
+      cursor: not-allowed;
+    }
+
+    .sui-checkbox__box {
+      background: var(--control-disabled-background);
+      border-color: var(--control-disabled-border);
+    }
+
+    input:checked + .sui-checkbox__box {
+      background: var(--control-disabled-text);
+      border-color: var(--control-disabled-text);
+    }
+  }
+}

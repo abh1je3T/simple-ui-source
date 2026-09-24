@@ -1,0 +1,93 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as FormFieldStories from './FormField.stories';
+
+<Meta of={FormFieldStories} name="Quick start" />
+
+<Title />
+<Subtitle>A structural wrapper that manages labels, inputs, and validation feedback.</Subtitle>
+
+<Description>
+  The `FormField` component is the standard building block for forms. It orchestrates the relationship between a label, a form control (like an `Input` or `Select`), and help or error messages. It automatically generates unique IDs to link these elements together for perfect accessibility.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Automatic Accessibility**: Generates and manages `id`, `htmlFor`, and `aria-describedby` links between labels, inputs, and messages automatically via context.
+- **Validation State**: Manages error states and displays validation messages with appropriate styling.
+- **Helper Text**: Provides a slot for secondary instructions below the input.
+- **Required Indicator**: Automatically displays an accessible asterisk on the label when `required` is true.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Wrap All Inputs**: Wrap every individual input component (`Input`, `TextArea`, `Dropdown`, etc.) in a `FormField`.
+- **Provide Labels**: Always provide a `label` string. Forms without labels are highly inaccessible.
+- **Clear Error Messages**: Provide actionable error text that tells the user exactly how to fix the problem.
+
+### Don't:
+- **Multiple Inputs**: Don't put multiple inputs inside a single `FormField` unless they logically act as a single unit (like a complex custom control).
+- **Manual IDs**: You don't need to pass an `id` to the inner input or the label; the `FormField` manages this internally using React context.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { FormField } from "@simple-ui/form-field";
+import { Input } from "@simple-ui/input";
+
+const Example = () => {
+  return (
+    <FormField 
+      label="Username" 
+      required 
+      helperText="You can use letters, numbers & periods."
+    >
+      <Input placeholder="Enter your username" />
+    </FormField>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Error Precedence**: If both `error` and `helperText` are provided, the `error` message takes precedence and replaces the helper text to avoid overwhelming the user with text blocks.
+
+> [!IMPORTANT]
+> **Inner Component Support**: The inner component must be designed to consume the `FormFieldContext` to inherit the automatically generated IDs. Standard Simple UI components like `Input` support this out of the box.
+
+---
+
+## Examples
+
+### With Helper Text
+Provides secondary guidance to the user.
+<Canvas of={FormFieldStories.WithHelperText} />
+
+### Validation States (Errors)
+Displays validation feedback prominently in red.
+<Canvas of={FormFieldStories.WithError} />
+
+### Required Fields
+Automatically adds an asterisk to the label.
+<Canvas of={FormFieldStories.Required} />
+
+---
+
+## Accessibility Audit
+
+- **ID Generation**: Uses React's `useId()` to guarantee perfectly unique IDs for the input, label, and message blocks, avoiding global ID collisions on the page.
+- **Context Injection**: By providing `FormFieldContext`, inner components automatically receive the correct `id` (linking to the label's `htmlFor`) and `aria-describedby` (linking to the error/helper text's `id`).
+
+---
+
+## API Reference
+
+<ArgTypes />

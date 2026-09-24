@@ -1,0 +1,116 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as DrawerStories from './Drawer.stories';
+
+<Meta of={DrawerStories} name="Quick start" />
+
+<Title />
+<Subtitle>A flexible, accessible overlay panel that slides in from the edge of the screen.</Subtitle>
+
+<Description>
+  The `Drawer` component is a robust overlay panel that can be anchored to any edge of the viewport. It is ideal for navigation menus, complex settings panels, or secondary task flows that require more space than a standard modal without leaving the current context. It features built-in focus trapping, screen reader support, and gesture-driven drag handles.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Directional Anchors**: Supports sliding in from the `left`, `right`, `top`, or `bottom` edges.
+- **Gesture Support**: Includes an optional drag handle that allows users to close the drawer via swipe gestures natively.
+- **Semantic Tones**: Apply semantic styling (`primary`, `secondary`, `tertiary`) directly to the drawer container.
+- **Accessible by Default**: Automatically traps focus inside the drawer while open, disables scrolling on the main `<body>`, and handles `Escape` key interactions.
+- **Flexible Content Area**: Functions as an unopinionated wrapper, allowing you to compose rich interfaces using other UI atoms and molecules.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Complex Forms & Settings**: Use the drawer for extensive forms or settings panels where context from the underlying page is still helpful.
+- **Mobile Bottom Sheets**: Use `anchor="bottom"` with a drag handle to create mobile-friendly bottom sheets.
+- **Focus Management**: Ensure the first interactive element inside the drawer is clearly focusable for keyboard users.
+
+### Don't:
+- **Destructive Confirmations**: Do not use a drawer for simple, destructive alerts (e.g., "Are you sure you want to delete this?"). Use an Alert Dialog instead.
+- **Nested Drawers**: Avoid stacking multiple drawers on top of each other, as it creates poor UX and complicates focus management.
+- **Scroll Hijacking**: Do not place horizontally scrolling elements inside a drawer where the drag handle also listens for horizontal swipes (e.g., left/right anchors).
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Drawer } from "@simple-ui/drawer";
+import { Button } from "@simple-ui/button";
+import { useState } from "react";
+
+const Example = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open Drawer</Button>
+
+      <Drawer 
+        open={open} 
+        onClose={() => setOpen(false)} 
+        anchor="right"
+        tone="primary"
+      >
+        <div style={{ padding: 24 }}>
+          <h2>Drawer Content</h2>
+          <p>Your complex content goes here.</p>
+        </div>
+      </Drawer>
+    </>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Drag Handle**: The `showDragHandle={true}` prop provides a native-feeling swipe-to-close behavior. It is highly recommended for `bottom` anchored drawers on mobile devices. Note that swiping is restricted strictly to dragging the handle itself, preventing accidental closures while scrolling content.
+
+> [!IMPORTANT]
+> **Portal Usage**: Under the hood, the component uses `ReactDOM.createPortal` to append the drawer to the end of `document.body`. This ensures it always breaks out of its parent's stacking context (`z-index`) and avoids overflow clipping issues.
+
+---
+
+## Visual Styles
+
+### Anchors
+The drawer can be anchored to any of the four edges of the viewport.
+<Canvas of={DrawerStories.Anchors} />
+
+### Tones
+Available in several semantic background tones for branding or context.
+<Canvas of={DrawerStories.Tones} />
+
+---
+
+## Examples
+
+### Drag Handle & Swipe Gestures
+Toggle the drag handle on or off. When enabled, dragging the handle in the direction of its origin edge will smoothly close the drawer.
+<Canvas of={DrawerStories.DragHandle} />
+
+### Complex Composition (Edit Profile)
+A real-world example demonstrating how to compose `Avatar`, `FormField`, `Input`, and `Switch` components within a drawer.
+<Canvas of={DrawerStories.EditProfile} />
+
+---
+
+## Accessibility Audit
+
+- **Focus Trap**: Utilizes internal lifecycle hooks to safely trap keyboard focus within the drawer when open.
+- **Body Scroll Lock**: Automatically hides overflow on `document.body` while visible to prevent the background page from scrolling.
+- **ARIA Attributes**: The container uses `role="dialog"` and `aria-modal="true"` to explicitly inform screen readers of the modal overlay.
+- **Dismissible via Keyboard**: Fully supports closing the drawer by pressing the `Escape` key.
+
+---
+
+## API Reference
+
+<ArgTypes />

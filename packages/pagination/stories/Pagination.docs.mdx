@@ -1,0 +1,105 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as PaginationStories from './Pagination.stories';
+
+<Meta of={PaginationStories} name="Quick start" />
+
+<Title />
+<Subtitle>A navigation component for splitting large collections of data across multiple pages.</Subtitle>
+
+<Description>
+  The `Pagination` component provides a standard interface for users to navigate through extensive datasets. It automatically manages complex ellipsis (`...`) rendering, sibling counts, and boundaries to ensure the UI remains compact and usable regardless of the total number of pages.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Smart Ellipsis Rendering**: Automatically calculates when to collapse page numbers using ellipses based on the current page and total pages.
+- **Customizable Boundaries**: Control how many pages are always visible at the edges (`boundaryCount`) and adjacent to the active page (`siblingCount`).
+- **Semantic Tones**: Apply standard validation or branding colors (`primary`, `success`, `neutral`).
+- **Visual Variants**: Choose between `solid` (filled backgrounds for active state) and `subtle` (lighter, text-based active states).
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Server-Side Rendering**: Use `Pagination` when data is fetched in chunks from the server, preventing massive initial load times.
+- **Provide Context**: Always display to the user what data is currently being viewed (e.g., "Showing 11-20 of 150 results") somewhere near the pagination controls.
+- **Scroll to Top**: When a user changes the page, automatically scroll the view back to the top of the dataset.
+
+### Don't:
+- **Infinite Scroll Mixing**: Don't use standard Pagination if you are also implementing an "Infinite Scroll" pattern; pick one paradigm per dataset.
+- **Small Datasets**: Avoid pagination if the total data easily fits on a single screen without overwhelming the user.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Pagination } from "@simple-ui/pagination";
+import { useState } from "react";
+
+const Example = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  return (
+    <Pagination 
+      page={currentPage} 
+      totalPages={20} 
+      onChange={setCurrentPage} 
+      showPrevNext={true}
+      tone="primary"
+    />
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Mobile Responsiveness**: On smaller screens, consider reducing `siblingCount` to 0 to save horizontal space, as the ellipsis logic will aggressively collapse the UI.
+
+> [!IMPORTANT]
+> **Controlled Component**: The `Pagination` component is fully controlled. It does not hold internal state for the current page; you must pass `page` and listen to `onChange`.
+
+---
+
+## Visual Styles
+
+### Variants
+<Canvas of={PaginationStories.Appearance} />
+
+### Sizes
+<Canvas of={PaginationStories.Sizes} />
+
+### Tones
+<Canvas of={PaginationStories.Tones} />
+
+---
+
+## Examples
+
+### Complex Ellipsis Logic
+By adjusting the `siblingCount` and `boundaryCount`, you can control how aggressively the pagination collapses into ellipses.
+<Canvas of={PaginationStories.CustomBehaviour} />
+
+### Large Datasets vs Small Datasets
+Notice how the component natively skips ellipsis rendering if the `totalPages` is small enough to fit on screen.
+<Canvas of={PaginationStories.Patterns} />
+
+---
+
+## Accessibility Audit
+
+- **ARIA Attributes**: Utilizes `aria-label`, `aria-current="page"`, and `aria-disabled` correctly across all internal buttons to describe their state and purpose.
+- **Keyboard Navigation**: Fully focusable via `Tab` with clear focus rings. `Enter` or `Space` activates page changes.
+- **Disabled States**: Prev/Next buttons use `disabled` attributes logically when at the extreme ends of the dataset, removing them from the tab order.
+
+---
+
+## API Reference
+
+<ArgTypes />

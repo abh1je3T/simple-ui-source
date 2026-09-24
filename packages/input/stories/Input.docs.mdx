@@ -1,0 +1,107 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as InputStories from './Input.stories';
+
+<Meta of={InputStories} name="Quick start" />
+
+<Title />
+<Subtitle>A foundational form component for accepting single-line text input.</Subtitle>
+
+<Description>
+  The `Input` component allows users to enter and edit text. It supports rich configurations including icons (prefix/suffix), semantic validation tones, and various sizes, making it suitable for a wide range of data entry scenarios.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Adornments**: Support for `prefix` and `suffix` elements, ideal for icons, currency symbols, or clear buttons.
+- **Semantic Tones**: Includes validation tones (`success`, `error`) and branding tones (`primary`, `neutral`) for immediate visual feedback.
+- **Scalable Sizes**: Available in `sm`, `md`, and `lg` to fit tight layouts or provide larger touch targets.
+- **Controlled API**: Simplified `onChange` handler that directly returns the string value instead of the full event object.
+- **Type Support**: Specifically designed for `text` and `password` input types.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Pair with Labels**: Always use the `Input` inside a `FormField` or pair it with a `Label` component for accessibility.
+- **Use Placeholders Wisely**: Use placeholders for brief examples of expected input, not as a replacement for labels.
+- **Provide Feedback**: Use the `tone="error"` prop in conjunction with a helpful error message when validation fails.
+
+### Don't:
+- **Multi-line Text**: Do not use the `Input` component for multi-line text; use `TextArea` instead.
+- **Number Validation**: Avoid using it for strict numeric input with stepping if a dedicated `NumberInput` or `OTPInput` is more appropriate.
+- **Overcrowd Adornments**: Do not put complex interactive elements inside `prefix` or `suffix` slots.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Input } from "@simple-ui/input";
+import { FiMail } from "react-icons/fi";
+import { useState } from "react";
+
+const Example = () => {
+  const [email, setEmail] = useState("");
+  
+  return (
+    <Input 
+      type="text"
+      placeholder="Enter your email"
+      value={email}
+      onChange={setEmail}
+      prefix={<FiMail />}
+      tone="neutral"
+    />
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Icons for Context**: A leading icon (`prefix`) can help users understand the requested data format (e.g., a phone icon, a lock icon, or an envelope) faster than reading the label.
+
+> [!TIP]
+> **Password Visibility**: You can use the `suffix` slot to implement a "show/hide" toggle button for password fields.
+
+> [!IMPORTANT]
+> **Controlled Component**: The `onChange` prop provides the string value directly `(value: string) => void`. This is a deliberate abstraction over the native event to simplify state management.
+
+---
+
+## Visual Styles
+
+### Tones
+<Canvas of={InputStories.Tones} />
+
+### Sizes
+<Canvas of={InputStories.Sizes} />
+
+---
+
+## Examples
+
+### Prefix and Suffix
+<Canvas of={InputStories.WithAffixes} />
+
+### Disabled State
+<Canvas of={InputStories.Disabled} />
+
+---
+
+## Accessibility Audit
+
+- **Focus Styling**: Provides a clear focus ring that respects the active `tone` (e.g., red ring for errors).
+- **Semantic Element**: Uses a native `<input>` element internally, ensuring compatibility with browser autofill and password managers.
+- **Adornment Visibility**: Prefix and suffix elements are visually contained but do not interfere with the native input's tab order or focus state.
+
+---
+
+## API Reference
+
+<ArgTypes />

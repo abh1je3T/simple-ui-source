@@ -1,0 +1,120 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as ModalStories from './Modal.stories';
+
+<Meta of={ModalStories} name="Quick start" />
+
+<Title />
+<Subtitle>A versatile dialog component for focal tasks, information, and confirmations.</Subtitle>
+
+<Description>
+  The `Modal` component provides a focused overlay for important tasks or information that requires user attention. It traps focus, manages scroll locking, and provides multiple visual variants to suit different contexts—from simple confirmations to complex data entry forms.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Focus Management**: Automatically traps focus within the modal and restores it on close.
+- **Scroll Locking**: Prevents background scrolling while the modal is active.
+- **Multiple Tones**: Supports semantic tones like `primary`, `secondary`, and `tertiary`.
+- **Responsive Sizing**: Offers various size variants (`sm` to `xl`) for different content volumes.
+- **Safe Dismissal**: Supports closing via backdrop click or the Escape key.
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Use for Focal Tasks**: Use modals for specific tasks that need to be completed before the user returns to the main flow.
+- **Keep it Simple**: Try to limit the complexity of the content within a modal to avoid overwhelming users.
+- **Provide Clear Actions**: Always include clear "Cancel" and "Confirm" (or equivalent) actions in the footer.
+
+### Don't:
+- **Nested Modals**: Avoid opening a modal on top of another modal; it complicates focus management and UX.
+- **Overcrowd**: Don't use modals for large amounts of information that would be better suited for a dedicated page.
+- **Implicit Closure**: Avoid making critical tasks closable only via backdrop click; always provide an explicit close action.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { Modal } from "@simple-ui/modal";
+import { Button } from "@simple-ui/button";
+import { useState } from "react";
+
+const Example = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open Modal</Button>
+      <Modal 
+        open={open} 
+        onClose={() => setOpen(false)} 
+        title="Account Settings"
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <p>Manage your account preferences here.</p>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+             <Button variant="secondary" onClick={() => setOpen(false)}>Close</Button>
+             <Button variant="primary" onClick={() => setOpen(false)}>Save</Button>
+          </div>
+        </div>
+      </Modal>
+    </>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Size Selection**: Use `size="sm"` for simple confirmations and `size="lg"` or `xl` for complex forms to ensure readable line lengths and adequate spacing.
+
+> [!IMPORTANT]
+> **Accessibility**: Ensure the `title` prop is descriptive, as it is used to provide the accessible name for the dialog for screen reader users.
+
+---
+
+## Visual Styles
+
+### Tones
+The modal supports several semantic tones to indicate the context of the information.
+<Canvas of={ModalStories.Tones} />
+
+### Sizes
+Available in multiple size variants to accommodate different types of content.
+<Canvas of={ModalStories.Sizes} />
+
+---
+
+## Examples
+
+### Profile Editing
+A real-world example of a profile editing flow using `FormField`, `Input`, `Avatar`, and `TextArea`.
+<Canvas of={ModalStories.ProfileEdit} />
+
+### Delete Confirmation
+A standard confirmation pattern for destructive actions.
+<Canvas of={ModalStories.DeleteConfirmation} />
+
+### Long Content
+The modal handles long content gracefully by enabling internal scrolling if necessary.
+<Canvas of={ModalStories.LongContent} />
+
+---
+
+## Accessibility Audit
+
+- **WAI-ARIA Compliance**: Implements `role="dialog"` and `aria-modal="true"`.
+- **Keyboard Support**: Fully supports navigation via `Tab`, and dismissal via `Esc`.
+- **Focus Management**: Focus is trapped and managed automatically upon opening and closing.
+
+---
+
+## API Reference
+
+<ArgTypes />

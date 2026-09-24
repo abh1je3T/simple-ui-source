@@ -1,0 +1,107 @@
+/* ---------------------------
+   BASE
+--------------------------- */
+.sui-tooltip-children-wrapper {
+  display: inline-block;
+  vertical-align: middle;
+}
+.sui-tooltip {
+  z-index: var(--zindex-tooltip, 1300);
+
+  border-radius: var(--radius-sm);
+  padding: var(--layout-spacing-xs) var(--layout-spacing-sm);
+
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-sm);
+  font-weight: var(--font-weight-medium);
+
+  box-shadow: var(--shadows-md);
+
+  white-space: nowrap;
+  pointer-events: none;
+
+  opacity: 0;
+
+  animation: tooltip-in var(--component-tooltip-show-duration, 200ms)
+    var(--component-tooltip-show-easing, cubic-bezier(0, 0, 0.2, 1)) forwards;
+}
+
+/* ---------------------------
+   TONES
+--------------------------- */
+
+/* default — dark (matches your grey800 + white pattern) */
+.sui-tooltip--dark {
+  background: var(--grey800);
+  color: var(--white);
+  border: none;
+}
+
+/* light — inverted, uses card bg with border */
+.sui-tooltip--light {
+  background: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+}
+
+/* info */
+.sui-tooltip--info {
+  background: var(--info-subtle);
+  color: var(--info-base);
+  border: 1px solid var(--info-base);
+}
+
+/* success */
+.sui-tooltip--success {
+  background: var(--success-subtle);
+  color: var(--success-base);
+  border: 1px solid var(--success-base);
+}
+
+/* warning */
+.sui-tooltip--warning {
+  background: var(--warning-subtle);
+  color: var(--grey900);
+  border: 1px solid var(--warning-base);
+}
+
+/* error */
+.sui-tooltip--error {
+  background: var(--error-subtle);
+  color: var(--error-base);
+  border: 1px solid var(--error-base);
+}
+
+/* ---------------------------
+   SIZES
+--------------------------- */
+
+.sui-tooltip--sm {
+  font-size: var(--font-size-xs);
+  padding: var(--layout-spacing-xs);
+}
+
+.sui-tooltip--md {
+  font-size: var(--font-size-sm);
+  padding: var(--layout-spacing-xs) var(--layout-spacing-sm);
+}
+
+.sui-tooltip--lg {
+  font-size: var(--font-size-md);
+  padding: var(--layout-spacing-sm) var(--layout-spacing-md);
+}
+
+/* ---------------------------
+   ANIMATION
+--------------------------- */
+
+@keyframes tooltip-in {
+  from {
+    opacity: 0;
+    scale: 0.95;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}

@@ -1,0 +1,193 @@
+@keyframes date-cell-in {
+  from {
+    transform: scale(0.75) translateY(4px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+// ── Root ───────────────────────────────────────────────────────────────────
+
+.sui-date-input {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+// ── Separator ──────────────────────────────────────────────────────────────
+
+.sui-date-input__separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 var(--layout-spacing-xs);
+  font-size: var(--font-size-md);
+  color: var(--grey500);
+  user-select: none;
+}
+
+// ── Cell — base ────────────────────────────────────────────────────────────
+
+.sui-date-input__cell {
+  text-align: center;
+  outline: none;
+  font-family: inherit;
+  font-weight: var(--font-weight-medium);
+  padding: 0;
+  caret-color: var(--primary-base);
+
+  animation: date-cell-in 200ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+
+  transition:
+    box-shadow var(--animation-duration-xs) var(--animation-easing-ease-in-out),
+    background var(--animation-duration-xs) var(--animation-easing-ease-in-out),
+    border-color var(--animation-duration-xs)
+      var(--animation-easing-ease-in-out),
+    transform 120ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  transform-origin: center bottom;
+
+  &:focus {
+    transform: scale(1.08);
+  }
+
+  &::placeholder {
+    color: var(--control-placeholder);
+    font-weight: var(--font-weight-regular);
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    color: var(--control-disabled-text);
+  }
+}
+
+// ── Tones ──────────────────────────────────────────────────────────────────
+
+.sui-date-input__cell {
+  &--neutral {
+    --_tone-base: var(--primary-base);
+    --_tone-ring: var(--grey100);
+    --_tone-bg: var(--grey100);
+  }
+
+  &--primary {
+    --_tone-base: var(--primary-base);
+    --_tone-ring: var(--control-focus-ring);
+    --_tone-bg: var(--primary-subtle-background);
+  }
+
+  &--success {
+    --_tone-base: var(--success-base);
+    --_tone-ring: var(--success-subtle);
+    --_tone-bg: var(--success-subtle);
+  }
+
+  &--warning {
+    --_tone-base: var(--warning-base);
+    --_tone-ring: var(--warning-subtle);
+    --_tone-bg: var(--warning-subtle);
+  }
+
+  &--error {
+    --_tone-base: var(--error-base);
+    --_tone-ring: var(--error-subtle);
+    --_tone-bg: var(--error-subtle);
+  }
+}
+
+// ── Variants ───────────────────────────────────────────────────────────────
+
+.sui-date-input__cell--boxed {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--control-border);
+  background: var(--control-background);
+  color: var(--control-text);
+
+  &:focus {
+    border-color: var(--_tone-base);
+    box-shadow: 0 0 0 3px var(--_tone-ring);
+  }
+
+  &.sui-date-input__cell--filled {
+    border-color: var(--_tone-base);
+  }
+
+  &.sui-date-input__cell--disabled {
+    background: var(--control-disabled-background);
+    border-color: var(--control-disabled-border);
+  }
+}
+
+.sui-date-input__cell--underline {
+  border: none;
+  border-radius: 0;
+  color: var(--control-text);
+  background: var(--_tone-bg);
+
+  &:not(.sui-date-input__cell--filled) {
+    box-shadow: inset 0 -3px 0 var(--control-border);
+  }
+
+  &.sui-date-input__cell--filled {
+    box-shadow: inset 0 -3px 0 var(--_tone-base);
+  }
+
+  &:focus {
+    box-shadow: inset 0 -4px 0 var(--_tone-base);
+  }
+
+  &.sui-date-input__cell--disabled {
+    background: var(--grey100);
+    box-shadow: inset 0 -3px 0 var(--control-disabled-border);
+    color: var(--control-disabled-text);
+  }
+}
+
+// ── Sizes ──────────────────────────────────────────────────────────────────
+
+.sui-date-input__cell {
+  &--sm {
+    width: 40px;
+    height: 40px;
+    font-size: var(--font-size-sm);
+
+    &.sui-date-input__cell--wide {
+      width: 40px;
+    }
+  }
+
+  &--md {
+    width: 48px;
+    height: 48px;
+    font-size: var(--font-size-md);
+
+    &.sui-date-input__cell--wide {
+      width: 48px;
+    }
+  }
+
+  &--lg {
+    width: 56px;
+    height: 56px;
+    font-size: var(--font-size-lg);
+
+    &.sui-date-input__cell--wide {
+      width: 56px;
+    }
+  }
+}
+
+// ── Disabled wrapper ───────────────────────────────────────────────────────
+
+.sui-date-input--disabled {
+  opacity: 0.45;
+}

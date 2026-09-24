@@ -1,0 +1,151 @@
+.sui-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--layout-spacing-xs);
+
+  /* =========================
+     FIELD
+  ========================= */
+  &__field {
+    display: flex;
+    align-items: center;
+    gap: var(--layout-spacing-xs);
+
+    background: var(--control-background);
+    border: 1px solid var(--control-border);
+    border-radius: var(--radius-md);
+
+    padding: 0 var(--layout-spacing-sm);
+
+    transition:
+      border-color var(--animation-duration-sm)
+        var(--animation-easing-ease-in-out),
+      box-shadow var(--animation-duration-sm)
+        var(--animation-easing-ease-in-out);
+
+    &:focus-within {
+      border-color: var(--control-focus-border, var(--primary-base));
+      box-shadow: 0 0 0 2px var(--control-focus-ring);
+    }
+  }
+
+  /* =========================
+     INPUT
+  ========================= */
+  &__control {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+
+    font-size: var(--font-size-sm);
+    color: var(--control-text);
+
+    padding: 8px 0;
+
+    &::placeholder {
+      color: var(--control-placeholder);
+    }
+
+    &:disabled {
+      color: var(--control-disabled-text);
+      cursor: not-allowed;
+    }
+  }
+
+  /* =========================
+     PREFIX / SUFFIX
+  ========================= */
+  &__prefix,
+  &__suffix {
+    display: flex;
+    align-items: center;
+    color: var(--control-placeholder);
+  }
+
+  /* =========================
+     SIZES
+  ========================= */
+  &--sm .sui-input__control {
+    font-size: var(--font-size-xs);
+    padding: 6px 0;
+  }
+
+  &--md .sui-input__control {
+    font-size: var(--font-size-sm);
+    padding: 8px 0;
+  }
+
+  &--lg .sui-input__control {
+    font-size: var(--font-size-md);
+    padding: 10px 0;
+  }
+  /* =========================
+     FULL WIDTH
+  ========================= */
+  &--full {
+    width: 100%;
+  }
+
+  /* =========================
+     TONES (optional override system)
+  ========================= */
+  &--neutral {
+    --control-focus-border: var(--grey500);
+    --control-focus-ring: var(--grey200);
+  }
+
+  &--primary {
+    --control-focus-border: var(--primary-base);
+    --control-focus-ring: var(--primary-subtle-border);
+  }
+
+  &--success {
+    --control-focus-border: var(--success-base);
+    --control-focus-ring: var(--success-subtle);
+  }
+
+  &--warning {
+    --control-focus-border: var(--warning-base);
+    --control-focus-ring: var(--warning-subtle);
+  }
+
+  &--error {
+    --control-focus-border: var(--error-base);
+    --control-focus-ring: var(--error-subtle);
+  }
+
+  /* =========================
+     DISABLED STATE
+  ========================= */
+  &--disabled {
+    .sui-input__field {
+      background: var(--control-disabled-background);
+      border-color: var(--control-disabled-border);
+      cursor: not-allowed;
+    }
+
+    .sui-input__control {
+      background: var(--control-disabled-background);
+      color: var(--control-disabled-text);
+      -webkit-text-fill-color: var(--control-disabled-text);
+      cursor: not-allowed;
+    }
+
+    .sui-input__control::placeholder {
+      color: var(--control-disabled-text);
+      opacity: 0.7;
+    }
+
+    .sui-input__prefix,
+    .sui-input__suffix {
+      color: var(--control-disabled-text);
+    }
+
+    /* IMPORTANT: kill focus visuals */
+    .sui-input__field:focus-within {
+      border-color: var(--control-disabled-border);
+      box-shadow: none;
+    }
+  }
+}

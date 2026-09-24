@@ -1,0 +1,138 @@
+import { Meta, Title, Subtitle, Description, Primary, Controls, Stories, Story, Canvas, ArgTypes } from '@storybook/addon-docs/blocks';
+import * as DateInputStories from './DateInput.stories';
+
+<Meta of={DateInputStories} name="Quick start" />
+
+<Title />
+<Subtitle>A segmented date entry component with per-cell validation and smart focus management.</Subtitle>
+
+<Description>
+  The `DateInput` component provides a purpose-built, accessible interface for entering structured date values. Unlike a plain `<input type="date">`, it uses individual character-level cells per digit, enabling precise validation, smart auto-advance, and consistent cross-browser styling — while fully participating in native HTML forms.
+</Description>
+
+<Primary />
+
+## Key Features
+
+- **Flexible Format System**: Compose any date format from `DD`, `MM`, `YYYY`, and `YY` segments in any order (e.g. `[DD, MM, YYYY]`, `[YYYY, MM, DD]`, `[MM, YYYY]`).
+- **Smart Focus Management**: Automatically advances to the next cell on completion, moves back on `Backspace`, and supports full `ArrowLeft`/`ArrowRight` navigation.
+- **Digit-Level Validation**: Rejects invalid inputs at the character level — e.g. a day cannot start with a digit greater than 3, preventing `40` from ever being typed.
+- **Paste Support**: Intelligently handles pasting a full date string (e.g. `25/06/2025`) or raw digit sequences (e.g. `25062025`) into any cell.
+- **Form Participation**: Renders a hidden `<input>` carrying the full serialised value under the provided `name`, compatible with native `FormData` and `<form>` submission.
+- **Visual Variants**: Choose between `underline` (minimal, inline feel) and `boxed` (bordered, classic field look).
+
+---
+
+## Usage Guidelines
+
+### Do:
+- **Date of Birth / Expiry Fields**: Use `DateInput` wherever structured, unambiguous date entry is required.
+- **Match Locale**: Use `[DD, MM, YYYY]` for EU/UK audiences and `[MM, DD, YYYY]` for US audiences.
+- **Pair with a Label**: Always associate a `<label>` element — use `htmlFor="{id}-input"` to focus the first cell specifically.
+- **Provide a name**: Always set `name` when the input is inside a `<form>` so the value is included in form submission.
+
+### Don't:
+- **Date Pickers**: Don't use `DateInput` as a replacement for a calendar/date picker when the user needs to browse dates. It is strictly for direct, known-value entry.
+- **Partial Formats**: Don't use `[MM, YYYY]` when the full day is required — the component intentionally omits the DD segment in that case.
+- **Invalid Segment Combinations**: Don't include both `YYYY` and `YY` in the same format — the component will throw a validation error.
+
+---
+
+## Usage Pattern
+
+```tsx
+import { DateInput } from "@simple-ui/date-input";
+import { useState } from "react";
+
+const Example = () => {
+  const [dob, setDob] = useState("");
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      <label htmlFor="dob-input" style={{ fontWeight: 500 }}>
+        Date of Birth
+      </label>
+      <DateInput
+        id="dob"
+        name="dob"
+        format={["DD", "MM", "YYYY"]}
+        separator="/"
+        variant="boxed"
+        value={dob}
+        onChange={setDob}
+      />
+    </div>
+  );
+};
+```
+
+---
+
+## Best Practices
+
+> [!TIP]
+> **Label association**: Set `id="dob"` on the `DateInput` and use `htmlFor="dob-input"` on your `<label>`. The component automatically exposes the first cell as `{id}-input` so clicking the label focuses the correct digit.
+
+> [!TIP]
+> **Month/Year only**: Use `format={["MM", "YYYY"]}` for credit card expiry fields. The component correctly drops the day entirely and adjusts all validation, serialisation and paste logic automatically.
+
+> [!IMPORTANT]
+> **Controlled vs Uncontrolled**: In controlled mode, `value` must be the full serialised string matching the format and separator (e.g. `"25/06/2025"` for `DD/MM/YYYY`). Passing a partial or mismatched string will silently result in empty cells.
+
+> [!WARNING]
+> **Invalid formats throw**: Passing an invalid `format` array (unknown segment, duplicate, or conflicting `YY`+`YYYY`) causes a synchronous `Error` during render. In production, wrap the component in a React Error Boundary. The exported `validateFormat()` utility lets you pre-validate the format before rendering.
+
+---
+
+## Visual Styles
+
+### Variants
+<Canvas of={DateInputStories.Boxed} />
+
+### Sizes
+<Canvas of={DateInputStories.Sizes} />
+
+### Tones
+<Canvas of={DateInputStories.Tones} />
+
+---
+
+## Examples
+
+### Format Variations
+<Canvas of={DateInputStories.MDY} />
+<Canvas of={DateInputStories.YMD} />
+<Canvas of={DateInputStories.DotSeparator} />
+
+### Two-Digit Year Formats
+<Canvas of={DateInputStories.DDMMYY} />
+<Canvas of={DateInputStories.MonthYear} />
+
+### Disabled State
+<Canvas of={DateInputStories.Disabled} />
+
+### Form Submission
+<Canvas of={DateInputStories.FormSubmission} />
+
+### Invalid Formats
+<Canvas of={DateInputStories.InvalidFormats} />
+
+---
+
+## Accessibility Audit
+
+- **Group Role**: The root element uses `role="group"` with `aria-label="Date input"` to semantically wrap the individual cells.
+- **Per-Cell Labels**: Every individual `<input>` has `aria-label="DD digit 1"` (etc.) so screen readers announce the field and position as the user navigates between cells.
+- **Keyboard Navigation**:
+  - `0–9` — enters a digit and advances focus if the cell or segment is complete
+  - `Backspace` — clears the current cell; moves focus back if already empty
+  - `Delete` — clears the current cell without moving focus
+  - `ArrowLeft` / `ArrowRight` — moves focus between cells
+- **Spinner Suppression**: `-webkit-inner-spin-button` and `-webkit-outer-spin-button` are hidden to prevent the browser from rendering number-input spinners on cells.
+- **Mobile Optimized**: Each cell declares `inputMode="numeric"` to trigger the numeric soft keyboard on mobile devices.
+
+---
+
+## API Reference
+
+<ArgTypes />

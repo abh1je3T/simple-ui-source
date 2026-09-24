@@ -1,0 +1,109 @@
+.sui-drop-option {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Better for checkboxes */
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  margin: 4px;
+  cursor: pointer;
+  font-size: inherit;
+  color: var(--control-text);
+  transition: all var(--animation-duration-xs)
+    var(--animation-easing-ease-in-out);
+  gap: 8px;
+
+  &:hover:not(&--disabled) {
+    background: var(--grey100);
+  }
+
+  &--focused:not(&--disabled) {
+    background: var(--grey100);
+    box-shadow: inset 0 0 0 1px var(--primary-base);
+  }
+
+  &--selected:not(&--multiple) {
+    background: var(--primary-subtle-background);
+    color: var(--primary-base);
+    font-weight: var(--font-weight-medium);
+
+    &:hover {
+      background: var(--primary-subtle-background);
+    }
+  }
+
+  &--multiple {
+    & .sui-drop-option__label {
+      flex: 1;
+    }
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    color: var(--control-disabled-text);
+    opacity: 0.6;
+  }
+
+  &__label {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__checkbox {
+    pointer-events: none; /* Let the parent li handle clicks */
+  }
+
+  &__check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto; /* Push to the end if not multiple */
+    color: var(--primary-base);
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+/* =========================
+   GROUPS
+========================= */
+.sui-dropdown__group {
+  padding: 4px 0;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--grey100);
+    margin-bottom: 4px;
+  }
+}
+
+.sui-dropdown__group-label {
+  padding: 4px 12px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--grey400);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.sui-dropdown__group-items {
+  padding-left: 8px;
+}
+
+/* Size overrides inherited from Dropdown */
+.sui-dropdown--sm .sui-drop-option {
+  font-size: var(--font-size-xs);
+  padding: 6px 10px;
+}
+
+.sui-dropdown--sm .sui-dropdown__group-label {
+  font-size: 10px;
+}
+
+.sui-dropdown--lg .sui-drop-option {
+  font-size: var(--font-size-md);
+  padding: 10px 14px;
+}

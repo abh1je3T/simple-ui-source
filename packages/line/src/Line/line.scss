@@ -1,0 +1,86 @@
+.sui-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-foreground);
+
+  /* ---------------------------
+     Horizontal Line
+  ---------------------------- */
+  &--horizontal {
+    width: 100%;
+    margin: var(--layout-spacing-md) 0;
+
+    border-top: 1px solid var(--border);
+
+    &.sui-line--dashed {
+      border-top-style: dashed;
+    }
+
+    /* 🚨 FIX: remove line when text is present */
+    &.sui-line--with-text {
+      border-top: none;
+    }
+  }
+
+  /* ---------------------------
+     Vertical Line
+  ---------------------------- */
+  &--vertical {
+    width: 1px;
+    height: 100%;
+    align-self: stretch;
+    margin: 0 var(--layout-spacing-sm);
+    background: var(--border);
+
+    &.sui-line--dashed {
+      background: none;
+      border-left: 1px dashed var(--border);
+    }
+  }
+
+  /* ---------------------------
+     Text Line
+  ---------------------------- */
+  &--with-text {
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: var(--layout-spacing-sm);
+    color: var(--muted-foreground);
+
+    &::before,
+    &::after {
+      content: "";
+      flex: 1;
+      border-top: 1px solid var(--border);
+    }
+
+    /* dashed support */
+    &.sui-line--dashed {
+      &::before,
+      &::after {
+        border-top-style: dashed;
+      }
+    }
+  }
+
+  /* text alignment */
+  &--text-left {
+    &::before {
+      flex: 0.2;
+    }
+  }
+
+  &--text-right {
+    &::after {
+      flex: 0.2;
+    }
+  }
+
+  &__text {
+    padding: 0 var(--layout-spacing-xs);
+    font-size: var(--font-size-sm);
+    color: var(--muted-foreground);
+  }
+}
